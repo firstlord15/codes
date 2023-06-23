@@ -1,66 +1,103 @@
-import random as rn
+import random
+from colorama import Fore, init
 
-# def custom_randint(low, high):
-#     probabilities = list(range(80, 8, -1))
-#     num = rn.choices(range(low, high+1), weights=probabilities/100)[0]
-#     return num
+init()
 
-# print(custom_randint(80, 8))
+print('\n\n')
+print('--------------------------------------------------------')
+
 
 class Fighter:
-
-    # Name --> string
-    # Power --> int(1, 100) все включительно
-    # Agility --> int(1, 100) все включительно
-    # Protection --> int(1, 100) все включительно
-    # Skills ---> int(1, 10) все включительно
-
-    def __init__(self, name, power, agility, protection, skills, is_alive = True, HP = 100):
+    def __init__(self, name: str, height: float = None, weight: float = None):
         self.name = name
-        self.power = power
-        self.agility = agility
-        self.protection = protection
-        self.skills = skills
-        self.is_alive = is_alive
-        self.HP = HP
 
-    def attack(self, protect):   
-        # if rn.choice([True, False]):
-        #     fighter.HP -= rn.randint(13, 19)
-        #     print(f'Fighter hp = {fighter.HP}')
-        # else:
-        #     print('You miss!')
+        if height is None and weight is None:
+            height = random.randint(150, 200) / 100
+            weight = random.randint(50, 100)
 
-        # Урон от атаки = (Сила Атакующего + Ловкость Атакующего) - (Защита Защищающегося + Ловкость Защищающегося) + (Навыки Атакующего - Навыки Защищающегося)
+        elif height is None and weight is not None:
+            height = random.randint(150, 200) / 100
 
-        result = 0
-        if (self.skills - protect.skills) <= 3 and (self.skills - protect.skills) > 0:
-            result += ((((self.power + self.agility)/4) * (self.skills/35)))  - ((protect.protection + protect.agility) * (self.skills/45))
-        elif (self.skills - protect.skills) > 3 and (self.skills - protect.skills) < 6:
-            result += ((((self.power + self.agility)/4) * ((self.skills)/15))) * ((protect.protection + protect.agility) * (self.skills/25))
-        elif (self.skills - protect.skills) >= 6:
-            result += ((((self.power + self.agility)/4) * ((self.skills)/5))) * ((protect.protection + protect.agility) * (self.skills/15))
-        elif (self.skills - protect.skills) == 0:
-            result += ((((self.power + self.agility)/4) * ((self.skills)))) * ((protect.protection + protect.agility) * (self.skills))
-        elif (self.skills - protect.skills) < 0:
-            result += ((((self.power + self.agility)/4) * (self.skills/15))) * ((protect.protection + protect.agility) * (self.skills/30))
-        
-        result = round(result)
-        
-        print(f'self = {self.name}\nprotect = {protect.name}')
-        print(f'attack = {result}')
-        print(f'skills = {(self.skills - protect.skills)}')
+        elif height is not None and weight is None:
+            weight = random.randint(50, 100)
 
+        self.weight = weight
+        self.height = height
 
+        st = int(self.weight / self.height ** 2)
+        self.power = st
 
-        return
-    
+        self.is_alive = True
+        self.hp = 100
+
+        print(
+            f'   {Fore.CYAN}{self.name}:   Рост: {Fore.YELLOW}{self.height}{Fore.CYAN}, Вес: {Fore.YELLOW}{self.weight}{Fore.CYAN}, Сила: {Fore.YELLOW}{self.power}',
+            Fore.WHITE)
+
+    def attack(self, opponent):
+        if not opponent.is_alive:
+            return False
+
+        elif random.random() < self.power / (self.power + opponent.power):
+            # Атака успешна
+            damage = int((random.randint(10, 30) + self.power / 2) - (opponent.power / 3))
+            opponent.receive_damage(damage)
+            return True
+
+        else:
+            # Атака неудачна
+            print(f"   {Fore.GREEN}{opponent.name}:   блокировал атаку{Fore.WHITE}")
+            return False
+
+    def receive_damage(self, damage: int):
+        self.hp -= damage
+
+        print(f"   {Fore.YELLOW}{self.name}:   Отхватил: {damage}, Здоровья: {self.hp}{Fore.WHITE}")
+
+        if self.hp <= 0:
+            self.is_alive = False
+            print('--------------------------------------------------------')
+            print(f"   {Fore.RED}{self.name} погиб{Fore.WHITE}")
 
     def show_info(self):
-        pass
+        print(f"   {Fore.YELLOW}{self.name}, сила: {self.power}, {'жив' if self.is_alive else 'мертв'}{Fore.WHITE}")
 
 
+class Contest:
+    def __init__(self, fighter_first, fighter_second):
+        self.fighter_first = fighter_first
+        self.fighter_second = fighter_second
 
-first_player = Fighter('Ratmir', 100, 100, 100, 6)
-second_player = Fighter('Ogi', 100, 100, 100, 5)
-first_player.attack(second_player)
+        if self.fighter_first.power > self.fighter_second.power:
+            self.attacker = self.fighter_first
+            self.defender = self.fighter_second
+        else:
+            self.attacker = self.fighter_second
+            self.defender = self.fighter_first
+
+    def fight(self):
+
+        print('--------------------------------------------------------')
+        print(f'   {Fore.CYAN}{self.attacker.name} атакует первым', Fore.WHITE)
+        print('--------------------------------------------------------')
+
+        while self.attacker.is_alive and self.defender.is_alive:
+
+            while self.attacker.attack(self.defender):
+                if not self.defender.is_alive or not self.attacker.is_alive: break
+                if not self.attacker.attack(self.defender): break
+
+            if not self.defender.is_alive or not self.attacker.is_alive: break
+
+            self.attacker, self.defender = self.defender, self.attacker
+
+        if self.attacker.is_alive:
+            return self.attacker
+        else:
+            return self.defender
+
+
+contest = Contest(Fighter("Вася"), Fighter("Петя"))
+winner = contest.fight()
+print(Fore.CYAN + "   Победил боец", winner.name + "!!!!!", Fore.WHITE)
+print('\n\n')

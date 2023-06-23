@@ -8,25 +8,30 @@
 
 
 def memoize(fn):
-	memo = {}
-	def wrapper(n):
-		if n not in memo:
-			memo[n] = fn(n)
-		return memo[n]
-	return wrapper
+    memo = {}
+
+    def wrapper(n):
+        if n not in memo:
+            memo[n] = fn(n)
+        return memo[n]
+
+    return wrapper
+
 
 @memoize
 def square(n):
-	print('[System]: Вычисляется')
-	return n ** 2
+    print('[System]: Вычисляется')
+    return n ** 2
+
 
 # square = memoize(square)
 
 @memoize
 def fib(n):
-	print(f'[System]: Вычисляется {n}')
-	if n in [0, 1]: return n
-	return fib(n-1) + fib(n-2)
+    print(f'[System]: Вычисляется {n}')
+    if n in [0, 1]: return n
+    return fib(n - 1) + fib(n - 2)
+
 
 # fib = memoize(fib)
 
@@ -47,7 +52,6 @@ print(square(30))
 print(square(30))
 print(square(30))
 print(square(30))
-
 
 print(fib(3))
 print(fib(3))

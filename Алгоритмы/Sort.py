@@ -70,7 +70,7 @@ def SortVs(array):
     for i in range(1, len(array)):
         temp = array[i]
         j = i-1
-        while(j>=0 and temp < array[j]):
+        while(j >= 0 and temp < array[j]):
             array[j+1] = array[j]
             j -= 1
         array[j+1] = temp
@@ -78,15 +78,57 @@ def SortVs(array):
     return array
 
 #########################################################################
+
+THRESHOLD = 10
+
+def plainSort(arr: list, low: int, high: int) -> list:
+    arr[low:high+1] = sorted(arr[low:high+1])
+
+def merge(arr: list, low: int, mid: int, high: int) -> list:
+    merged = []
+    i = low
+    j = mid + 1
+    while i <= mid and j <= high:
+        if arr[i] <= arr[j]:
+            merged.append(arr[i])
+            i += 1
+        else:
+            merged.append(arr[j])
+            j += 1
+    merged += arr[i:mid+1]
+    merged += arr[j:high+1]
+    arr[low:high+1] = merged
+
+def mergeSort(arr: list, low: int, high: int) -> list:
+    if (high - low < THRESHOLD):
+        plainSort(arr, low, high)
+    else:
+        mid = (low + high) // 2
+        mergeSort(arr, low, mid)
+        mergeSort(arr, mid+1, high)
+        merge(arr, low, mid, high)
+
+
+#########################################################################
+# print(Fore.MAGENTA)
+# print(array, '\n')
+
+# print(Fore.CYAN)
+# SortPusr(array)
+
+# print(Fore.GREEN)
+# Sort_Shaker(array)
+
+# print(Fore.YELLOW)
+# print("Сортировка Вставкой:", SortVs(array))
+# print(Fore.WHITE)
+
 print(Fore.MAGENTA)
 print(array, '\n')
 
-print(Fore.CYAN)
+print(Fore.YELLOW)
 SortPusr(array)
 
 print(Fore.GREEN)
-Sort_Shaker(array)
-
-print(Fore.YELLOW)
-print("Сортировка Вставкой:", SortVs(array))
-print(Fore.WHITE)
+mergeSort(array, 0, len(array)-1)
+print(array)

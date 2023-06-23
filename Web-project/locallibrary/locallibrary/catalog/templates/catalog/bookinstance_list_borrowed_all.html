@@ -1,0 +1,38 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h1>Список заимствованных книг</h1>
+
+    {% if object_list %}
+        <ul>
+            {% for book_instance in object_list %}
+                <li>
+                    <a href="{% url 'book-detail' book_instance.book.pk %}">{{ book_instance.book.title }}</a> ({{ book_instance.due_back }}) -
+                        <span style="font-family: Arial, sans-serif"> Заёмщик: {{ book_instance.borrower }} </span> -
+                    <a href="{% url 'renew-book-librarian' book_instance.id %}"> Renew </a>
+                </li>
+
+            {% endfor %}
+        </ul>
+
+        {% if is_paginated %}
+            <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; первая</a>
+                <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+            {% endif %}
+
+            <span class="current-page">{{ page_obj.number }}</span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">следующая</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
+            {% endif %}
+        </span>
+            </div>
+        {% endif %}
+    {% else %}
+        <p>Список заимствованных книг пуст.</p>
+    {% endif %}
+{% endblock %}
