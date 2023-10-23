@@ -5,9 +5,8 @@ import json
 BASE_URL_PETSTORE = 'https://petstore.swagger.io/v2'
 
 # GET
-response = requests.get(f'{BASE_URL_PETSTORE}/pet/1')
+response = requests.get(f'{BASE_URL_PETSTORE}/pet/5')
 pprint.pprint('GET example')
-
 pprint.pprint(response.url)
 pprint.pprint(response.status_code)
 pprint.pprint(response.reason)
@@ -21,7 +20,7 @@ pass
 
 # POST
 data = {'name': 'Barsic'}
-response = requests.post(f'{BASE_URL_PETSTORE}/pet/1', data=data)
+response = requests.post(f'{BASE_URL_PETSTORE}/pet/5', data=data)
 
 pprint.pprint('POST example')
 pprint.pprint(response.status_code)
@@ -44,22 +43,22 @@ pprint.pprint('**********')
 # POST, PATCH, PUT
 pass
 
-# DELETE
-response = requests.delete(f'{BASE_URL_PETSTORE}/pet/1')
+# # DELETE
+# response = requests.delete(f'{BASE_URL_PETSTORE}/pet/1')
 
-pprint.pprint('DELETE example')
-pprint.pprint(response.status_code)
-pprint.pprint(response.reason)
-pprint.pprint(response.text)
+# pprint.pprint('DELETE example')
+# pprint.pprint(response.status_code)
+# pprint.pprint(response.reason)
+# pprint.pprint(response.text)
 
-response = requests.get(f'{BASE_URL_PETSTORE}/pet/1')
-pprint.pprint(f'GET 1')
+# response = requests.get(f'{BASE_URL_PETSTORE}/pet/1')
+# pprint.pprint(f'GET 1')
 
-pprint.pprint(response.status_code)
-pprint.pprint(response.reason)
-pprint.pprint(response.text)
-pprint.pprint('**********')
-pass
+# pprint.pprint(response.status_code)
+# pprint.pprint(response.reason)
+# pprint.pprint(response.text)
+# pprint.pprint('**********')
+# pass
 
 
 

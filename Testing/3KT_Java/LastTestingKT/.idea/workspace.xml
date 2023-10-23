@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1c333cf8-5101-4564-bda5-d74d3d39294d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../Java/BSTandAVL/BST_and_AVL.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../1 КТ/.idea/1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HttpRequest/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HttpRequest/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HttpRequest/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HttpRequest/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HttpRequest/HttpRequest.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HttpRequests/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HttpRequests/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HttpRequests/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../HttpRequests/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../4 КТ/pythonProject/.idea/pythonProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../1/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../1/.idea/1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../1/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../1/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../1/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../1/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../1/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../1/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2/.vscode/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../2/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/api_testing/base_request.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/api_testing/request_console_example" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/api_testing/requests_example.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/ddt/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/ddt/pairwise/pairwise_example.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/ddt/pairwise/test_pairwise_example.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/ddt/pytest_args/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/ddt/pytest_args/conftest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/ddt/pytest_args/test_args.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/ddt/test_parametrizations.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/iters_and_gens/gens.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/iters_and_gens/itesrs.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/muteble_data.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/context_manager.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/csv_read.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/csv_write.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/files/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/files/config.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/files/poem.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/files/users.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/files/users.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/json_read_write.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/txt_read.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/txt_write.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API requests/test_data/read_write_files/yaml_read_write.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Алгоритмы/3 курс/КТ1/KT1/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Алгоритмы/3 курс/КТ1/KT1/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Алгоритмы/3 курс/КТ1/KT1/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Алгоритмы/3 курс/КТ1/KT1/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Алгоритмы/3 курс/КТ1/KT1/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Алгоритмы/3 курс/КТ1/KT1/KT1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Алгоритмы/3 курс/КТ1/KT1/src/Main.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2X8UzZMzVeI5WL0bav5SxYgjy48" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "F:/Codes/Алгоритмы/3 курс/LastTestingKT"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1c333cf8-5101-4564-bda5-d74d3d39294d" name="Changes" comment="" />
+      <created>1698010464341</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698010464341</updated>
+    </task>
+    <servers />
+  </component>
+</project>
