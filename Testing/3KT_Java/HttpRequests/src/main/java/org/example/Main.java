@@ -33,6 +33,26 @@ public class Main {
                   "status": "available"
                 }""";
 
+        String jsonContent2 = """
+                {
+                  "id": 10,
+                  "category": {
+                    "id": 0,
+                    "name": "string"
+                  },
+                  "name": "Ratmir_Cool_7",
+                  "photoUrls": [
+                    "string"
+                  ],
+                  "tags": [
+                    {
+                      "id": 0,
+                      "name": "string"
+                    }
+                  ],
+                  "status": "available"
+                }""";
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request_get = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "pet/5"))
@@ -46,8 +66,22 @@ public class Main {
                 .POST(HttpRequest.BodyPublishers.ofString(jsonContent))
                 .build();
 
+        HttpRequest request_delete = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "pet/5"))
+                .DELETE()
+                .build();
+
+        HttpRequest request_post2 = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "pet"))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonContent2))
+                .build();
+
+
         HttpResponse<String> response = client.send(request_get, HttpResponse.BodyHandlers.ofString());
         HttpResponse<String> response_2 = client.send(request_post, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response_3 = client.send(request_delete, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response_4 = client.send(request_post2, HttpResponse.BodyHandlers.ofString());
         JsonObject answer = JsonParser.parseString(response.body()).getAsJsonObject();
 
         System.out.println("Response Code: " + response.statusCode());
@@ -59,6 +93,16 @@ public class Main {
         System.out.println("Response Code: " + response_2.statusCode());
         System.out.println("Response Body: " + response_2.body());
         System.out.println("Response Request: " + response_2.request());
+        System.out.println("**********************************************\n\n");
+
+        System.out.println("Response Code: " + response_3.statusCode());
+        System.out.println("Response Body: " + response_3.body());
+        System.out.println("Response Request: " + response_3.request());
+        System.out.println("**********************************************\n\n");
+
+        System.out.println("Response Code: " + response_4.statusCode());
+        System.out.println("Response Body: " + response_4.body());
+        System.out.println("Response Request: " + response_4.request());
         System.out.println("**********************************************\n\n");
     }
 }
