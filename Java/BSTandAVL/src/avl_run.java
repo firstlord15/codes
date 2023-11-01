@@ -7,8 +7,8 @@ public class avl_run {
                 17, 6, 5, 20, 19, 18, 11, 14, 12, 13, 2, 4, 10
         };
 
-        for (int i = 0; i < anArrayNodes.length; i++) {
-            avlTree.insert(anArrayNodes[i]);
+        for (int anArrayNode : anArrayNodes) {
+            avlTree.insert(anArrayNode);
         }
 
         // Visualize the BST
@@ -17,6 +17,5 @@ public class avl_run {
         // In-order traversal of BST
         System.out.print("In-order Traversal: ");
         avlTree.inOrderTraversal();
-
     }
 }
