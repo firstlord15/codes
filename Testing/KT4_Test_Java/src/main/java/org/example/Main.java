@@ -30,8 +30,10 @@ public class Main {
     public static String start_testing(String num){
         return "[Начало " + num + " кейса]";
     }
+
     @Test
-    public static void test_first_case(String Url) throws IOException, InterruptedException {
+    public void test_first_case() throws IOException, InterruptedException {
+        String Url = "https://dog.ceo/api/breeds/list/all";
         String num = "первого";
         System.out.println(start_testing(num));
         HttpResponse<String> response = getResponse(Url);
@@ -54,14 +56,14 @@ public class Main {
             assertFalse(messageValue.asJsonObject().isEmpty());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Failed testing");
+            fail("Failed testing");
         }
         System.out.println(end_testing(num));
     }
 
-
     @Test
-    public static void test_second_case(String Url) throws IOException, InterruptedException {
+    public void test_second_case() throws IOException, InterruptedException {
+        String Url = "https://dog.ceo/api/breeds/image/random";
         String num = "второго";
         System.out.println(start_testing(num));
         HttpResponse<String> response = getResponse(Url);
@@ -81,11 +83,11 @@ public class Main {
             System.out.println("Failed testing");
         }
         System.out.println(end_testing(num));
-
     }
 
     @Test
-    public static void test_third_case(String Url) throws IOException, InterruptedException {
+    public void test_third_case() throws IOException, InterruptedException {
+        String Url = "https://dog.ceo/api/breed/hound/list";
         String num = "третьего";
         System.out.println(start_testing(num));
         HttpResponse<String> response = getResponse(Url);
@@ -105,14 +107,16 @@ public class Main {
             // Проверка, что "message" не пустое
             assertFalse(messageValue.asJsonArray().isEmpty());
 
-            System.out.println(end_testing(num));;
+            System.out.println(end_testing(num));
         } catch (Exception e){
             e.printStackTrace();
             System.out.println("Failed testing");
         }
     }
 
-    public static void test_fourth_case(String Url) throws IOException, InterruptedException {
+    @Test
+    public void test_fourth_case() throws IOException, InterruptedException {
+        String Url = "https://dog.ceo/api/breed/hound/afghan/images";
         String num = "четвертого";
         System.out.println(start_testing(num));
         HttpResponse<String> response = getResponse(Url);
@@ -139,7 +143,9 @@ public class Main {
         }
     }
 
-    public static void test_fifth_case(String Url) throws IOException, InterruptedException {
+    @Test
+    public void test_fifth_case() throws IOException, InterruptedException {
+        String Url = "https://dog.ceo/api/breed/hound/afghan/images/random";
         String num = "пятого";
         System.out.println(start_testing(num));
         HttpResponse<String> response = getResponse(Url);
@@ -159,18 +165,7 @@ public class Main {
         }
     }
 
-
-    public static void main(String[] args) throws IOException, InterruptedException {
-        String AllListBreedsUrl = "https://dog.ceo/api/breeds/list/all";
-        String RandomImageUrl = "https://dog.ceo/api/breeds/image/random";
-        String AllListBreedHoundUrl = "https://dog.ceo/api/breed/hound/list";
-        String AllListSubBreedImageUrl = "https://dog.ceo/api/breed/hound/afghan/images";
-        String RandomImageSubBreedUrl = "https://dog.ceo/api/breed/hound/afghan/images/random";
-
-        test_first_case(AllListBreedsUrl); // Первый кейс
-        test_second_case(RandomImageUrl); // Второй кейс
-        test_third_case(AllListBreedHoundUrl); // Третий кейс
-        test_fourth_case(AllListSubBreedImageUrl); // Четвертый кейс
-        test_fifth_case(RandomImageSubBreedUrl); // Пятый кейс
+    public static void main(String[] args){
+        System.out.println("\nПроверка завершена");
     }
 }

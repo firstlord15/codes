@@ -13,6 +13,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -20,14 +21,6 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.junit.jupiter</groupId>-->
-        <!--            <artifactId>junit-jupiter-api</artifactId>-->
-        <!--            <version>5.8.0</version> &lt;!&ndash; Укажите актуальную версию JUnit Jupiter &ndash;&gt;-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
-
 
         <dependency>
             <groupId>javax.json</groupId>
