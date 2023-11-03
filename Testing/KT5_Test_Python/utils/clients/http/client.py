@@ -1,9 +1,11 @@
 import typing
+
 import allure
 from httpx import Client, Response
 from httpx._client import UseClientDefault
-from httpx._types import (AuthTypes, CookieTypes, HeaderTypes, QueryParamTypes, RequestContent, 
-                          RequestData, RequestExtensions, RequestFiles, TimeoutTypes, URLTypes)
+from httpx._types import (AuthTypes, CookieTypes, HeaderTypes, QueryParamTypes,
+                          RequestContent, RequestData, RequestExtensions,
+                          RequestFiles, TimeoutTypes, URLTypes)
 
 
 class HTTPClient(Client):
