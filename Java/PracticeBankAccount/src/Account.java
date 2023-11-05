@@ -6,14 +6,18 @@ abstract class Account {
     private String currency;
     private final String name;
     private final String surname;
+    private String phoneNumber;
     private final ArrayList<String> history;
+    private static int historyCount = 0;
+    private String typeAccount;
 
-    Account(String name, String surname, String accountID, double balance, String currency){
+    Account(String name, String surname, String accountID, double balance, String currency, String phoneNumber){
         this.accountID = accountID;
         this.balance = balance;
         this.currency = currency;
         this.name = name;
         this.surname = surname;
+        this.phoneNumber = phoneNumber;
         this.history = new ArrayList<>();
     }
 
@@ -25,9 +29,27 @@ abstract class Account {
         }
     }
 
-    public void addOperation(String str){history.add(str);}
+    public void addOperation(String str){
+        history.add(str);
+        historyCount++;
+    }
+
+    public int getHistoryCount(){
+        return historyCount;
+    }
+
+    public String getTypeAccount(){
+        return typeAccount;
+    }
+
+    public void setTypeAccount(String typeAccount) {
+        this.typeAccount = typeAccount;
+    }
 
     public String getAccountID() {return accountID;}
+
+    public String getPhoneNumber() {return phoneNumber;}
+    public void setPhoneNumber(String phoneNumber) {this.phoneNumber = phoneNumber;}
 
     public double getBalance(){return balance;}
     public void setBalance(double newBalance){balance = newBalance;}

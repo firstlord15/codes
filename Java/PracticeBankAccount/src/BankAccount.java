@@ -1,13 +1,22 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 
 public class BankAccount extends Account{
     private final String numberCard;
+    private static final String nameTypeAccount = "Bank Account";
+    private static final LocalDateTime timeOpenAccount = LocalDateTime.now();
 
-    BankAccount(String name, String surname, String accountID, ArrayList<BankAccount> listAccounts, double balance, String currency) {
-        super(name, surname, accountID, balance, currency);
+    BankAccount(String name, String surname, String accountID, double balance, String currency, String phoneNumber, ArrayList<BankAccount> listAccounts) {
+        super(name, surname, accountID, balance, currency, phoneNumber);
         this.numberCard = setNumberCard(listAccounts);
+        setTypeAccount(nameTypeAccount);
+    }
+
+
+    public static LocalDateTime getTimeOpenAccount(){
+        return timeOpenAccount;
     }
 
     public String getNumberCard() {
@@ -15,15 +24,11 @@ public class BankAccount extends Account{
     }
 
     private String generateNumberCard() {
-        int[] numberCard = new int[16];
-        String result = "";
+        String result = "2806" + this.getAccountID();
 
-        for (int i = 0; i < numberCard.length; i++) {
-            numberCard[i] = ThreadLocalRandom.current().nextInt(10);
-        }
-
-        for (int num : numberCard) {
-            result += String.valueOf(num);
+        while(result.length() < 16) {
+            int randomNum = ThreadLocalRandom.current().nextInt(10);
+            result += randomNum;
         }
 
         return result;
@@ -107,11 +112,22 @@ public class BankAccount extends Account{
         }
     }
 
-    public String getInfoAccount(){
-        return "ID: " + this.getAccountID() + "\n" +
+    public String getMainAccountDetails(){
+        return  "ID: " + this.getAccountID() + "\n" +
                 "Пользователь: " + this.getFullName() + "\n" +
                 "Номер карты: " + this.getNumberCard() + "\n" +
                 "Баланс: " + this.getBalance() + this.getCurrency() + "\n" +
                 "Последняя операция: " + getHistoryLast() + "\n";
+    }
+
+    public String getExtendedAccountDetails(){
+        return  "ID: " + this.getAccountID() + "\n" +
+                "Пользователь: " + this.getFullName() + "\n" +
+                "Номер карты: " + this.getNumberCard() + "\n" +
+                "Номер телефона: " + this.getPhoneNumber() + "\n" +
+                "Баланс: " + this.getBalance() + this.getCurrency() + "\n" +
+                "Тип аккаунта: " + getTypeAccount() + "\n" +
+                "Последняя операция: " + getHistoryLast() + "\n" +
+                "Время создания аккаунта: " + getTimeOpenAccount() + "\n";
     }
 }
