@@ -1,47 +1,98 @@
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
+
 
 public class BankAccount extends Account{
     private final String numberCard;
-    private final ArrayList<String> history;
 
-    BankAccount(String accountID, double balance, String currency, String name, String surname, String numberCard) {
+    BankAccount(String name, String surname, String accountID, ArrayList<BankAccount> listAccounts, double balance, String currency) {
         super(name, surname, accountID, balance, currency);
-        this.numberCard = numberCard;
-        history = new ArrayList<>();
+        this.numberCard = setNumberCard(listAccounts);
     }
 
-    public String getNumberCard() {return numberCard;}
-    public String getHistoryLast() {
-        try {
-            return history.getLast();
-        } catch (Exception e){
-            return  "Nothing";
-        }
+    public String getNumberCard() {
+        return numberCard;
     }
-    private void setHistory(String str){history.add(str);}
+
+    private String generateNumberCard() {
+        int[] numberCard = new int[16];
+        String result = "";
+
+        for (int i = 0; i < numberCard.length; i++) {
+            numberCard[i] = ThreadLocalRandom.current().nextInt(10);
+        }
+
+        for (int num : numberCard) {
+            result += String.valueOf(num);
+        }
+
+        return result;
+    }
+
+
+    private String setNumberCard(ArrayList<BankAccount> listAccounts){
+        String number;
+        int maxAttempts = 100;  // Максимальное количество попыток
+
+        for (int attempt = 0; attempt < maxAttempts; attempt++) {
+            number = generateNumberCard();
+            boolean isUnique = true;
+
+            for (BankAccount account : listAccounts) {
+                if (account.getNumberCard().equals(number)) {
+                    isUnique = false;
+                    break;
+                }
+            }
+
+            if (isUnique) {
+                return number;
+            }
+        }
+
+        throw new IllegalStateException("Не удалось найти уникальный номер карты");
+    }
+
 
     @Override
     public void deposit(double amount) {
-        setBalance(getBalance() + amount);
-        setHistory(getFormatHistory(0, amount, null));
-    }
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Сумма депозита должна быть больше 0!");
+        }
 
-    // Надо решить проблему с удвоенным добовлением события в истории из-за 39 строки
+        setBalance(getBalance() + amount);
+        addOperation(getFormatHistory(0, amount, null));
+    }
 
     @Override
     public void withdraw(double amount) {
-        setBalance(getBalance() - amount);
-        setHistory(getFormatHistory(1, amount, null));
-    }
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Сумма снятия должна быть больше 0!");
+        }
 
-    // Решить проблему с получателем у получателя после трансфера
+        if (this.getBalance() < amount) {
+            throw new IllegalArgumentException("Не хватает средств!");
+        }
+
+        setBalance(getBalance() - amount);
+        addOperation(getFormatHistory(1, amount, null));
+    }
 
     @Override
     public void transfer(double amount, Account transferee) {
-        transferee.deposit(amount);
-        this.withdraw(amount);
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Сумма перевода должна быть больше 0!");
+        }
 
-        setHistory(getFormatHistory(1, amount, transferee.getFullName()));
+        if (this.getBalance() < amount) {
+            throw new IllegalArgumentException("Не хватает средств!");
+        }
+
+        transferee.setBalance(transferee.getBalance() + amount);
+        this.setBalance(getBalance() - amount);
+
+        transferee.addOperation(getFormatHistory(0, amount, this.getFullName()));
+        addOperation(getFormatHistory(1, amount, transferee.getFullName()));
     }
 
     private String getFormatHistory(int method, double amount, String actingPerson){
@@ -50,7 +101,7 @@ public class BankAccount extends Account{
         switch (method){
             case 0 -> {return "У вас +" + amount + getCurrency();}
             case 1 -> {return "У вас -" + amount + getCurrency();}
-            case 2 -> {return "У вас +" + amount + getCurrency() + " Отправитель " + actingPerson;}
+            case 2 -> {return "У вас +" + amount + getCurrency() + ", Отправитель: " + actingPerson;}
             case 3 -> {return "У вас -" + amount + getCurrency() + ", Получатель: " + actingPerson;}
             default -> {return "Ошибка, неверный метод";}
         }
@@ -63,5 +114,4 @@ public class BankAccount extends Account{
                 "Баланс: " + this.getBalance() + this.getCurrency() + "\n" +
                 "Последняя операция: " + getHistoryLast() + "\n";
     }
-
 }
