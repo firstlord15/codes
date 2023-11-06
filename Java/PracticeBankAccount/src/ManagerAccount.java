@@ -5,7 +5,7 @@ public class ManagerAccount extends Account{
     private static int countManagedAccounts = 0;
 
     ManagerAccount(String name, String surname, String accountID, double balance, String currency, String phoneNumber) {
-        super(name, surname, accountID, balance, currency, phoneNumber);
+        super(name, surname, accountID, phoneNumber);
         managedAccounts = new ArrayList<>();
     }
 
@@ -123,5 +123,36 @@ public class ManagerAccount extends Account{
 
         if (countManagedAccounts != 0){ throw new Exception("У вас и так нет управляемых аккаунтов!"); }
         countManagedAccounts--;
+    }
+
+    @Override
+    public void transfer(double amount, BankAccount transferee) {
+
+    }
+
+    @Override
+    public void withdraw(double amount) {
+
+    }
+
+    @Override
+    public void deposit(double amount) {
+
+    }
+
+    @Override
+    public String getFormatHistory(int method, double amount, String actingPerson){
+        
+        if (actingPerson != null){
+            method += 2;
+        }
+
+        switch (method){
+            case 0 -> { return "У вас +" + amount + getCurrency(); }
+            case 1 -> { return "У вас -" + amount + getCurrency(); }
+            case 2 -> { return "У вас +" + amount + getCurrency() + ", Отправитель: " + actingPerson; }
+            case 3 -> { return "У вас -" + amount + getCurrency() + ", Получатель: " + actingPerson; }
+            default -> { return "Ошибка, неверный метод"; }
+        }
     }
 }

@@ -101,6 +101,22 @@ public class BankAccount extends Account{
     }
 
     // код для информации
+    @Override
+    public String getFormatHistory(int method, double amount, String actingPerson){
+        DebitCard card = getDebitCard();
+        if (actingPerson != null){
+            method += 2;
+        }
+
+        switch (method){
+            case 0 -> { return "У вас +" + amount + card.getCurrency(); }
+            case 1 -> { return "У вас -" + amount + card.getCurrency(); }
+            case 2 -> { return "У вас +" + amount + card.getCurrency() + ", Отправитель: " + actingPerson; }
+            case 3 -> { return "У вас -" + amount + card.getCurrency() + ", Получатель: " + actingPerson; }
+            default -> { return "Ошибка, неверный метод"; }
+        }
+    }
+
     public String getMainAccountDetails(){
         return  "Данные пользователя:" + "\n" +
                 "ID: " + this.getAccountID() + "\n" +

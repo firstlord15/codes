@@ -70,17 +70,9 @@ abstract class Account {
     public abstract void deposit(double amount);
 
     // остальные методы
-    public String getFormatHistory(int method, double amount, String actingPerson){
-        if (actingPerson != null){
-            method += 2;
-        }
+    public abstract String getFormatHistory(int method, double amount, String actingPerson);
 
-        switch (method){
-            case 0 -> {return "У вас +" + amount + getCurrency();}
-            case 1 -> {return "У вас -" + amount + getCurrency();}
-            case 2 -> {return "У вас +" + amount + getCurrency() + ", Отправитель: " + actingPerson;}
-            case 3 -> {return "У вас -" + amount + getCurrency() + ", Получатель: " + actingPerson;}
-            default -> {return "Ошибка, неверный метод";}
-        }
-    }
+
+
+
 }
