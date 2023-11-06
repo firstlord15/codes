@@ -4,38 +4,31 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class BankAccount extends Account{
-    private final String numberCard;
     private static final String nameTypeAccount = "Bank Account";
     private static final LocalDateTime timeOpenAccount = LocalDateTime.now();
+    private final DebitCard debitCard;
 
-    BankAccount(String name, String surname, String accountID, double balance, String currency, String phoneNumber, ArrayList<BankAccount> listAccounts) {
-        super(name, surname, accountID, balance, currency, phoneNumber);
-        this.numberCard = setNumberCard(listAccounts);
+    BankAccount(String name, String surname, String accountID, String phoneNumber, ArrayList<BankAccount> listAccounts, DebitCard debitCard) throws Exception {
+        super(name, surname, accountID, phoneNumber);
+        debitCard.setCardNumber(addNumberCard(listAccounts));
         setTypeAccount(nameTypeAccount);
+        this.debitCard = debitCard;
     }
 
-
+    // getter and setter
     public static LocalDateTime getTimeOpenAccount(){
         return timeOpenAccount;
     }
 
+    public DebitCard getDebitCard() {
+        return debitCard;
+    }
+
     public String getNumberCard() {
-        return numberCard;
+        return debitCard.getCardNumber();
     }
 
-    private String generateNumberCard() {
-        String result = "2806" + this.getAccountID();
-
-        while(result.length() < 16) {
-            int randomNum = ThreadLocalRandom.current().nextInt(10);
-            result += randomNum;
-        }
-
-        return result;
-    }
-
-
-    private String setNumberCard(ArrayList<BankAccount> listAccounts){
+    private String addNumberCard(ArrayList<BankAccount> listAccounts){
         String number;
         int maxAttempts = 100;  // Максимальное количество попыток
 
@@ -58,76 +51,86 @@ public class BankAccount extends Account{
         throw new IllegalStateException("Не удалось найти уникальный номер карты");
     }
 
-
+    // основные операции
     @Override
     public void deposit(double amount) {
+        DebitCard card = getDebitCard();
+
         if (amount <= 0) {
             throw new IllegalArgumentException("Сумма депозита должна быть больше 0!");
         }
 
-        setBalance(getBalance() + amount);
-        addOperation(getFormatHistory(0, amount, null));
+        card.setBalance(card.getBalance() + amount);
+        setHistory(getFormatHistory(0, amount, null));
     }
 
     @Override
     public void withdraw(double amount) {
+        DebitCard card = getDebitCard();
+
         if (amount <= 0) {
             throw new IllegalArgumentException("Сумма снятия должна быть больше 0!");
         }
 
-        if (this.getBalance() < amount) {
+        if (card.getBalance() < amount) {
             throw new IllegalArgumentException("Не хватает средств!");
         }
 
-        setBalance(getBalance() - amount);
-        addOperation(getFormatHistory(1, amount, null));
+        card.setBalance(card.getBalance() - amount);
+        setHistory(getFormatHistory(1, amount, null));
     }
 
     @Override
-    public void transfer(double amount, Account transferee) {
+    public void transfer(double amount, BankAccount transferee) {
+        DebitCard card = getDebitCard();
+        DebitCard transfereeCard = transferee.getDebitCard();
+
         if (amount <= 0) {
             throw new IllegalArgumentException("Сумма перевода должна быть больше 0!");
         }
 
-        if (this.getBalance() < amount) {
+        if (card.getBalance() < amount) {
             throw new IllegalArgumentException("Не хватает средств!");
         }
 
-        transferee.setBalance(transferee.getBalance() + amount);
-        this.setBalance(getBalance() - amount);
+        transfereeCard.setBalance(amount + transfereeCard.getBalance());
+        card.setBalance(card.getBalance() - amount);
 
-        transferee.addOperation(getFormatHistory(0, amount, this.getFullName()));
-        addOperation(getFormatHistory(1, amount, transferee.getFullName()));
+        transferee.setHistory(getFormatHistory(0, amount, this.getFullName()));
+        setHistory(getFormatHistory(1, amount, transferee.getFullName()));
     }
 
-    private String getFormatHistory(int method, double amount, String actingPerson){
-        if (actingPerson != null){method += 2;}
-
-        switch (method){
-            case 0 -> {return "У вас +" + amount + getCurrency();}
-            case 1 -> {return "У вас -" + amount + getCurrency();}
-            case 2 -> {return "У вас +" + amount + getCurrency() + ", Отправитель: " + actingPerson;}
-            case 3 -> {return "У вас -" + amount + getCurrency() + ", Получатель: " + actingPerson;}
-            default -> {return "Ошибка, неверный метод";}
-        }
-    }
-
+    // код для информации
     public String getMainAccountDetails(){
-        return  "ID: " + this.getAccountID() + "\n" +
+        return  "Данные пользователя:" + "\n" +
+                "ID: " + this.getAccountID() + "\n" +
+                "Баланс: " + getDebitCard().getBalance() + getDebitCard().getCurrency() + "\n" +
                 "Пользователь: " + this.getFullName() + "\n" +
                 "Номер карты: " + this.getNumberCard() + "\n" +
-                "Баланс: " + this.getBalance() + this.getCurrency() + "\n" +
                 "Последняя операция: " + getHistoryLast() + "\n";
     }
 
     public String getExtendedAccountDetails(){
-        return  "ID: " + this.getAccountID() + "\n" +
+        return  "Данные расширенные пользователя:" + "\n" +
+                "ID: " + this.getAccountID() + "\n" +
+                "Баланс: " + getDebitCard().getBalance() + getDebitCard().getCurrency() + "\n" +
                 "Пользователь: " + this.getFullName() + "\n" +
                 "Номер карты: " + this.getNumberCard() + "\n" +
                 "Номер телефона: " + this.getPhoneNumber() + "\n" +
-                "Баланс: " + this.getBalance() + this.getCurrency() + "\n" +
                 "Тип аккаунта: " + getTypeAccount() + "\n" +
                 "Последняя операция: " + getHistoryLast() + "\n" +
                 "Время создания аккаунта: " + getTimeOpenAccount() + "\n";
+    }
+
+    // остальные методы
+    private String generateNumberCard() {
+        String result = "2806" + this.getAccountID();
+
+        while(result.length() < 16) {
+            int randomNum = ThreadLocalRandom.current().nextInt(10);
+            result += randomNum;
+        }
+
+        return result;
     }
 }
