@@ -1,5 +1,9 @@
-public class BusinessAccount extends Account{
+import java.time.LocalDateTime;
 
+public class BusinessAccount extends Account{
+    private static final String nameTypeAccount = "Bank Account";
+    private static final LocalDateTime timeOpenAccount = LocalDateTime.now();
+    private final DebitCard debitCard;
     BusinessAccount(String name, String surname, String accountID, double balance, String currency, String phoneNumber) {
         super(name, surname, accountID, phoneNumber);
     }
@@ -11,7 +15,7 @@ public class BusinessAccount extends Account{
 
     @Override
     public void withdraw(double amount) {
-
+        
     }
 
     @Override

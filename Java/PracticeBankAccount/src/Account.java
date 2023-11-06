@@ -48,7 +48,7 @@ abstract class Account {
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
 
     public double getBalance(BankAccount bankAccount) { return bankAccount.getDebitCard().getBalance(); }
-    public double getBalance(BusinessCard card) { return card.getBalance(); }
+    public double getBalance(BusinessAccount businessAccount) { return businessAccount.getBalance(); }
 
     public void setBalance(double newBalance, BankAccount bankAccount){ bankAccount.getDebitCard().setBalance(newBalance); }
     public void setBalance(double newBalance, BusinessCard card){ card.setBalance(newBalance); }
@@ -71,8 +71,4 @@ abstract class Account {
 
     // остальные методы
     public abstract String getFormatHistory(int method, double amount, String actingPerson);
-
-
-
-
 }

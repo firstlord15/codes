@@ -140,7 +140,7 @@ public class BankAccount extends Account{
 
     // остальные методы
     private String generateNumberCard() {
-        String result = "2806" + this.getAccountID();
+        String result = "2806";
 
         while(result.length() < 16) {
             int randomNum = ThreadLocalRandom.current().nextInt(10);
