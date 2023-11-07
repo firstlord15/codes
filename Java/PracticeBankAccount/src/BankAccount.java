@@ -8,9 +8,9 @@ public class BankAccount extends Account{
     private static final LocalDateTime timeOpenAccount = LocalDateTime.now();
     private final DebitCard debitCard;
 
-    BankAccount(String name, String surname, String accountID, String phoneNumber, double balance, String currency, ArrayList<BankAccount> listAccounts) throws Exception {
+    BankAccount(String name, String surname, String accountID, String phoneNumber, double balance, String currency, ArrayList<BankAccount> listAccounts, String cardHolderName) throws Exception {
         super(name, surname, accountID, phoneNumber);
-        this.debitCard = new DebitCard(addNumberCard(listAccounts), timeOpenAccount.getMonthValue() +"/"+ timeOpenAccount.getDayOfMonth(), balance, currency);
+        this.debitCard = new DebitCard(cardHolderName, addNumberCard(listAccounts), String.format("%02d/%02d", timeOpenAccount.getMonthValue(), timeOpenAccount.getDayOfMonth()), balance, currency);
         setTypeAccount(nameTypeAccount);
     }
 
@@ -47,7 +47,7 @@ public class BankAccount extends Account{
             }
         }
 
-        throw new IllegalStateException("Не удалось найти уникальный номер карты");
+        throw new IllegalStateException("Не удалось найти уникальный номер для карты");
     }
 
     // основные операции
@@ -132,11 +132,8 @@ public class BankAccount extends Account{
 
         return  "Данные расширенные пользователя:" + "\n" +
                 "ID: " + this.getAccountId() + "\n" +
-                "Баланс: " + card.getBalance() + card.getCurrency() + "\n" +
                 "Пользователь: " + this.getFullName() + "\n" +
-                "Номер карты: " + this.getNumberCard() + "\n" +
-                "Срок действия: " + card.getExpirationDate() + "\n" +
-                "CVV: " + card.getCVV() + "\n" +
+                card.getMainCardDetails() + "\n" +
                 "Номер телефона: " + this.getPhoneNumber() + "\n" +
                 "Тип аккаунта: " + getTypeAccount() + "\n" +
                 "Последняя операция: " + getHistoryLast() + "\n" +

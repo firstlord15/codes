@@ -39,10 +39,8 @@ abstract class Account {
     }
 
     public int getHistoryCount() { return historyCount; }
-
     public String getTypeAccount() { return typeAccount; }
     public void setTypeAccount(String typeAccount) { this.typeAccount = typeAccount; }
-
     public String getAccountId() { return accountId; }
 
     public void setAccountId(String accountId) {
