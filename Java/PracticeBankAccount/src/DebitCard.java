@@ -1,3 +1,5 @@
+import java.awt.datatransfer.Transferable;
+
 public class DebitCard extends BankCards {
     private double cashWithdrawalLimit;
     private boolean transferEnabled;
@@ -15,18 +17,18 @@ public class DebitCard extends BankCards {
     }
 
     public void setCashWithdrawalLimit(double limit) {
-        this.cashWithdrawalLimit = limit;
+        if (limit > 0){
+            this.cashWithdrawalLimit = limit;
+        } else {
+            this.cashWithdrawalLimit = 0;
+        }
     }
 
-    public boolean isTransferEnabled() {
+    public boolean getTransferEnabled(){
         return transferEnabled;
     }
 
-    public void enableTransfer() {
-        transferEnabled = true;
-    }
-
-    public void disableTransfer() {
-        transferEnabled = false;
+    public void setTransferEnabled(boolean transferEnabled) {
+        this.transferEnabled = transferEnabled;
     }
 }

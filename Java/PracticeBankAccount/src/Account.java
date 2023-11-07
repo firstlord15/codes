@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 abstract class Account {
+    private String login;
+    private String password;
     private String accountId;
     private final String name;
     private final String surname;
@@ -8,17 +10,31 @@ abstract class Account {
     private final ArrayList<String> history;
     private static int historyCount = 0;
     private String typeAccount;
+    private Credits credits;
 
-    Account(String name, String surname, String accountID, String phoneNumber){
+    Account(String login, String password, String name, String surname, String accountID, String phoneNumber){
+        this.login = login;
+        this.password = password;
         this.accountId = accountID;
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
         this.history = new ArrayList<>();
+        this.credits = null;
     }
 
 
     // getter and setter
+    public double getCreditBalance() {
+        return credits != null ? credits.getCredit() : 0;
+    }
+    public double getCreditInterestRate() {
+        return credits != null ? credits.getInterestRate() : 0;
+    }
+    public int getCreditTermInMonths() {
+        return credits != null ? credits.getCreditTermInMonths() : 0;
+    }
+
     public String getHistoryLast() {
         try { return history.getLast(); }
         catch (Exception e){ return  "Nothing"; }
@@ -38,6 +54,9 @@ abstract class Account {
         historyCount++;
     }
 
+    public boolean hasCredit() {
+        return credits == null;
+    }
     public int getHistoryCount() { return historyCount; }
     public String getTypeAccount() { return typeAccount; }
     public void setTypeAccount(String typeAccount) { this.typeAccount = typeAccount; }
@@ -56,10 +75,52 @@ abstract class Account {
 
 
     // основные операции
-    public abstract void transfer(double amount, BankAccount transferee);
     public abstract void withdraw(double amount);
     public abstract void deposit(double amount);
 
+
     // остальные методы
     public abstract String getFormatHistory(int method, double amount, String actingPerson);
+
+    public void takeCredit(double creditAmount, double interestRate, int creditTermInMonths) {
+        // Проверка на наличие активного кредита
+        if (credits != null) {
+            throw new IllegalStateException("У вас уже есть активный кредит.");
+        }
+
+        // Создание нового кредита
+        credits = new Credits(creditAmount, interestRate, creditTermInMonths);
+    }
+
+    public void repayCredit(double amount) {
+        // Проверка на наличие активного кредита
+        if (credits == null) {
+            throw new IllegalStateException("У вас нет активного кредита для погашения.");
+        }
+
+        double totalAmountToRepay = credits.getTotalAmountToRepay();
+
+        if (amount < totalAmountToRepay) {
+            throw new IllegalArgumentException("Сумма погашения должна быть не меньше общей суммы к возврату.");
+        }
+
+        // Погашение кредита
+        credits = null;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

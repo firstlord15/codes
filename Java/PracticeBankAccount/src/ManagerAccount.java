@@ -4,15 +4,15 @@ public class ManagerAccount extends Account{
     private final ArrayList<BankAccount> managedAccounts;
     private static int countManagedAccounts = 0;
 
-    ManagerAccount(String name, String surname, String accountID, double balance, String currency, String phoneNumber) {
-        super(name, surname, accountID, phoneNumber);
+    ManagerAccount(String login, String password, String name, String surname, String accountID, String phoneNumber) {
+        super(login, password, name, surname, accountID, phoneNumber);
         managedAccounts = new ArrayList<>();
     }
 
 
     // getter and setter
     public String getManagedAccountDetails(BankAccount account){
-        return account.getExtendedAccountDetails();
+        return account.getAccountDetails(false);
     }
 
     public int getNumberOfManagedAccounts() {
@@ -125,19 +125,32 @@ public class ManagerAccount extends Account{
         countManagedAccounts--;
     }
 
-    @Override
     public void transfer(double amount, BankAccount transferee) {
 
     }
 
     @Override
-    public void withdraw(double amount) {
-
+    public void deposit(double amount) {
+        return;
     }
 
     @Override
-    public void deposit(double amount) {
+    public void withdraw(double amount) {
+        return;
+    }
+    
+    public void transfer(double amount, BankAccount sourceAccount, BankAccount targetAccount) {
+        if (!isManagedAccount(sourceAccount) || !isManagedAccount(targetAccount)) {
+            throw new IllegalArgumentException("Один из аккаунтов не управляется данным менеджером.");
+        }
 
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Сумма для перевода должна быть положительной.");
+        }
+
+        // Выполните перевод средств между аккаунтами.
+        sourceAccount.withdraw(amount);
+        targetAccount.deposit(amount);
     }
 
     @Override

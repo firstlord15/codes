@@ -8,10 +8,16 @@ public class BankAccount extends Account{
     private static final LocalDateTime timeOpenAccount = LocalDateTime.now();
     private final DebitCard debitCard;
 
-    BankAccount(String name, String surname, String accountID, String phoneNumber, double balance, String currency, ArrayList<BankAccount> listAccounts, String cardHolderName) throws Exception {
-        super(name, surname, accountID, phoneNumber);
+    BankAccount(String login, String password, String name, String surname, String accountID, String phoneNumber, double balance, String currency, ArrayList<BankAccount> listAccounts, String cardHolderName) throws Exception {
+        super(login, password, name, surname, accountID, phoneNumber);
         this.debitCard = new DebitCard(cardHolderName, addNumberCard(listAccounts), String.format("%02d/%02d", timeOpenAccount.getMonthValue(), timeOpenAccount.getDayOfMonth()), balance, currency);
         setTypeAccount(nameTypeAccount);
+
+        for (BankAccount account : listAccounts) {
+            if (account.getLogin().equals(this.getLogin())) {
+                throw new IllegalArgumentException("Такой логин уже есть!");
+            }
+        }
     }
 
     // getter and setter
@@ -79,10 +85,11 @@ public class BankAccount extends Account{
         setHistory(getFormatHistory(1, amount, null));
     }
 
-    @Override
+
     public void transfer(double amount, BankAccount transferee) {
         DebitCard card = getDebitCard();
         DebitCard transfereeCard = transferee.getDebitCard();
+        double difference = card.getCashWithdrawalLimit() - amount;
 
         if (amount <= 0) {
             throw new IllegalArgumentException("Сумма перевода должна быть больше 0!");
@@ -92,11 +99,42 @@ public class BankAccount extends Account{
             throw new IllegalArgumentException("Не хватает средств!");
         }
 
-        transfereeCard.setBalance(amount + transfereeCard.getBalance());
-        card.setBalance(card.getBalance() - amount);
+        if (!card.getTransferEnabled()){
+            throw new IllegalArgumentException("В этой карте отключена возможность переводов и покупок");
+        }
 
-        transferee.setHistory(getFormatHistory(0, amount, this.getFullName()));
-        setHistory(getFormatHistory(1, amount, transferee.getFullName()));
+        // Проверка на разрешение переводов для карты transfereeCard
+        if (!transfereeCard.getTransferEnabled()) {
+            throw new IllegalArgumentException("Карта получателя не разрешает переводы.");
+        }
+
+        if (difference > 0){
+            if (this != transferee){
+                card.setCashWithdrawalLimit(difference);
+
+                transfereeCard.setBalance(amount + transfereeCard.getBalance());
+                card.setBalance(card.getBalance() - amount);
+
+                transferee.setHistory(getFormatHistory(0, amount, this.getFullName()));
+                setHistory(getFormatHistory(1, amount, transferee.getFullName()));
+            }
+            else {
+                card.setCashWithdrawalLimit(difference);
+
+                transfereeCard.setBalance(amount + transfereeCard.getBalance());
+                card.setBalance(card.getBalance() - amount);
+
+                transferee.setHistory(getFormatHistory(0, amount, "Кому ты там переводишь?"));
+                setHistory(getFormatHistory(1, amount, "Кому ты там переводишь?"));
+            }
+        }
+        else {
+            transfereeCard.setBalance(amount + transfereeCard.getBalance());
+            card.setBalance(card.getBalance() - amount - (amount * 0.05));
+
+            transferee.setHistory(getFormatHistory(0, amount, this.getFullName()));
+            setHistory(getFormatHistory(1, amount, transferee.getFullName()));
+        }
     }
 
     // код для информации
@@ -116,28 +154,22 @@ public class BankAccount extends Account{
         }
     }
 
-    public String getMainAccountDetails(){
+    public String getAccountDetails(boolean extended) {
         DebitCard card = getDebitCard();
-
-        return  "Данные пользователя:" + "\n" +
-                "ID: " + this.getAccountId() + "\n" +
+        String details = "AccountId: " + this.getAccountId() + "\n" +
                 "Баланс: " + card.getBalance() + card.getCurrency() + "\n" +
                 "Пользователь: " + this.getFullName() + "\n" +
-                "Номер карты: " + this.getNumberCard() + "\n" +
-                "Последняя операция: " + getHistoryLast() + "\n";
-    }
+                "Номер карты: " + this.getNumberCard() + "\n";
 
-    public String getExtendedAccountDetails(){
-        DebitCard card = getDebitCard();
+        if (extended) {
+            details += card.getMainCardDetails() + "\n" +
+                    "Номер телефона: " + this.getPhoneNumber() + "\n" +
+                    "Тип аккаунта: " + getTypeAccount() + "\n" +
+                    "Последняя операция: " + getHistoryLast() + "\n" +
+                    "Время создания аккаунта: " + getTimeOpenAccount() + "\n";
+        }
 
-        return  "Данные расширенные пользователя:" + "\n" +
-                "ID: " + this.getAccountId() + "\n" +
-                "Пользователь: " + this.getFullName() + "\n" +
-                card.getMainCardDetails() + "\n" +
-                "Номер телефона: " + this.getPhoneNumber() + "\n" +
-                "Тип аккаунта: " + getTypeAccount() + "\n" +
-                "Последняя операция: " + getHistoryLast() + "\n" +
-                "Время создания аккаунта: " + getTimeOpenAccount() + "\n";
+        return details;
     }
 
     // остальные методы

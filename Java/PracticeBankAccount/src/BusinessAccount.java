@@ -7,29 +7,77 @@ public class BusinessAccount extends Account{
     private static final LocalDateTime timeOpenAccount = LocalDateTime.now();
     private final BusinessCard businessCard;
 
-    BusinessAccount(String name, String surname, String accountID, double balance, String currency, String phoneNumber, ArrayList<BusinessAccount> accountArrayList, String cardHolderName, String companyName) throws Exception {
-        super(name, surname, accountID, phoneNumber);
+    BusinessAccount(String login, String password, String name, String surname, String accountID, double balance, String currency, String phoneNumber, ArrayList<BusinessAccount> accountArrayList, String cardHolderName, String companyName) throws Exception {
+        super(login, password, name, surname, accountID, phoneNumber);
         this.businessCard = new BusinessCard(cardHolderName, addNumberCard(accountArrayList), String.format("%02d/%02d", timeOpenAccount.getMonthValue(),
                                              timeOpenAccount.getDayOfMonth()), balance, currency, companyName);
     }
 
-    public static String getNameTypeAccount() {
+    public String getNameTypeAccount() {
         return nameTypeAccount;
     }
 
     @Override
-    public void transfer(double amount, BankAccount transferee) {
-
-    }
-
-    @Override
     public void withdraw(double amount) {
-        
+        BusinessCard card = getBusinessCard();
+
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Сумма снятия должна быть больше 0!");
+        }
+
+        if (card.getBalance() < amount) {
+            throw new IllegalArgumentException("Не хватает средств!");
+        }
+
+        card.setBalance(card.getBalance() - amount);
+        setHistory(getFormatHistory(1, amount, null));
     }
 
     @Override
     public void deposit(double amount) {
+        BusinessCard card = getBusinessCard();
 
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Сумма депозита должна быть больше 0!");
+        }
+
+        card.setBalance(card.getBalance() + amount);
+        setHistory(getFormatHistory(0, amount, null));
+    }
+
+
+    public void transfer(double amount, BusinessAccount transferee) {
+        if (!(transferee instanceof BusinessAccount)) {
+            throw new IllegalArgumentException("Перевод с бизнес аккаунта возможен только на другой бизнес аккаунт.");
+        }
+
+
+        BusinessCard card = getBusinessCard();
+        BusinessCard transfereeCard = transferee.getBusinessCard();
+
+        if (amount <= 0) {
+            throw new IllegalArgumentException("Сумма перевода должна быть больше 0!");
+        }
+
+        if (card.getBalance() < amount) {
+            throw new IllegalArgumentException("Не хватает средств!");
+        }
+
+
+        if (this != transferee){
+            transfereeCard.setBalance(amount + transfereeCard.getBalance());
+            card.setBalance(card.getBalance() - amount);
+
+            transferee.setHistory(getFormatHistory(0, amount, this.getFullName()));
+            setHistory(getFormatHistory(1, amount, transferee.getFullName()));
+        }
+        else {
+            transfereeCard.setBalance(amount + transfereeCard.getBalance());
+            card.setBalance(card.getBalance() - amount);
+
+            transferee.setHistory(getFormatHistory(0, amount, "Кому ты там переводишь?"));
+            setHistory(getFormatHistory(1, amount, "Кому ты там переводишь?"));
+        }
     }
 
     public BusinessCard getBusinessCard() {
