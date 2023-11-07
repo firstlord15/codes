@@ -8,11 +8,10 @@ public class BankAccount extends Account{
     private static final LocalDateTime timeOpenAccount = LocalDateTime.now();
     private final DebitCard debitCard;
 
-    BankAccount(String name, String surname, String accountID, String phoneNumber, ArrayList<BankAccount> listAccounts, DebitCard debitCard) throws Exception {
+    BankAccount(String name, String surname, String accountID, String phoneNumber, double balance, String currency, ArrayList<BankAccount> listAccounts) throws Exception {
         super(name, surname, accountID, phoneNumber);
-        debitCard.setCardNumber(addNumberCard(listAccounts));
+        this.debitCard = new DebitCard(addNumberCard(listAccounts), timeOpenAccount.getMonthValue() +"/"+ timeOpenAccount.getDayOfMonth(), balance, currency);
         setTypeAccount(nameTypeAccount);
-        this.debitCard = debitCard;
     }
 
     // getter and setter
@@ -118,20 +117,26 @@ public class BankAccount extends Account{
     }
 
     public String getMainAccountDetails(){
+        DebitCard card = getDebitCard();
+
         return  "Данные пользователя:" + "\n" +
                 "ID: " + this.getAccountID() + "\n" +
-                "Баланс: " + getDebitCard().getBalance() + getDebitCard().getCurrency() + "\n" +
+                "Баланс: " + card.getBalance() + card.getCurrency() + "\n" +
                 "Пользователь: " + this.getFullName() + "\n" +
                 "Номер карты: " + this.getNumberCard() + "\n" +
                 "Последняя операция: " + getHistoryLast() + "\n";
     }
 
     public String getExtendedAccountDetails(){
+        DebitCard card = getDebitCard();
+
         return  "Данные расширенные пользователя:" + "\n" +
                 "ID: " + this.getAccountID() + "\n" +
-                "Баланс: " + getDebitCard().getBalance() + getDebitCard().getCurrency() + "\n" +
+                "Баланс: " + card.getBalance() + card.getCurrency() + "\n" +
                 "Пользователь: " + this.getFullName() + "\n" +
                 "Номер карты: " + this.getNumberCard() + "\n" +
+                "Срок действия: " + card.getExpirationDate() + "\n" +
+                "CVV: " + card.getCVV() + "\n" +
                 "Номер телефона: " + this.getPhoneNumber() + "\n" +
                 "Тип аккаунта: " + getTypeAccount() + "\n" +
                 "Последняя операция: " + getHistoryLast() + "\n" +

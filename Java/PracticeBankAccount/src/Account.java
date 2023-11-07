@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 abstract class Account {
-    private final String accountID;
+    private String accountID;
     private final String name;
     private final String surname;
     private String phoneNumber;
@@ -39,25 +39,26 @@ abstract class Account {
     }
 
     public int getHistoryCount() { return historyCount; }
-    public String getTypeAccount() { return typeAccount; }
 
+    public String getTypeAccount() { return typeAccount; }
     public void setTypeAccount(String typeAccount) { this.typeAccount = typeAccount; }
+
     public String getAccountID() { return accountID; }
+
+    public void setAccountID(String accountID) {
+        this.accountID = accountID;
+    }
+
+    public String findAccountID(ArrayList<BankAccount> accounts){
+        return String.valueOf(accounts.size() + 1);
+    }
+
+    public String findAccountID(ArrayList<ManagerAccount> accounts){
+        return String.valueOf(accounts.size() + 1);
+    }
 
     public String getPhoneNumber() { return phoneNumber; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
-
-    public double getBalance(BankAccount bankAccount) { return bankAccount.getDebitCard().getBalance(); }
-    public double getBalance(BusinessAccount businessAccount) { return businessAccount.getBalance(); }
-
-    public void setBalance(double newBalance, BankAccount bankAccount){ bankAccount.getDebitCard().setBalance(newBalance); }
-    public void setBalance(double newBalance, BusinessCard card){ card.setBalance(newBalance); }
-
-    public String getCurrency(BankAccount bankAccount) { return bankAccount.getDebitCard().getCurrency(); }
-    public String getCurrency(BusinessCard card) { return card.getCurrency(); }
-
-    public void setCurrency(String currency, BankAccount bankAccount){ bankAccount.getDebitCard().setCurrency(currency); }
-    public void setCurrency(String currency, BusinessCard card){ card.setCurrency(currency); }
 
     public String getName() { return name; }
     public String getSurname() { return surname; }

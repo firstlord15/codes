@@ -6,10 +6,10 @@ public class DebitCard implements BankCards {
     private String currency;
 
 
-    public DebitCard(String cardNumber, String expirationDate, String cvv, double balance, String currency) {
+    public DebitCard(String cardNumber, String expirationDate, double balance, String currency) throws Exception {
         this.cardNumber = cardNumber;
         this.expirationDate = expirationDate;
-        this.cvv = cvv;
+        setCvv(generateCVV());
         this.balance = balance;
         this.currency = currency;
     }
@@ -63,4 +63,15 @@ public class DebitCard implements BankCards {
         this.currency = currency;
     }
     // Остальные методы
+
+    private String generateCVV(){
+        String cardNumber = getCardNumber();
+        String expirationDate = getExpirationDate();
+
+        char cvv1 = cardNumber.charAt(cardNumber.length() - 1);
+        char cvv2 = expirationDate.charAt(0);
+        char cvv3 = cardNumber.charAt(cardNumber.length() - 2);
+
+        return String.valueOf(cvv1 + cvv2 + cvv3);
+    }
 }

@@ -24,7 +24,7 @@ public class ManagerAccount extends Account{
             throw new Exception("Пользователь "+ account.getName() +" не обслуживается этим менеджером");
         }
 
-        return account.getBalance();
+        return account.getDebitCard().getBalance();
     }
 
     public String getHistoryAllForManagedAccount(BankAccount account) throws Exception {
@@ -71,7 +71,7 @@ public class ManagerAccount extends Account{
         double total = 0;
 
         for (BankAccount account: managedAccounts){
-            total += account.getBalance();
+            total += account.getDebitCard().getBalance();
         }
 
         return total;
@@ -142,17 +142,6 @@ public class ManagerAccount extends Account{
 
     @Override
     public String getFormatHistory(int method, double amount, String actingPerson){
-        
-        if (actingPerson != null){
-            method += 2;
-        }
-
-        switch (method){
-            case 0 -> { return "У вас +" + amount + getCurrency(); }
-            case 1 -> { return "У вас -" + amount + getCurrency(); }
-            case 2 -> { return "У вас +" + amount + getCurrency() + ", Отправитель: " + actingPerson; }
-            case 3 -> { return "У вас -" + amount + getCurrency() + ", Получатель: " + actingPerson; }
-            default -> { return "Ошибка, неверный метод"; }
-        }
+        return null;
     }
 }
