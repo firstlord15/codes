@@ -120,7 +120,7 @@ public class BankAccount extends Account{
         DebitCard card = getDebitCard();
 
         return  "Данные пользователя:" + "\n" +
-                "ID: " + this.getAccountID() + "\n" +
+                "ID: " + this.getAccountId() + "\n" +
                 "Баланс: " + card.getBalance() + card.getCurrency() + "\n" +
                 "Пользователь: " + this.getFullName() + "\n" +
                 "Номер карты: " + this.getNumberCard() + "\n" +
@@ -131,7 +131,7 @@ public class BankAccount extends Account{
         DebitCard card = getDebitCard();
 
         return  "Данные расширенные пользователя:" + "\n" +
-                "ID: " + this.getAccountID() + "\n" +
+                "ID: " + this.getAccountId() + "\n" +
                 "Баланс: " + card.getBalance() + card.getCurrency() + "\n" +
                 "Пользователь: " + this.getFullName() + "\n" +
                 "Номер карты: " + this.getNumberCard() + "\n" +

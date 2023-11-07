@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 abstract class Account {
-    private String accountID;
+    private String accountId;
     private final String name;
     private final String surname;
     private String phoneNumber;
@@ -10,7 +10,7 @@ abstract class Account {
     private String typeAccount;
 
     Account(String name, String surname, String accountID, String phoneNumber){
-        this.accountID = accountID;
+        this.accountId = accountID;
         this.name = name;
         this.surname = surname;
         this.phoneNumber = phoneNumber;
@@ -43,18 +43,10 @@ abstract class Account {
     public String getTypeAccount() { return typeAccount; }
     public void setTypeAccount(String typeAccount) { this.typeAccount = typeAccount; }
 
-    public String getAccountID() { return accountID; }
+    public String getAccountId() { return accountId; }
 
-    public void setAccountID(String accountID) {
-        this.accountID = accountID;
-    }
-
-    public String findAccountID(ArrayList<BankAccount> accounts){
-        return String.valueOf(accounts.size() + 1);
-    }
-
-    public String findAccountID(ArrayList<ManagerAccount> accounts){
-        return String.valueOf(accounts.size() + 1);
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getPhoneNumber() { return phoneNumber; }

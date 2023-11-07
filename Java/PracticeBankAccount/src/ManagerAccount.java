@@ -47,7 +47,7 @@ public class ManagerAccount extends Account{
         String listOfNames = "Список управляемых аккаунтов:\n";
 
         for (BankAccount account: managedAccounts) {
-            listOfNames += "["+ account.getAccountID() + "] " + account.getFullName() + "\n";
+            listOfNames += "["+ account.getAccountId() + "] " + account.getFullName() + "\n";
         }
 
         return listOfNames;
@@ -55,7 +55,7 @@ public class ManagerAccount extends Account{
 
     public BankAccount getManagedAccountById(String accountId){
         for(BankAccount account: managedAccounts){
-            if (account.getAccountID().equals(accountId)){
+            if (account.getAccountId().equals(accountId)){
                 return account;
             }
         }

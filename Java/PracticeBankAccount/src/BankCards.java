@@ -1,4 +1,4 @@
-public interface BankCards {
+public interface BankCards { // абстаркт
     String getCardNumber();
     String getExpirationDate();
     String getCVV();
