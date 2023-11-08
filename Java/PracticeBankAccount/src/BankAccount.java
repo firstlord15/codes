@@ -1,9 +1,10 @@
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class BankAccount extends Account{
+public class BankAccount extends Account implements Serializable {
     private static final String nameTypeAccount = "Bank Account";
     private static final LocalDateTime timeOpenAccount = LocalDateTime.now();
     private final DebitCard debitCard;

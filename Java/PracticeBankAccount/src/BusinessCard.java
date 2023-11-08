@@ -1,4 +1,6 @@
-public class BusinessCard extends BankCards {
+import java.io.Serializable;
+
+public class BusinessCard extends BankCards implements Serializable {
     private String companyName;
 
     public BusinessCard(String cardHolderName, String cardNumber, String expirationDate, double balance, String currency, String companyName) throws Exception {
@@ -19,5 +21,4 @@ public class BusinessCard extends BankCards {
         String cardDetails = super.getMainCardDetails();
         return cardDetails + "\nCompany Name: " + companyName;
     }
-
 }

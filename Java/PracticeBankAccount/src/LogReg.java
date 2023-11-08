@@ -1,43 +1,63 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class LogReg {
     private static final String ACCOUNTS_DATA_DIR = "AccountsData";
-    private final List<Account> accounts = new ArrayList<>();
+    private List<Account> accounts = new ArrayList<>();
 
-    public void registerBankAccount(BankAccount account) throws IOException {
+    public void registerBankAccount(BankAccount account) {
         createAccountDirectory(account);
         accounts.add(account);
+        saveAccounts();
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(ArrayList<Account> accounts) {
+        this.accounts = accounts;
     }
 
     public void registerBusinessAccount(BusinessAccount account) throws IOException {
         createAccountDirectory(account);
-        accounts.add(account);
+        accounts.add((Account) account);
+        saveAccounts();
     }
 
-    public boolean login(String fullName, String accountId, String login) {
-        String accountDirName = ACCOUNTS_DATA_DIR + File.separator + fullName + "_" + accountId + "_" + login;
-        File accountDirectory = new File(accountDirName);
+    public Account login(String login, String password) {
+        if (isAccountExists(login)){
+            Account account = findLoginAccount(login);
 
-        return accountDirectory.exists();
+            if (Objects.equals(account.getPassword(), password)){
+                return account;
+            }
+        }
+
+        return null;
     }
 
-    private void createAccountDirectory(Account account) throws IOException {
+    private void createAccountDirectory(Account account) {
         String accountDirName = ACCOUNTS_DATA_DIR + File.separator + account.getFullName() + "_" + account.getAccountId() + "_" + account.getLogin();
         File accountDirectory = new File(accountDirName);
-
         if (!accountDirectory.exists()) {
             if (accountDirectory.mkdirs()) {
-                createCardFile(account);
-                createCreditFile(account);
                 saveAccountData(account);
             } else {
-                throw new IOException("Не удалось создать директорию аккаунта или уже существует");
+                throw new RuntimeException("Не удалось создать директорию аккаунта или уже существует");
             }
         }
     }
 
+    public void saveAccounts() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ACCOUNTS_DATA_DIR + File.separator + "accounts.ser"))) {
+            oos.writeObject(accounts);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public ArrayList<BankAccount> getBankAccounts() {
         ArrayList<BankAccount> bankAccounts = new ArrayList<>();
         for (Account account : accounts) {
@@ -52,7 +72,7 @@ public class LogReg {
         String businessAccounts = "";
         for (Account account : accounts) {
             if (account instanceof BankAccount) {
-                businessAccounts += account.getFullName() + "\n";
+                businessAccounts += account.getFullName() + "(" + account.getLogin() + ")" + "\n";
             }
         }
 
@@ -73,7 +93,7 @@ public class LogReg {
         String businessAccounts = "";
         for (Account account : accounts) {
             if (account instanceof BusinessAccount) {
-                businessAccounts += account.getFullName() + "\n";
+                businessAccounts += account.getFullName() + "(" + account.getLogin() + ")" + "\n";
             }
         }
 
@@ -183,6 +203,15 @@ public class LogReg {
         }
     }
 
+    public boolean isAccountExists(String login) {
+        for (Account account : accounts) {
+            if (account.getLogin().equals(login)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean isAccountExists(String fullName, String accountId, String login) {
         for (Account account : accounts) {
             if (account.getFullName().equals(fullName) && account.getAccountId().equals(accountId) && account.getLogin().equals(login)) {
@@ -195,6 +224,15 @@ public class LogReg {
     public Account findAccount(String fullName, String accountId, String login) {
         for (Account account : accounts) {
             if (account.getFullName().equals(fullName) && account.getAccountId().equals(accountId) && account.getLogin().equals(login)) {
+                return account;
+            }
+        }
+        return null;
+    }
+
+    public Account findLoginAccount(String login) {
+        for (Account account : accounts) {
+            if (account.getLogin().equals(login)) {
                 return account;
             }
         }

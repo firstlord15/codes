@@ -1,6 +1,7 @@
 import java.awt.datatransfer.Transferable;
+import java.io.Serializable;
 
-public class DebitCard extends BankCards {
+public class DebitCard extends BankCards implements Serializable {
     private double cashWithdrawalLimit;
     private boolean transferEnabled;
 

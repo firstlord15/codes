@@ -71,7 +71,7 @@ abstract class Account {
 
     public String getName() { return name; }
     public String getSurname() { return surname; }
-    public String getFullName() { return name + " " + surname; }
+    public String getFullName() { return surname + " " + name; }
 
 
     // основные операции
