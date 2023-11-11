@@ -74,10 +74,6 @@ public class TransactionHistory {
         return resultTransactions;
     }
 
-    public List<BankTransaction> getAllTransactions() {
-        return new ArrayList<>(transactionList);
-    }
-
     public double getTotalBalanceForPeriod(Date startDate, Date endDate) {
         double totalBalance = 0;
 
