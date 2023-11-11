@@ -13,6 +13,8 @@ public class LogReg {
         saveAccounts();
     }
 
+
+
     public List<Account> getAccounts() {
         return accounts;
     }
