@@ -1,3 +1,5 @@
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Scanner;
 
 public class App {
@@ -5,6 +7,11 @@ public class App {
     private static final Registration registration = new Registration();
     private static final Scanner scanner = new Scanner(System.in);
     private static Account authenticatedAccount;
+    private static int authenticatedAccountIndex = 0;
+
+    public static int getAuthenticatedAccountIndex() {
+        return authenticatedAccountIndex;
+    }
 
     public void start() {
         System.out.println("Welcome to the Banking App!");
@@ -41,6 +48,7 @@ public class App {
         String password = scanner.nextLine();
 
         authenticatedAccount = login.authenticate(username, password);
+        authenticatedAccountIndex = login.findIndexAccount(authenticatedAccount.getLogin());
 
         if (authenticatedAccount != null) {
             System.out.println("Login successful. Welcome, " + username + "!");
@@ -57,8 +65,6 @@ public class App {
         String login = scanner.nextLine();
         System.out.print("Enter password: ");
         String password = scanner.nextLine();
-        System.out.print("Enter account number: ");
-        String accountNumber = scanner.nextLine();
         System.out.print("Enter first name: ");
         String firstName = scanner.nextLine();
         System.out.print("Enter last name: ");
@@ -66,7 +72,7 @@ public class App {
         System.out.print("Enter phone number: ");
         String phoneNumber = scanner.nextLine();
 
-        Account newAccount = new Account(accountNumber, new Person(firstName, lastName, phoneNumber), login, password);
+        Account newAccount = new Account(new Person(firstName, lastName, phoneNumber), login, password);
         registration.getAccounts().add(newAccount);
         registration.saveAccountsToFile();
 
@@ -75,8 +81,8 @@ public class App {
 
     public void manageAccount() {
         while (true) {
-            System.out.println("\n1. Deposit\n2. Withdraw\n3. Transfer\n4. Logout");
-            System.out.print("Choose an option: ");
+            System.out.println("\n1. Deposit\n2. Withdraw\n3. Transfer\n4. Get details account\n5. Logout");
+            System.out.print("Введите свой выбор: ");
             String string = scanner.nextLine();
             scanner.nextLine();
 
@@ -85,24 +91,21 @@ public class App {
                 System.exit(0);
             }
 
-            int choice = Integer.parseInt(string);
+            int choice = Integer.parseInt(string.trim());
             switch (choice) {
-                case 1:
-                    deposit();
-                    break;
-                case 2:
-                    withdraw();
-                    break;
-                case 3:
-                    transfer();
-                    break;
-                case 4:
+                case 1 -> deposit();
+                case 2 -> withdraw();
+                case 3 -> transfer();
+                case 4 -> System.out.println(authenticatedAccount.getDetailsAccount());
+                case 5 -> {
                     authenticatedAccount = null;
                     System.out.println("Logout successful. Returning to the main menu.");
                     return;
-                default:
-                    System.out.println("Invalid option. Please choose a valid option.");
+                }
+                default -> System.out.println("Invalid option. Please choose a valid option.");
             }
+
+            scanner.nextLine();
         }
     }
 
@@ -111,6 +114,12 @@ public class App {
         double amount = scanner.nextDouble();
         authenticatedAccount.deposit(amount);
         System.out.println("Deposit successful. New balance: " + authenticatedAccount.getBalance());
+
+        Date currentDate = Calendar.getInstance().getTime();
+        authenticatedAccount.addTransaction(new BankTransaction(authenticatedAccount, new Transaction(currentDate, amount, TransactionType.DEPOSIT)));
+
+        registration.setAccountByIndex(authenticatedAccountIndex, authenticatedAccount);
+        registration.saveAccountsToFile(); // Обновляем файл после операции
     }
 
     public void withdraw() {
@@ -119,30 +128,44 @@ public class App {
         if (authenticatedAccount.getBalance() >= amount) {
             authenticatedAccount.withdraw(amount);
             System.out.println("Withdrawal successful. New balance: " + authenticatedAccount.getBalance());
+
+
+            Date currentDate = Calendar.getInstance().getTime();
+            authenticatedAccount.addTransaction(new BankTransaction(authenticatedAccount, new Transaction(currentDate, amount, TransactionType.DEPOSIT)));
+            registration.setAccountByIndex(authenticatedAccountIndex, authenticatedAccount);
+            registration.saveAccountsToFile(); // Обновляем файл после операции
         } else {
             System.out.println("Insufficient funds. Withdrawal failed.");
         }
     }
 
     public void transfer() {
-        System.out.print("Enter the recipient's account number: ");
-        String recipientAccountNumber = scanner.nextLine();
+        System.out.print("Enter the recipient's login: ");
+        String login = scanner.nextLine();
         System.out.print("Enter the amount to transfer: ");
         double amount = scanner.nextDouble();
 
-        Account recipientAccount = findAccountByNumber(recipientAccountNumber);
+        Account recipientAccount = findAccountByUsername(login);
 
         if (recipientAccount != null) {
             authenticatedAccount.transferTo(recipientAccount, amount);
             System.out.println("Transfer successful. New balance: " + authenticatedAccount.getBalance());
+
+
+            Date currentDate = Calendar.getInstance().getTime();
+            authenticatedAccount.addTransaction(new BankTransaction(authenticatedAccount, new Transaction(currentDate, amount, TransactionType.WITHDRAWAL)));
+            recipientAccount.addTransaction(new BankTransaction(recipientAccount, new Transaction(currentDate, amount, TransactionType.DEPOSIT)));
+
+            registration.setAccountByIndex(authenticatedAccountIndex, authenticatedAccount);
+            registration.saveAccountsToFile(); // Обновляем файл после операции
         } else {
             System.out.println("Recipient account not found. Transfer failed.");
         }
     }
 
-    private Account findAccountByNumber(String accountNumber) {
+    private Account findAccountByUsername(String login) {
         for (Account account : registration.getAccounts()) {
-            if (account.getAccountNumber().equals(accountNumber)) {
+            if (account.getLogin().equals(login)) {
                 return account;
             }
         }

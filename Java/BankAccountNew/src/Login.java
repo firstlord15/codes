@@ -1,11 +1,7 @@
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class Login {
-    private static final List<Account> accounts = new ArrayList<>();
     private static final Registration registration = new Registration();
 
     public Account authenticate(String username, String password) {
@@ -18,11 +14,28 @@ public class Login {
         return null;
     }
 
+    public Account findAccountByIndex(int index) {
+        loadAccountsFromFile();
+        return registration.getAccounts().get(index);
+    }
+
+    public Integer findIndexAccount(String login) {
+        loadAccountsFromFile();
+        List<Account> list = registration.getAccounts();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getLogin().equals(login)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
     public Account findAccountByUsername(String login) {
         loadAccountsFromFile();
-        for (Account acc : accounts) {
-            if (acc.getLogin().equals(login)) {
-                return acc;
+        for (Account account : registration.getAccounts()) {
+            System.out.println(account.getLogin());
+            if (account.getLogin().equals(login)) {
+                return account;
             }
         }
         return null;

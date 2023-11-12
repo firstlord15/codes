@@ -13,7 +13,7 @@ public class Registration {
         try (Scanner fileScanner = new Scanner(new File(FILE_PATH))) {
             while (fileScanner.hasNextLine()) {
                 String[] parts = fileScanner.nextLine().split(",");
-                String accountNumber = parts[0];
+                String bankNumber = parts[0];
                 String firstName = parts[1];
                 String lastName = parts[2];
                 String phoneNumber = parts[3];
@@ -22,7 +22,9 @@ public class Registration {
                 double balance = Double.parseDouble(parts[6]);
 
                 Person person = new Person(firstName, lastName, phoneNumber);
-                Account account = new Account(accountNumber, person, login, password);
+                Account account = new Account(person, login, password);
+                account.setBankNumber(bankNumber);
+
                 account.deposit(balance);
                 accounts.add(account);
             }
@@ -37,12 +39,11 @@ public class Registration {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
             for (Account account : accounts) {
                 writer.println(
-                        account.getAccountNumber() + "," +
-                                account.
+                        account.getBankNumber() + "," +
                                 account.getPerson().getFirstName() + "," +
                                 account.getPerson().getLastName() + "," +
                                 account.getPerson().getPhoneNumber() + "," +
-                                account.getLogin() + "," +
+                                account.getLogin().toLowerCase() + "," +
                                 account.getPassword() + "," +
                                 account.getBalance()
                 );
@@ -50,6 +51,11 @@ public class Registration {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setAccountByIndex(int index, Account account){
+        loadAccountsFromFile();
+        accounts.set(index, account);
     }
 
 

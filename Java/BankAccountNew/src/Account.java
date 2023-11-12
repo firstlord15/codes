@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Random;
 
 public class Account {
-    private String accountNumber;
     private String bankNumber;
     private String login;
     private String password;
@@ -11,10 +10,9 @@ public class Account {
     private double balance;
     private TransactionHistory transactionHistory;
 
-    Account(String accountNumber, Person person, String login, String password){
+    Account(Person person, String login, String password){
         this.login = login;
         this.password = password;
-        this.accountNumber = accountNumber;
         this.person = person;
         this.balance = 0;
         this.transactionHistory = new TransactionHistory();
@@ -26,7 +24,7 @@ public class Account {
         String bankNumberBuilder = "";
 
         for (int i = 0; i < 16; i++) {
-            int num = rand.nextInt(16);
+            int num = rand.nextInt(10);
             bankNumberBuilder += num;
         }
 
@@ -39,15 +37,6 @@ public class Account {
 
     public void setBankNumber(String bankNumber) {
         this.bankNumber = bankNumber;
-    }
-
-
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
     }
 
     public Person getPerson() {
@@ -138,11 +127,17 @@ public class Account {
     @Override
     public String toString() {
         return "Account{" +
-                "accountNumber='" + accountNumber + '\'' +
-                ", person=" + person +
+                "bankNumber='" + bankNumber + '\'' +
+                ", person=" + person.toString() +
                 ", balance=" + balance +
-                ", transactionHistory=" + transactionHistory +
                 '}';
+    }
+
+    public String getDetailsAccount() {
+        return "bank number: " + bankNumber + "\n" +
+                "person: " + person.toString() + "\n" +
+                "balance: " + balance + "\n" +
+                "Transaction: " + transactionHistory.getLastTransaction();
     }
 
     public String getPassword() {

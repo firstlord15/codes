@@ -27,7 +27,7 @@ public class BankTransaction {
     public String toString() {
         return "BankTransaction{" +
                 "account=" + account +
-                ", transaction=" + transaction +
+                ", transaction=" + transaction.toString() +
                 '}';
     }
 
