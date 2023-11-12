@@ -3,16 +3,14 @@ import java.util.UUID;
 public class Person {
     private String firstName;
     private String lastName;
-    private String address;
     private String phoneNumber;
     private String id;
 
-    Person(String firstName, String lastName, String address, String phoneNumber, String id){
+    Person(String firstName, String lastName, String phoneNumber){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
         this.phoneNumber = phoneNumber;
-        this.id = id;
+        this.id = generateUniqueId();
     }
 
     public static String generateUniqueId() {
@@ -37,14 +35,6 @@ public class Person {
 
     public String getFullName(){
         return getFirstName() + " " + getLastName();
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address.trim().toLowerCase();
     }
 
     public String getPhoneNumber() {

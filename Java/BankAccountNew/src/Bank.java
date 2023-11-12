@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Bank {
     private List<Account> accounts;
@@ -9,7 +10,6 @@ public class Bank {
         this.bankName = bankName;
         accounts = new ArrayList<>();
     }
-
 
     public String getBankName() {
         return bankName;
@@ -26,4 +26,6 @@ public class Bank {
     public void setAccounts(List<Account> accounts) {
         this.accounts = accounts;
     }
+
+
 }

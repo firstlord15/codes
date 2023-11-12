@@ -1,17 +1,44 @@
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class Account {
     private String accountNumber;
+    private String bankNumber;
+    private String login;
+    private String password;
     private Person person;
     private double balance;
     private TransactionHistory transactionHistory;
 
-    Account(String accountNumber, Person person){
+    Account(String accountNumber, Person person, String login, String password){
+        this.login = login;
+        this.password = password;
         this.accountNumber = accountNumber;
         this.person = person;
         this.balance = 0;
         this.transactionHistory = new TransactionHistory();
+        this.bankNumber = generateBankNumber();
+    }
+
+    public String generateBankNumber() {
+        Random rand = new Random();
+        String bankNumberBuilder = "";
+
+        for (int i = 0; i < 16; i++) {
+            int num = rand.nextInt(16);
+            bankNumberBuilder += num;
+        }
+
+        return bankNumberBuilder;
+    }
+
+    public String getBankNumber() {
+        return bankNumber;
+    }
+
+    public void setBankNumber(String bankNumber) {
+        this.bankNumber = bankNumber;
     }
 
 
@@ -59,11 +86,11 @@ public class Account {
         return transactionHistory.getBalanceOnDate(date);
     }
 
-    private void deposit(double amount) {
+    public void deposit(double amount) {
         balance += amount;
     }
 
-    private void withdraw(double amount) {
+    public void withdraw(double amount) {
         balance -= amount;
     }
 
@@ -116,5 +143,21 @@ public class Account {
                 ", balance=" + balance +
                 ", transactionHistory=" + transactionHistory +
                 '}';
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 }
