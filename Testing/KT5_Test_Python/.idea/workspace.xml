@@ -5,34 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c102877a-7952-4bd7-88be-57da503ee170" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Java/PracticeBankAccount/src/LogReg.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Java/PracticeBankAccount/src/LogReg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KT5_Test_Java/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../KT5_Test_Java/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../KT5_Test_Java/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../KT5_Test_Java/src/main/java/org/example/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/KT5_Test_Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/KT5_Test_Python.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/api/authentication_api.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/base/api/questions_api.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/conftest.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/authentication.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/questions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_futurama_questions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/assertions/api/questions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/assertions/base/assertion_base.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/assertions/base/assertion_mixin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/assertions/base/assertion_types.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/assertions/base/expect.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/assertions/base/solutions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/assertions/schema.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/clients/http/builder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/clients/http/client.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/constants/routes.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/fakers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/fixtures/questions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Алгоритмы/3 курс/hashtables/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Алгоритмы/3 курс/hashtables/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Алгоритмы/3 курс/hashtables/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../Алгоритмы/3 курс/hashtables/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,10 +15,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
@@ -62,21 +35,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -87,6 +60,7 @@
       <updated>1699613486124</updated>
       <workItem from="1699613487839" duration="203000" />
       <workItem from="1699613726574" duration="2941000" />
+      <workItem from="1699951793571" duration="35000" />
     </task>
     <servers />
   </component>

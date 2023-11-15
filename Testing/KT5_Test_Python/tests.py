@@ -9,7 +9,7 @@ class DefaultQuestion(BaseModel):
     answer: str
 
 jsonschema = {
-    "id": "1", "question": f"{fake.seed}",
+    "id": "1", "question": f"SSS",
     "possibleAnswers": {
         "0": "no correct",
         "1": "no correct x2",
