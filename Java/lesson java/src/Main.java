@@ -1,5 +1,4 @@
 
-import javax.swing.*;
 import java.io.*;
 import java.util.Scanner;
 
@@ -8,9 +7,13 @@ public class Main {
         String way = "result.txt";
         String way2 = "result2.txt";
 
-        if (new File(way).delete() || new File(way2).delete()) System.out.println("Файлы удалены");
+        if (new File(way).delete() || new File(way2).delete()) {
+            System.out.println("Файлы удалены");
+        }
 
         StringBuilder stringBuilder = new StringBuilder();
+        String string = "";
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Пиши че хочешь: ");

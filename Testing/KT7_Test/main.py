@@ -1,68 +1,45 @@
-import pytest
 import asyncio
-from aiopg import pool
 import aiohttp
-
+import pytest
 
 async def async_function():
-    return 42
+    return "It's async function"
 
 
 @pytest.mark.asyncio
-async def test_resolve_promise():
+async def test_async_function(event_loop):
     result = await async_function()
-    assert result == 42
+    assert result == "It's async function"
 
 
-async def async_function2():
-    raise ValueError("Test error")
+async def async_function_error():
+    raise ValueError("An expected error occurred.")
 
 
 @pytest.mark.asyncio
-async def test_reject_promise():
-    with pytest.raises(ValueError, match="Test error"):
-        await async_function2()
+async def test_failed_promise_rejection(event_loop):
+    with pytest.raises(ValueError, match="An expected error occurred."):
+        await async_function_error()
 
 
-async def fetch_data():
+async def async_http_request():
     async with aiohttp.ClientSession() as session:
-        async with session.get('https://api.example.com/data') as response:
-            return await response.json()
+        async with session.get("https://petstore.swagger.io/v2/user/string") as response:
+            return response._body
 
-
-@pytest.mark.asyncio
-async def test_http_request():
-    result = await fetch_data()
-    assert 'key' in result
-
-
-async def add_record_to_database():
-    # Assume there's a database connection pool 'pool'
-    async with pool.acquire() as connection:
-        async with connection.cursor() as cursor:
-            await cursor.execute("INSERT INTO records (data) VALUES ('test')")
-            await connection.commit()
-
+jsonExmple = {
+  "id": 9223372036854771000,
+  "username": "string",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "password": "string",
+  "phone": "string",
+  "userStatus": 0
+}
 
 @pytest.mark.asyncio
-async def test_database_interaction():
-    await add_record_to_database()
-    # Add assertions to check if the record was added successfully
-
-
-async def async_function3():
-    return 42
-
-
-def run_async_function_in_thread():
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    result = loop.run_until_complete(async_function())
-    loop.close()
-    return result
-
-
-@pytest.mark.asyncio
-async def test_run_in_thread():
-    result = await asyncio.gather(run_async_function_in_thread())
-    assert result[0] == 42
+async def test_async_http_request(event_loop):
+    result = await async_http_request()
+    assert result == jsonExmple
+    
