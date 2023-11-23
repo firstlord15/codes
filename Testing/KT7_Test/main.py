@@ -51,5 +51,3 @@ async def test_add_record_to_database(event_loop):
     assert result is not None
 
 
-
-
