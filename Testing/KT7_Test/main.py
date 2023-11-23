@@ -1,3 +1,4 @@
+from database import add_record_to_database
 import aiohttp
 import pytest
 
@@ -25,21 +26,30 @@ async def test_failed_promise_rejection(event_loop):
 async def async_http_request():
     async with aiohttp.ClientSession() as session:
         async with session.get("https://petstore.swagger.io/v2/user/string") as response:
-            return response._body
-
-jsonExmple = {
-    "id": 9223372036854771000,
-    "username": "string",
-    "firstName": "string",
-    "lastName": "string",
-    "email": "string",
-    "password": "string",
-    "phone": "string",
-    "userStatus": 0
-}
+            return await response.json()
 
 
 @pytest.mark.asyncio
 async def test_async_http_request(event_loop):
     result = await async_http_request()
-    assert result == jsonExmple
+    assert "id" in result
+    assert "username" in result
+    assert "firstName" in result
+    assert "lastName" in result
+    assert "email" in result
+    assert "password" in result
+    assert "phone" in result
+    assert "userStatus" in result
+
+
+
+@pytest.mark.asyncio
+async def test_add_record_to_database(event_loop):
+    data_to_insert = ("value1", "value2")
+    result = await add_record_to_database(data_to_insert)
+
+    assert result is not None
+
+
+
+
