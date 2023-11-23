@@ -1,15 +1,15 @@
-import asyncio
 import aiohttp
 import pytest
 
-async def async_function():
-    return "It's async function"
+
+async def async_function_resolve():
+    return "Expected Value"
 
 
 @pytest.mark.asyncio
-async def test_async_function(event_loop):
-    result = await async_function()
-    assert result == "It's async function"
+async def test_async_function_resolve(event_loop):
+    result = await async_function_resolve()
+    assert result == "Expected Value"
 
 
 async def async_function_error():
@@ -28,18 +28,18 @@ async def async_http_request():
             return response._body
 
 jsonExmple = {
-  "id": 9223372036854771000,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
+    "id": 9223372036854771000,
+    "username": "string",
+    "firstName": "string",
+    "lastName": "string",
+    "email": "string",
+    "password": "string",
+    "phone": "string",
+    "userStatus": 0
 }
+
 
 @pytest.mark.asyncio
 async def test_async_http_request(event_loop):
     result = await async_http_request()
     assert result == jsonExmple
-    
