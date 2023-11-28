@@ -41,7 +41,7 @@ class TestPetUsers:
         assert response_user.status_code == 200
         with allure.step("Check the response JSON"):
             user_data = response_user.json()
-            UserResponse(**user_data)  # Validate the response with Pydantic
+            UserResponse(**user_data)
         allure.attach(response_user.text, "Response", allure.attachment_type.JSON)
 
     @allure.title("POST /user")
@@ -52,7 +52,7 @@ class TestPetUsers:
         assert response_post_user.status_code == 200
         with allure.step("Check the response JSON"):
             user_data = response_post_user.json()
-            AnswerUserResponse(**user_data)  # Validate the response with Pydantic
+            AnswerUserResponse(**user_data)
         allure.attach(response_post_user.text, "Response", allure.attachment_type.JSON)
 
 
