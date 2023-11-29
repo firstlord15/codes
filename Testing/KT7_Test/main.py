@@ -1,8 +1,11 @@
 from database import add_record_to_database
 import aiohttp
 import pytest
+import asyncio
+import threading
 
 
+# 1
 async def async_function_resolve():
     return "Expected Value"
 
@@ -12,7 +15,7 @@ async def test_async_function_resolve(event_loop):
     result = await async_function_resolve()
     assert result == "Expected Value"
 
-
+# 2
 async def async_function_error():
     raise ValueError("An expected error occurred.")
 
@@ -23,10 +26,12 @@ async def test_failed_promise_rejection(event_loop):
         await async_function_error()
 
 
+# 3
 async def async_http_request():
     async with aiohttp.ClientSession() as session:
         async with session.get("https://petstore.swagger.io/v2/user/string") as response:
             return await response.json()
+
 
 
 @pytest.mark.asyncio
@@ -42,7 +47,7 @@ async def test_async_http_request(event_loop):
     assert "userStatus" in result
 
 
-
+# 4
 @pytest.mark.asyncio
 async def test_add_record_to_database(event_loop):
     data_to_insert = ("value1", "value2")
@@ -51,3 +56,27 @@ async def test_add_record_to_database(event_loop):
     assert result is not None
 
 
+# 5
+def run_async_function_in_thread(async_function, *args, **kwargs):
+    loop = asyncio.new_event_loop()
+    asyncio.set_event_loop(loop)
+
+    def run():
+        result = loop.run_until_complete(async_function(*args, **kwargs))
+        loop.stop()
+
+    thread = threading.Thread(target=run)
+    thread.start()
+    thread.join()
+
+    return loop, result
+
+async def async_function_to_run():
+    await asyncio.sleep(1)
+    return "Async Function Result"
+
+@pytest.mark.asyncio
+async def test_run_async_function_in_thread(event_loop):
+    loop, result = run_async_function_in_thread(async_function_to_run)
+    assert result == "Async Function Result"
+    loop.close()
