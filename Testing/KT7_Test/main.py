@@ -61,7 +61,10 @@ def run_async_function_in_thread(async_function, *args, **kwargs):
     loop = asyncio.new_event_loop()
     asyncio.set_event_loop(loop)
 
+    result = None  # Инициализируем result заранее
+
     def run():
+        nonlocal result  # Используем nonlocal для изменения переменной внутри вложенной функции
         result = loop.run_until_complete(async_function(*args, **kwargs))
         loop.stop()
 
