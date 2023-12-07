@@ -1,9 +1,7 @@
 package org.example;
 
 public class User {
-
     private String id;
-    private static final ValueConfig valueConfig = new ValueConfig();
 
     @Value("${name}")
     private String name;
@@ -21,7 +19,7 @@ public class User {
 
     public User(String id) {
         this.id = id;
-        valueConfig.processAnnotations(this);
+        ValueConfig.processAnnotations(this);
     }
 
 
