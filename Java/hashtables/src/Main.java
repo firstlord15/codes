@@ -44,8 +44,6 @@ public class Main {
     }
 
 
-
-
     private static int Hash(int key){
         return (11 * key + 4) % 9;
     }
