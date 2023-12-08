@@ -1,67 +1,77 @@
+// A Java program for Bellman-Ford's single source the shortest
+// path algorithm.
+
+import java.lang.*;
 import java.util.*;
 
-public class Graph {
-    private final Map<String, List<String>> graph = new LinkedHashMap<>();
-    private final List<String> nodeList = new ArrayList<>();
+// A class to represent a connected, directed and weighted
+// graph
+class Graph {
 
-    public void addNode(String node) {
-        if (!graph.containsKey(node)) {
-            graph.put(node, new ArrayList<>());
-            nodeList.add(node);
-        }
+    int V, E;
+    Edge[] edge;
+
+    // Creates a graph with V vertices and E edges
+    Graph(int v, int e)
+    {
+        V = v;
+        E = e;
+        edge = new Edge[e];
+        for (int i = 0; i < e; ++i)
+            edge[i] = new Edge();
     }
 
-    public void addEdge(String node1, String node2) {
-        if (graph.containsKey(node1) && graph.containsKey(node2) && !graph.get(node1).contains(node2) && !graph.get(node2).contains(node1)) {
-            graph.get(node1).add(node2);
-            graph.get(node2).add(node1);
-        }
-    }
+    // The main function that finds shortest distances from
+    // src to all other vertices using Bellman-Ford
+    // algorithm. The function also detects negative weight
+    // cycle
+    void bellmanFord(Graph graph, int src)
+    {
+        int V = graph.V, E = graph.E;
+        int[] dist = new int[V];
 
-    public void deleteNode(String node) {
-        if (graph.containsKey(node)) {
-            List<String> nodes = graph.get(node);
-            graph.remove(node);
-            for (String nod : nodes) {
-                graph.get(nod).remove(node);
-            }
+        // Step 1: Initialize distances from src to all
+        // other vertices as INFINITE
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[src] = 0;
 
-            nodeList.remove(node);
-        }
-    }
-
-    public void deleteEdge(String node1, String node2) {
-        if (graph.containsKey(node1) && graph.containsKey(node2)) {
-            graph.get(node1).remove(node2);
-            graph.get(node2).remove(node1);
-        }
-    }
-
-    public StringBuilder getGraph() {
-        StringBuilder result = new StringBuilder();
-
-        for (String str: graph.keySet()) {
-            result.append("key: ").append(str).append(", value: ").append(graph.get(str)).append("\n");
-        }
-
-        return result;
-    }
-
-    public void DFS(String startNode, Set<String> visited, int[] distance) {
-        if ((visited == null) | (distance == null)){
-            visited = new HashSet<>();
-            distance = new int[nodeList.size()];
-        }
-
-        visited.add(startNode);
-
-        for (String nextNode: graph.get(startNode)) {
-            if (!visited.contains(nextNode)) {
-                distance[nodeList.indexOf(nextNode)] = distance[nodeList.indexOf(startNode)] + 1;
-
-                System.out.println("Start node: " + startNode + ", Next node: " + nextNode  + ", Distance: " + Arrays.toString(distance));
-                DFS(nextNode, visited, distance);
+        // Step 2: Relax all edges |V| - 1 times. A simple
+        // shortest path from src to any other vertex can
+        // have at-most |V| - 1 edges
+        for (int i = 1; i < V; ++i) {
+            for (int j = 0; j < E; ++j) {
+                int u = graph.edge[j].src;
+                int v = graph.edge[j].dest;
+                int weight = graph.edge[j].weight;
+                if (dist[u] != Integer.MAX_VALUE
+                        && dist[u] + weight < dist[v])
+                    dist[v] = dist[u] + weight;
             }
         }
+
+        // Step 3: check for negative-weight cycles. The
+        // above step guarantees shortest distances if graph
+        // doesn't contain negative weight cycle. If we get
+        // a shorter path, then there is a cycle.
+        for (int j = 0; j < E; ++j) {
+            int u = graph.edge[j].src;
+            int v = graph.edge[j].dest;
+            int weight = graph.edge[j].weight;
+            if (dist[u] != Integer.MAX_VALUE
+                    && dist[u] + weight < dist[v]) {
+                System.out.println(
+                        "Graph contains negative weight cycle");
+                return;
+            }
+        }
+        printArr(dist, V);
+    }
+
+    // A utility function used to print the solution
+    void printArr(int[] dist, int V)
+    {
+        System.out.println("Vertex Distance from Source");
+        for (int i = 0; i < V; ++i)
+            System.out.println(i + "\t\t" + dist[i]);
     }
 }
