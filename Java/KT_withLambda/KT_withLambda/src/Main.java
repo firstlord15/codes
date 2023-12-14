@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
-import java.util.stream.IntStream;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -36,9 +36,9 @@ public class Main {
             return stringBuilder.reverse().toString();
         };
 
-        Unpaired unpaired = (int[] ints) -> {
+        Unpaired unpaired = (int[] ins) -> {
             LinkedHashSet<Integer> result = new LinkedHashSet<>();
-            for (int num: ints){
+            for (int num: ins){
                 result.add(num);
             }
 
@@ -53,8 +53,6 @@ public class Main {
         };
 
         IsSimple isSimple = (int number) -> {
-            if(number < 2) return false;
-
             for(int i = 2; i < number / 2; i++) {
                 if(number % i == 0) {
                     return false;
