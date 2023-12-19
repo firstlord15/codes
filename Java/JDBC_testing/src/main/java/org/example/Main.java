@@ -10,7 +10,12 @@ public class Main {
     static final String PASS = "test";
 
     public static void main(String[] args) {
-//        apply_test(DB_URL, USER, PASS);
-        applyConnection(DB_URL, USER, PASS);
+        // apply_test(DB_URL, USER, PASS);
+        // applyConnection(DB_URL, USER, PASS);
+
+        User user = new User();
+        Class<?> clazz = user.getClass();
+
+        System.out.println(clazz.getDeclaredAnnotation(test.class));
     }
 }
