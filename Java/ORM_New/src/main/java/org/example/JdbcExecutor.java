@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.annotations.TableAnnotation;
 import org.example.tables.Column;
 import org.example.tables.Table;
 
@@ -9,6 +10,25 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JdbcExecutor {
+//    public static String generateQuerySelectTable(Class<?> clazz){
+//
+//
+//    }
+
+    public static String generateQueryDropTable(Class<?> clazz) {
+        TableAnnotation tableAnnotation = clazz.getDeclaredAnnotation(TableAnnotation.class);
+        String tableName = clazz.getSimpleName().toLowerCase();
+
+        // Иначе он просто выдет ошибку "возможно null"
+        if (tableAnnotation != null){
+            if (!tableAnnotation.name().isEmpty()){
+                tableName = tableAnnotation.name().toLowerCase();
+            }
+        }
+
+        return "DROP TABLE IF EXISTS " + tableName + ";";
+    }
+
     public static String generateQueryCreateTable(Table table){
         StringBuilder columns = new StringBuilder();
 

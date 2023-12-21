@@ -14,6 +14,9 @@ public class Main {
         Dog dog = new Dog(1, "Ogi", 15);
         EntityManager entityManager = new EntityManager(DB_URL, USER, PASSWORD);
 
+        entityManager.drop(User.class); // удаляют таблицы, если они есть
+        entityManager.drop(Dog.class);
+
         test_connection(DB_URL, USER, PASSWORD);
         entityManager.createTable(User.class);
         entityManager.save(user);

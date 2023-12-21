@@ -14,8 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static org.example.JdbcExecutor.generateInsertDataInTable;
-import static org.example.JdbcExecutor.generateQueryCreateTable;
+import static org.example.JdbcExecutor.*;
 
 public class EntityManager {
     private String DB_URL;
@@ -87,6 +86,10 @@ public class EntityManager {
 
         Field[] fields = clazz.getDeclaredFields();
         executeUpdate(generateInsertDataInTable(entity, tableName, fields));
+    }
+
+    public void drop(Class<?> clazz){
+        executeUpdate(generateQueryDropTable(clazz));
     }
 
     // изменения в бд в отдельном методе, удобнее, чем везде пихать отдельно
