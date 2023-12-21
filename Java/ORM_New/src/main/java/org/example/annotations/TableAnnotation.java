@@ -1,9 +1,9 @@
-package org.example;
+package org.example.annotations;
 import java.lang.annotation.*;
 
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
-public @interface Table {
+public @interface TableAnnotation {
     String name() default "";
 }

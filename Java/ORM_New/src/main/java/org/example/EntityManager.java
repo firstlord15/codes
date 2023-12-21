@@ -1,117 +1,92 @@
 package org.example;
 
+import org.example.annotations.ColumnAnnotation;
+import org.example.annotations.IdAnnotation;
+import org.example.annotations.MyEntity;
+import org.example.annotations.TableAnnotation;
+import org.example.tables.Column;
+import org.example.tables.Table;
+
 import java.lang.reflect.Field;
-import java.sql.*;
-import java.util.HashMap;
-import java.util.Objects;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import static org.example.JdbcExecutor.generateInsertDataInTable;
+import static org.example.JdbcExecutor.generateQueryCreateTable;
 
 public class EntityManager {
     private String DB_URL;
     private String USER;
     private String PASSWORD;
-    private static final HashMap<Class<?>, String> SQL_TYPE_MAP = new HashMap<>();
+    ArrayList<Column> columns;
 
-    static {
-        SQL_TYPE_MAP.put(String.class, "VARCHAR(255)");
-        SQL_TYPE_MAP.put(int.class, "INT");
-        SQL_TYPE_MAP.put(Integer.class, "INT");
-        SQL_TYPE_MAP.put(double.class, "DOUBLE");
-        SQL_TYPE_MAP.put(Double.class, "DOUBLE");
-        SQL_TYPE_MAP.put(float.class, "FLOAT");
-        SQL_TYPE_MAP.put(Float.class, "FLOAT");
-        SQL_TYPE_MAP.put(long.class, "INT");
-        SQL_TYPE_MAP.put(Long.class, "INT");
-        SQL_TYPE_MAP.put(boolean.class, "BOOLEAN");
-        SQL_TYPE_MAP.put(Boolean.class, "BOOLEAN");
-        SQL_TYPE_MAP.put(java.sql.Timestamp.class, "TIMESTAMP");
-    }
 
     public EntityManager(String DB_URL, String USER, String PASSWORD) {
         this.DB_URL = DB_URL;
         this.USER = USER;
         this.PASSWORD = PASSWORD;
+        this.columns = new ArrayList<>();
     }
 
-    public EntityManager() {
-        this.DB_URL = "jdbc:postgresql://localhost:5432/postgres";
-        this.USER = "postgres";
-        this.PASSWORD = "postgres";
+    public String getTableName(Class<?> clazz) {
+        String tableName = clazz.getSimpleName().toLowerCase();
+        TableAnnotation tableAnnotation = clazz.getDeclaredAnnotation(TableAnnotation.class);
+
+        if (tableAnnotation != null) {
+            if (!tableAnnotation.name().isEmpty())
+                tableName = tableAnnotation.name().toLowerCase();
+        }
+
+        return tableName;
     }
 
-    public void createTable(Object entity) {
-        Class<?> entityClass = entity.getClass();
-        MyEntity entityAnnotation = entityClass.getDeclaredAnnotation(MyEntity.class);
-        Table tableAnnotation = entityClass.getDeclaredAnnotation(Table.class);
-        String tableName;
+    public void createTable(Class<?> clazz) {
+        MyEntity entityAnnotation = clazz.getDeclaredAnnotation(MyEntity.class);
+        String tableName = getTableName(clazz);
+        this.columns = new ArrayList<>();
 
         if (entityAnnotation == null) {
-            System.out.println("Entity class must be annotated with @MyEntity");
+            System.out.println("Entity class must be annotated with @MyEntity!");
             return;
         }
 
-        if (tableAnnotation != null & !tableAnnotation.name().equals("")) {
-            tableName = tableAnnotation.name().toLowerCase();
-        } else {
-            tableName = entityClass.getSimpleName().toLowerCase();
-        }
-
-        Field[] fields = entityClass.getDeclaredFields();
-
-        StringBuilder queryCreateTable = new StringBuilder();
-        queryCreateTable.append("CREATE TABLE ").append(tableName).append(" (");
+        Field[] fields = clazz.getDeclaredFields();
 
         for (Field field : fields) {
-            Column columnAnnotation = field.getDeclaredAnnotation(Column.class);
+            ColumnAnnotation columnAnnotation = field.getDeclaredAnnotation(ColumnAnnotation.class);
+            IdAnnotation idAnnotation = field.getDeclaredAnnotation(IdAnnotation.class);
 
-            if ("id".equalsIgnoreCase(field.getName())) {
-                queryCreateTable.append(field.getName()).append(" serial PRIMARY KEY,").append("  ");
-                continue;
+            if (idAnnotation != null){
+                columns.add(new Column(field.getName()));
+            } else if (columnAnnotation != null) {
+                String columnName = !columnAnnotation.name().isEmpty() ? columnAnnotation.name() : field.getName();
+                columns.add(new Column(columnName, columnAnnotation.type(), columnAnnotation.nullable()));
             }
-            queryCreateTable.append(field.getName()).append(" ").append(SQL_TYPE_MAP.get(field.getType()));
-
-            if (columnAnnotation != null && !columnAnnotation.nullable()) {
-                queryCreateTable.append(" NOT NULL");
-            }
-            queryCreateTable.append(", ");
         }
-        queryCreateTable.setLength(queryCreateTable.length() - 2);
-        queryCreateTable.append(");");
 
-        executeUpdate(queryCreateTable.toString());
+        Table table = new Table(tableName, columns);
+        executeUpdate(generateQueryCreateTable(table));
     }
 
 
     public void save(Object entity) {
-        Class<?> entityClass = entity.getClass();
-        Field[] fields = entityClass.getDeclaredFields();
-        Table tableAnnotation = entityClass.getDeclaredAnnotation(Table.class);
-        String tableName;
+        Class<?> clazz = entity.getClass();
+        TableAnnotation tableAnnotation = clazz.getDeclaredAnnotation(TableAnnotation.class);
+        String tableName = clazz.getSimpleName().toLowerCase();
 
-
-        if (tableAnnotation != null & !tableAnnotation.name().equals("")) {
-            tableName = tableAnnotation.name().toLowerCase();
-        } else {
-            tableName = entityClass.getSimpleName().toLowerCase();
-        } // без именни пакета, выдает имя класса
-
-        StringBuilder query = new StringBuilder("INSERT INTO " + tableName + " (");
-        StringBuilder values = new StringBuilder("VALUES (");
-
-        for (Field field : fields) {
-            field.setAccessible(true); // Доступ к приватным полям
-            Column columnAnnotation = field.getAnnotation(Column.class);
-            if (!field.getName().equals("id")){
-                query.append(field.getName()).append(", ");
-                values.append("'").append(columnAnnotation.value()).append("'").append(", ");
+        // Иначе он просто выдет ошибку "возможно null"
+        if (tableAnnotation != null){
+            if (!tableAnnotation.name().isEmpty()){
+                tableName = tableAnnotation.name().toLowerCase();
             }
         }
 
-        // Последние два символа, то есть последняя запятая и пробел в строках запроса удаляются:
-        query.setLength(query.length() - 2);
-        values.setLength(values.length() - 2);
-        query.append(") ").append(values).append(");"); // объеденять
 
-        executeUpdate(query.toString());
+        Field[] fields = clazz.getDeclaredFields();
+        executeUpdate(generateInsertDataInTable(entity, tableName, fields));
     }
 
     // изменения в бд в отдельном методе, удобнее, чем везде пихать отдельно
@@ -124,27 +99,6 @@ public class EntityManager {
         }
     }
 
-    public void test_connection() {
-        System.out.println("Тестирование подключения к PostgresSQL JDBC");
-
-        try {
-            Class.forName("org.postgresql.Driver");
-        } catch (ClassNotFoundException e) {
-            System.out.println("PostgresSQL JDBC Driver не был найден. Скачайте или укажите import библиотеки");
-            e.printStackTrace();;
-            return;
-        }
-
-        System.out.println("PostgresSQL JDBC Driver successfully connected");
-
-        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)){
-            System.out.println("Вы успешно подключились к database!\n");
-        } catch (SQLException e) {
-            System.out.println("Подключение провалилось!");
-            e.printStackTrace();;
-            System.out.println("\n");
-        }
-    }
 
     public String getDB_URL() {
         return DB_URL;
