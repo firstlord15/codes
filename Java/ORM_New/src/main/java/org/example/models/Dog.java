@@ -1,9 +1,9 @@
 package org.example.models;
 
-import org.example.annotations.ColumnAnnotation;
-import org.example.annotations.MyEntity;
-import org.example.annotations.IdAnnotation;
-import org.example.tables.DatabaseType;
+import org.example.ORM.annotations.ColumnAnnotation;
+import org.example.ORM.annotations.MyEntity;
+import org.example.ORM.annotations.IdAnnotation;
+import org.example.ORM.tables.DatabaseType;
 
 @MyEntity
 public class Dog {

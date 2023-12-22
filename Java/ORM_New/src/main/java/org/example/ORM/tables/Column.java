@@ -1,4 +1,4 @@
-package org.example.tables;
+package org.example.ORM.tables;
 
 public class Column {
     private String columnName;

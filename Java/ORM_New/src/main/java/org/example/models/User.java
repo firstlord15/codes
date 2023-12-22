@@ -1,9 +1,9 @@
 package org.example.models;
 
-import org.example.annotations.ColumnAnnotation;
-import org.example.annotations.IdAnnotation;
-import org.example.annotations.MyEntity;
-import org.example.annotations.TableAnnotation;
+import org.example.ORM.annotations.ColumnAnnotation;
+import org.example.ORM.annotations.IdAnnotation;
+import org.example.ORM.annotations.MyEntity;
+import org.example.ORM.annotations.TableAnnotation;
 
 @MyEntity
 @TableAnnotation(name = "Person")

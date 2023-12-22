@@ -7,7 +7,7 @@ public class User {
     private String name;
     @Value("${surname}")
     private String surname;
-    @Value("test")
+    @Value("surname")
     private String test;
 
 

@@ -1,4 +1,4 @@
-package org.example.tables;
+package org.example.ORM.tables;
 
 import java.security.Timestamp;
 

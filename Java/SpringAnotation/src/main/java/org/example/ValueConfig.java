@@ -35,7 +35,6 @@ public class ValueConfig {
         }
     }
 
-
     public static HashMap<String, String> load(Reader reader) {
         HashMap<String, String> hashMap = new HashMap<>();
 

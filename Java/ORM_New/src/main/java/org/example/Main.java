@@ -1,8 +1,9 @@
 package org.example;
 
+import org.example.ORM.EntityManager;
 import org.example.models.*;
 
-import static org.example.JdbcExecutor.test_connection;
+import static org.example.ORM.JdbcExecutor.test_connection;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,11 +20,11 @@ public class Main {
 
         test_connection(DB_URL, USER, PASSWORD);
         entityManager.createTable(User.class);
-        entityManager.save(user);
-        System.out.println("1");
+        entityManager.insert(user);
+        entityManager.select(User.class);
 
         entityManager.createTable(Dog.class);
-        entityManager.save(dog);
-        System.out.println("2");
+        entityManager.insert(dog);
+        entityManager.select(Dog.class);
     }
 }

@@ -1,8 +1,8 @@
-package org.example;
+package org.example.ORM;
 
-import org.example.annotations.TableAnnotation;
-import org.example.tables.Column;
-import org.example.tables.Table;
+import org.example.ORM.annotations.TableAnnotation;
+import org.example.ORM.tables.Column;
+import org.example.ORM.tables.Table;
 
 import java.lang.reflect.Field;
 import java.sql.Connection;
@@ -10,12 +10,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class JdbcExecutor {
-//    public static String generateQuerySelectTable(Class<?> clazz){
-//
-//
-//    }
-
-    public static String generateQueryDropTable(Class<?> clazz) {
+    public static String getTableName(Class<?> clazz) {
         TableAnnotation tableAnnotation = clazz.getDeclaredAnnotation(TableAnnotation.class);
         String tableName = clazz.getSimpleName().toLowerCase();
 
@@ -26,7 +21,15 @@ public class JdbcExecutor {
             }
         }
 
-        return "DROP TABLE IF EXISTS " + tableName + ";";
+        return tableName;
+    }
+
+    public static String generateQuerySelectTable(Class<?> clazz){
+        return "SELECT * FROM " + getTableName(clazz) + ";";
+    }
+
+    public static String generateQueryDropTable(Class<?> clazz) {
+        return "DROP TABLE IF EXISTS " + getTableName(clazz) + ";";
     }
 
     public static String generateQueryCreateTable(Table table){

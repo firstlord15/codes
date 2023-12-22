@@ -1,20 +1,16 @@
-package org.example;
+package org.example.ORM;
 
-import org.example.annotations.ColumnAnnotation;
-import org.example.annotations.IdAnnotation;
-import org.example.annotations.MyEntity;
-import org.example.annotations.TableAnnotation;
-import org.example.tables.Column;
-import org.example.tables.Table;
+import org.example.ORM.annotations.ColumnAnnotation;
+import org.example.ORM.annotations.IdAnnotation;
+import org.example.ORM.annotations.MyEntity;
+import org.example.ORM.tables.Column;
+import org.example.ORM.tables.Table;
 
 import java.lang.reflect.Field;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
-import static org.example.JdbcExecutor.*;
+import static org.example.ORM.JdbcExecutor.*;
 
 public class EntityManager {
     private String DB_URL;
@@ -30,21 +26,8 @@ public class EntityManager {
         this.columns = new ArrayList<>();
     }
 
-    public String getTableName(Class<?> clazz) {
-        String tableName = clazz.getSimpleName().toLowerCase();
-        TableAnnotation tableAnnotation = clazz.getDeclaredAnnotation(TableAnnotation.class);
-
-        if (tableAnnotation != null) {
-            if (!tableAnnotation.name().isEmpty())
-                tableName = tableAnnotation.name().toLowerCase();
-        }
-
-        return tableName;
-    }
-
     public void createTable(Class<?> clazz) {
         MyEntity entityAnnotation = clazz.getDeclaredAnnotation(MyEntity.class);
-        String tableName = getTableName(clazz);
         this.columns = new ArrayList<>();
 
         if (entityAnnotation == null) {
@@ -66,26 +49,41 @@ public class EntityManager {
             }
         }
 
-        Table table = new Table(tableName, columns);
+        Table table = new Table(getTableName(clazz), columns);
         executeUpdate(generateQueryCreateTable(table));
     }
 
-
-    public void save(Object entity) {
-        Class<?> clazz = entity.getClass();
-        TableAnnotation tableAnnotation = clazz.getDeclaredAnnotation(TableAnnotation.class);
-        String tableName = clazz.getSimpleName().toLowerCase();
-
-        // Иначе он просто выдет ошибку "возможно null"
-        if (tableAnnotation != null){
-            if (!tableAnnotation.name().isEmpty()){
-                tableName = tableAnnotation.name().toLowerCase();
-            }
-        }
-
-
+    public void select(Class<?> clazz){
         Field[] fields = clazz.getDeclaredFields();
-        executeUpdate(generateInsertDataInTable(entity, tableName, fields));
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+            String query = "SELECT * FROM " + getTableName(clazz) + ";";
+            try (Statement statement = connection.createStatement()) {
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()) {
+                    System.out.println("Table: " + getTableName(clazz));
+
+                    for (Field field: fields) {
+                        ColumnAnnotation columnAnnotation = field.getDeclaredAnnotation(ColumnAnnotation.class);
+                        IdAnnotation idAnnotation = field.getDeclaredAnnotation(IdAnnotation.class);
+
+                        if (idAnnotation == null | columnAnnotation == null){
+                            System.out.println(field.getName() + ": " + resultSet.getString(field.getName()));
+                        }
+                    }
+                }
+
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void insert(Object entity) {
+        Class<?> clazz = entity.getClass();
+        Field[] fields = clazz.getDeclaredFields();
+        executeUpdate(generateInsertDataInTable(entity, getTableName(clazz), fields));
     }
 
     public void drop(Class<?> clazz){
