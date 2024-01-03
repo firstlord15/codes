@@ -1,4 +1,4 @@
-from toolz import curry, compose
+from toolz import curry
 import re
 
 txt = 'Hello, world!: I see that, all work in my code'
