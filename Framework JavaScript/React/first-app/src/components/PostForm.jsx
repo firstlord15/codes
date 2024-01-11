@@ -5,7 +5,7 @@ import MyInput from './UI/input/MyInput'
 const PostForm = ({ create }) => {
 	const [post, setPost] = useState({ title: '', body: '' })
 
-	const addNewPost = ({ e }) => {
+	const addNewPost = e => {
 		e.preventDefault()
 		if ((post.body.trim() !== '') | (post.title.trim() !== '')) {
 			const newPost = {
