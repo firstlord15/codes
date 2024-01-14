@@ -15,9 +15,15 @@ public class TestSpring {
 
         // second exp (IoC) and third (DI)
         MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
+        MusicPlayer musicPlayer1 = context.getBean("musicPlayer", MusicPlayer.class);
+
+        boolean comparison = musicPlayer == musicPlayer1;
+        System.out.println(comparison);
+
         musicPlayer.playMusic();
         System.out.println(musicPlayer.getName());
         System.out.println(musicPlayer.getVolume());
+
         context.close();
     }
 }

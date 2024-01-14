@@ -16,6 +16,7 @@
     <bean id="kpop" class="org.example.second.models.Kpop"/>
     <bean id="rockMusic" class="org.example.second.models.RockMusic"/>
 
+
     <!-- DI with constructor -->
 <!--    <bean id="musicPlayer" class="org.example.second.MusicPlayer">-->
 <!--        &lt;!&ndash; id bean &ndash;&gt;-->
@@ -31,7 +32,10 @@
 
     <!-- DI with file -->
     <context:property-placeholder location="classpath:musicPlayer.properties" />
-    <bean id="musicPlayer" class="org.example.second.MusicPlayer">
+
+    <!-- scope=singleton: создает один бин, на который все ссылаются -->
+    <!-- scope=prototype: создает новый бин каждый раз -->
+    <bean id="musicPlayer" class="org.example.second.MusicPlayer" >
         <property name="musicList">
             <list>
                 <ref bean="classicalMusic" />

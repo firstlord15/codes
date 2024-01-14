@@ -1,16 +1,28 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './styles/App.css'
+import { usePosts } from './hooks/usePosts'
 import PostList from './components/PostList'
 import PostForm from './components/PostForm'
-import MySelect from './components/UI/select/MySelect'
-import MyInput from './components/UI/input/MyInput'
+import PostFilter from './components/PostFilter'
+import MyModal from './components/UI/MyModal/MyModal'
+import MyButton from './components/UI/button/MyButton'
+import PostService from './API/PostService'
+import { useFetching } from './hooks/useFetching'
 
 function App() {
-	const [posts, setPosts] = useState([
-		{ id: 1, title: 'зззззз', body: 'яя' },
-		{ id: 2, title: 'аааааа', body: 'лвл' },
-		{ id: 3, title: 'ыыыыы', body: 'г' },
-	])
+	const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
+		const posts = await PostService.getAll()
+		setPosts(posts)
+	})
+
+	const [posts, setPosts] = useState([])
+	const [filter, setFilter] = useState({ sort: '', query: '' })
+	const [modal, setModal] = useState(false)
+	const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
+
+	useEffect(() => {
+		fetchPosts()
+	}, [])
 
 	const createPost = newPost => {
 		setPosts([...posts, newPost])
@@ -20,59 +32,27 @@ function App() {
 		setPosts(posts.filter(p => p.id !== post.id))
 	}
 
-	const [selectedSort, setSelectedSort] = useState('')
-	const [searchQuery, setSearchQuery] = useState('')
-
-	// поиск
-	const sortedPosts = useMemo(() => {
-		if (selectedSort) {
-			return [...posts].sort((a, b) =>
-				a[selectedSort].localeCompare(b[selectedSort])
-			)
-		}
-		return posts
-	}, [selectedSort, posts])
-
-	const sortPosts = sort => {
-		setSelectedSort(sort)
-	}
-
-	const sortedAndSearchedPosts = useMemo(() => {
-		return sortedPosts.filter(post =>
-			post.title.toLowerCase().includes(searchQuery)
-		)
-	}, [searchQuery, sortedPosts])
-
 	return (
 		<div className='App'>
-			<PostForm create={createPost} />
+			<button onClick={fetchPosts}>GET POSTS</button>
+			<MyButton style={{ marginTop: 30 }} onClick={() => setModal(true)}>
+				Создать пользователя
+			</MyButton>
+			<MyModal visible={modal} setVisible={setModal}>
+				<PostForm create={createPost} />
+			</MyModal>
 			<hr style={{ margin: '15px 0' }} />
-			<div>
-				<MyInput
-					placeholder='Поиск...'
-					onChange={e => setSearchQuery(e.target.value)}
-					value={searchQuery}
-				/>
-			</div>
-			<div>
-				<MySelect
-					value={selectedSort}
-					onChange={sortPosts}
-					defaultValue='Сортировка'
-					option={[
-						{ value: 'title', name: 'По названию' },
-						{ value: 'body', name: 'По описанию' },
-					]}
-				/>
-			</div>
-			{posts.length !== 0 ? (
+			<PostFilter filter={filter} setFilter={setFilter} />
+
+			{postError && <h1>Произошла ошибка ${postError}</h1>}
+			{isPostsLoading ? (
+				<h1>Идет загрузка...</h1>
+			) : (
 				<PostList
 					remove={removePost}
 					posts={sortedAndSearchedPosts}
 					title='Посты про JS'
 				/>
-			) : (
-				<h1 style={{ textAlign: 'center' }}>Посты не найдены</h1>
 			)}
 		</div>
 	)
