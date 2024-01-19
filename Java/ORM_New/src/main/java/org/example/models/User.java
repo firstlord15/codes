@@ -2,10 +2,10 @@ package org.example.models;
 
 import org.example.ORM.annotations.ColumnAnnotation;
 import org.example.ORM.annotations.IdAnnotation;
-import org.example.ORM.annotations.MyEntity;
+import org.example.ORM.annotations.EntityAnnotation;
 import org.example.ORM.annotations.TableAnnotation;
 
-@MyEntity
+@EntityAnnotation
 @TableAnnotation(name = "Person")
 public class User {
     @IdAnnotation

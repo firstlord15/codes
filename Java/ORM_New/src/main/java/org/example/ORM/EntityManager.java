@@ -2,7 +2,7 @@ package org.example.ORM;
 
 import org.example.ORM.annotations.ColumnAnnotation;
 import org.example.ORM.annotations.IdAnnotation;
-import org.example.ORM.annotations.MyEntity;
+import org.example.ORM.annotations.EntityAnnotation;
 import org.example.ORM.tables.Column;
 import org.example.ORM.tables.Table;
 
@@ -27,7 +27,7 @@ public class EntityManager {
     }
 
     public void createTable(Class<?> clazz) {
-        MyEntity entityAnnotation = clazz.getDeclaredAnnotation(MyEntity.class);
+        EntityAnnotation entityAnnotation = clazz.getDeclaredAnnotation(EntityAnnotation.class);
         this.columns = new ArrayList<>();
 
         if (entityAnnotation == null) {

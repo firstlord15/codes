@@ -1,11 +1,11 @@
 package org.example.models;
 
 import org.example.ORM.annotations.ColumnAnnotation;
-import org.example.ORM.annotations.MyEntity;
+import org.example.ORM.annotations.EntityAnnotation;
 import org.example.ORM.annotations.IdAnnotation;
 import org.example.ORM.tables.DatabaseType;
 
-@MyEntity
+@EntityAnnotation
 public class Dog {
     @IdAnnotation
     private int id;

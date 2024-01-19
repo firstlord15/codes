@@ -1,0 +1,16 @@
+.loader {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	border: 3px dashed teal;
+}
+
+@keyframes rotate {
+	from {
+		transform: rotateX(0deg) scale(1);
+	}
+
+	to {
+		transform: rotateX(360deg) scale(1.4);
+	}
+}
