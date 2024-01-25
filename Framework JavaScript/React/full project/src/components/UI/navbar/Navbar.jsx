@@ -5,9 +5,9 @@ import '../../../styles/App.css'
 const Navbar = () => {
 	return (
 		<div className='navbar'>
-			<div className='navbar__links'>
-				<Link href='/about'>О сайте</Link>
-				<Link href='/posts'>Посты</Link>
+			<div className='navbar__links nav'>
+				<Link to='/about'>О сайте</Link>
+				<Link to='/posts'>Посты</Link>
 			</div>
 		</div>
 	)
