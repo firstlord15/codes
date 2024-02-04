@@ -1,15 +1,17 @@
 import time
 from config import *
 from command import *
+from conftest import *
 
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 
-driver = webdriver.Chrome(service=ChromeService())
+driver = driver()
 driver.get("https://demo-opencart.ru")
 
-def first_task():    
+def first_task():
+    time.sleep(3)    
     findElementClick(driver, layout_product_cssSelector)
     findElementClick(driver, photo_product_cssSelector)
 
@@ -30,30 +32,33 @@ def third_task():
 def forth_task():
     time.sleep(2)
     findElementClick(driver, registration_button_cssSelector)
-    findElementClick(driver, registration_li_button_cssSelector)
+    findLTextClick(driver, registration_li_button_cssSelector)
 
     # для заполнения полей в регистрации данными
     for i in range(0, len(registration_input_texts)):
-        input = driver.find_element(By.CSS_SELECTOR, registration_inputs[i])
+        input = findElement(driver, registration_inputs[i])
         input.click()
-        write(registration_input_texts[i], input, driver)
+        write(registration_input_texts[i], input)
 
-    findElementClick(driver, registration_inputs[-3])
-    findElementClick(driver, registration_inputs[-2])
+    findXpathClick(driver, registration_inputs[-1])
+    findXpathClick(driver, registration_finished)
+    time.sleep(2)
 
-    # для проверки, был ли такой аккаунт или нет
-    try:
-        findElementClick(driver, registration_inputs[-1])
-        time.sleep(2)
-        home(driver)
-    except:
-        home(driver)
-
+    home(driver)
     time.sleep(3)
 
 
-    
-    
+def fifth_task():
+    search = findElement(driver, search_cssSelector)
+    time.sleep(1)
+    search.click()
+    time.sleep(10)
+    write(search_text, search)
+    time.sleep(1)
+    enter(driver)
 
-
-forth_task()
+# first_task()
+# second_task()
+# third_task()
+# forth_task()
+# fifth_task()

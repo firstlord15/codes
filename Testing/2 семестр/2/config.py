@@ -7,9 +7,14 @@ pc_button_cssSelector = "div.container:nth-child(3) nav.navbar div.collapse.navb
 pc_button_li_cssSelector = "div.container:nth-child(3) nav.navbar div.collapse.navbar-collapse.navbar-ex1-collapse ul.nav.navbar-nav li.dropdown:nth-child(1) div.dropdown-menu div.dropdown-inner ul.list-unstyled li:nth-child(1) > a:nth-child(1)"
 
 registration_button_cssSelector = "div.container div.nav.pull-right ul.list-inline li.dropdown:nth-child(2) > a.dropdown-toggle"
-registration_li_button_cssSelector = "div.container div.nav.pull-right ul.list-inline li.dropdown.open:nth-child(2) ul.dropdown-menu.dropdown-menu-right li:nth-child(1) > a:nth-child(1)"
+registration_li_button_cssSelector = "Регистрация"
 
 
-registration_inputs = ["#input-firstname", "#input-lastname", "#input-email", "#input-telephone", "#input-password", "#input-confirm", "div.container:nth-child(4) div.row div.col-sm-9 form.form-horizontal:nth-child(3) div.buttons:nth-child(4) div.pull-right > input:nth-child(3)", "div.container:nth-child(4) div.row div.col-sm-9 form.form-horizontal:nth-child(3) div.buttons:nth-child(4) div.pull-right > input.btn.btn-primary:nth-child(4)", "div.container:nth-child(4) div.row div.col-sm-9 div.buttons:nth-child(5) div.pull-right > a.btn.btn-primary"]
+registration_inputs = ["#input-firstname", "#input-lastname", "#input-email", "#input-telephone", "#input-password", "#input-confirm", "//body/div[@id='account-register']/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]"]
 
-registration_input_texts = ["Ратмир", "Ашимов", "testkfghafgkjfgsadsjklssgfhldgxklj@mail.ru", "89096895085", "UwUPassword", "UwUPassword"]
+registration_finished = "//body/div[@id='account-register']/div[1]/div[1]/form[1]/div[1]/div[1]/input[2]"
+
+registration_input_texts = ["Ратмир", "Ашимов", "testkfghadsadfgkjfgsadsjklssgfhldgxklj@mail.ru", "89096895085", "UwUPassword", "UwUPassword"]
+
+search_cssSelector = "#search"
+search_text = "random text"

@@ -1,6 +1,7 @@
 import time
 from config import *
 from selenium.webdriver.common.by import By
+from random import randint
 
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
@@ -8,9 +9,15 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+def escape(driver):
+    return ActionChains(driver).send_keys(Keys.ESCAPE).perform()
+
+def enter(driver):
+    return ActionChains(driver).send_keys(Keys.ENTER).perform()
+
 # функция возврата на главную страницу
 def home(driver):
-    ActionChains(driver).send_keys(Keys.ESCAPE).perform()
+    escape(driver)
     home_button = driver.find_element(By.CSS_SELECTOR, home_button_cssSelector)
     time.sleep(1)
     home_button.click()
@@ -25,7 +32,7 @@ def hover_mouse(first, second, driver):
 # заполняет поле, текстом
 def write(text, input_field):
     for letter in text:
-        time.sleep(0.01)
+        time.sleep(randint(1, 5) / 50)
         input_field.send_keys(letter)
     time.sleep(1)
 
@@ -43,11 +50,26 @@ def right_arrow(count: int, driver):
     time.sleep(1)
 
 # находит и возвращает указанный элемент
-def findElement(driver):
-    return driver.find_element(By.CSS_SELECTOR, layout_product_cssSelector)
+def findElement(driver, cssSelector):
+    return driver.find_element(By.CSS_SELECTOR, cssSelector)
 
 # находит и нажимает на указанный элемент
 def findElementClick(driver, cssSelector):
     element = driver.find_element(By.CSS_SELECTOR, cssSelector)
+    element.click()
+    time.sleep(1)
+
+def findLTextClick(driver, Link_Text):
+    element = driver.find_element(By.LINK_TEXT, Link_Text)
+    element.click()
+    time.sleep(1)
+
+def findNameClick(driver, Name):
+    element = driver.find_element(By.NAME, Name)
+    element.click()
+    time.sleep(1)
+
+def findXpathClick(driver, Xpath):
+    element = driver.find_element(By.XPATH, Xpath)
     element.click()
     time.sleep(1)
