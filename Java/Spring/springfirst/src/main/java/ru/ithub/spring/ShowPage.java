@@ -7,7 +7,7 @@ public class ShowPage {
         this.page = page;
     }
 
-    public void showPage() {
+    public void viewPage() {
         System.out.println(page.getPageFormat());
     }
 }

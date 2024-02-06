@@ -9,6 +9,6 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="pageBean"
-          class="ru.ithub.spring.PageLetter">
+          class="ru.ithub.spring.PageA4">
     </bean>
 </beans>

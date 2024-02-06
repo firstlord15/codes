@@ -1,12 +1,7 @@
 import os
 import pytest
-
+from config import website
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
-from selenium.webdriver.firefox.service import Service as FirefoxService
-
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.firefox import GeckoDriverManager
 
 def pytest_addoption(parser):
     parser.addoption("--browser", default="yandex")
@@ -18,17 +13,18 @@ def driver(request):
     drivers = request.config.getoption("--drivers")
 
     if browser == "chrome":
-        driver = webdriver.Chrome(executable_path=ChromeDriverManager().install())
+        driver = webdriver.Chrome()
     elif browser == "yandex":
-        yandex_driver_path = os.path.join(drivers, "yandexdriver\\yandexdriver.exe")
         options = webdriver.ChromeOptions()
-        options.binary_location = yandex_driver_path
-        driver = webdriver.Chrome(executable_path=yandex_driver_path, options=options)
+        binary_yandex_driver_file =  os.path.join(drivers, 'yandexdriver\\yandexdriver.exe')
+        service = webdriver.chrome.service.Service(executable_path=binary_yandex_driver_file)
+        driver = webdriver.Chrome(service=service, options=options)
     elif browser == "firefox":
-        driver = webdriver.Firefox(executable_path=GeckoDriverManager().install())
+        driver = webdriver.Firefox()
     else:
         raise Exception("Driver not supported")
 
+    driver.get(website)
     request.addfinalizer(driver.quit)
 
     return driver

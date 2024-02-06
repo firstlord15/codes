@@ -10,7 +10,8 @@ public class TestSpring {
 
         Page page = context.getBean("pageBean", Page.class);
         ShowPage showPage = new ShowPage(page);
-        showPage.showPage();
+        showPage.viewPage();
+
         context.close();
     }
 }

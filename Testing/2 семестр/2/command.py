@@ -18,10 +18,8 @@ def enter(driver):
 # функция возврата на главную страницу
 def home(driver):
     escape(driver)
-    home_button = driver.find_element(By.CSS_SELECTOR, home_button_cssSelector)
     time.sleep(1)
-    home_button.click()
-    time.sleep(2)
+    findElementClick(driver, home_button_cssSelector)
 
 # указать курсор на что-то и потом нажать на второе 
 def hover_mouse(first, second, driver):
@@ -29,9 +27,10 @@ def hover_mouse(first, second, driver):
     hover = ActionChains(driver).move_to_element(hover).perform()
     driver.find_element(By.CSS_SELECTOR, second).click() # клик по пункту
 
-# заполняет поле, текстом
+# заполняет поле, текстом, вставить можно как и просто текст, так и массив текстов
 def write(text, input_field):
-    for letter in text:
+    result_text = text[randint(0, len(text) - 1)] if isinstance(text, list) else text
+    for letter in result_text:
         time.sleep(randint(1, 5) / 50)
         input_field.send_keys(letter)
     time.sleep(1)
