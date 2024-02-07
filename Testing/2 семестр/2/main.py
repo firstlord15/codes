@@ -6,26 +6,31 @@ from conftest import *
 # driver = webdriver.Chrome()
 # driver.get("https://demo-opencart.ru")
 
-def first_task(driver):
+def test_first_task(driver):
     time.sleep(3)
     findElementClick(driver, layout_product_cssSelector)
     findElementClick(driver, photo_product_cssSelector)
     right_arrow(3, driver)
     home(driver)
 
-def second_task(driver):
-    # в сайте нет смены валюты
-    pass
+def test_second_task(driver):  
+    time.sleep(1)  
+    findElementClick(driver, MacBook_in_basket_cssSelector)
+    time.sleep(1)
 
-def third_task(driver):
+    findXpathClick(driver, basket_xpath)
+    time.sleep(1)
+    
+    home(driver)
+
+def test_third_task(driver):
     hover_mouse(pc_button_cssSelector, pc_button_li_cssSelector, driver)
     time.sleep(2)
     home(driver)
 
-def forth_task(driver):
+def test_forth_task(driver):
     time.sleep(2)
-    findElementClick(driver, registration_button_cssSelector)
-    findLTextClick(driver, registration_li_button_cssSelector)
+    reglog(driver, registration_button_cssSelector, registration_li_button_text)
 
     for i in range(len(registration_input_texts)):
         input = findElement(driver, registration_inputs[i])

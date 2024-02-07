@@ -48,6 +48,13 @@ def right_arrow(count: int, driver):
     
     time.sleep(1)
 
+def reglog(driver, reg_button_cssSelector, reglog_text):
+    time.sleep(1)
+    findElementClick(driver, reg_button_cssSelector)
+    time.sleep(1)
+    findLTextClick(driver, reglog_text)
+
+
 # находит и возвращает указанный элемент
 def findElement(driver, cssSelector):
     return driver.find_element(By.CSS_SELECTOR, cssSelector)
