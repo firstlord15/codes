@@ -8,10 +8,12 @@ public class TestSpring {
                 "applicationContext.xml"
         );
 
-        Page page = context.getBean("pageBean", Page.class);
-        ShowPage showPage = new ShowPage(page);
+        ShowPage showPage = context.getBean("showPageBean", ShowPage.class);
         showPage.viewPage();
 
+        System.out.println(showPage.getName());
+        System.out.println(showPage.getWith());
+        System.out.println(showPage.getHeight());
         context.close();
     }
 }

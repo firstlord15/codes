@@ -9,6 +9,13 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="pageBean"
-          class="ru.ithub.spring.PageA4">
+          class="ru.ithub.spring.PageLetter">
+    </bean>
+    <context:property-placeholder location="savePage.application" />
+    <bean id="showPageBean" class="ru.ithub.spring.ShowPage">
+        <property name="page" ref="pageBean" />
+        <property name="name" value="${savePage.name}" />
+        <property name="with" value="${savePage.with}" />
+        <property name="height" value="${savePage.height}" />
     </bean>
 </beans>
