@@ -2,6 +2,7 @@ from page_objects.BasePage import BasePage
 from selenium.webdriver.common.by import By
 from config import *
 
+
 class RegistrationPage(BasePage):
     INPUT_FIRSTNAME = (By.CSS_SELECTOR, "#input-firstname")
     INPUT_LASTNAME = (By.CSS_SELECTOR, "#input-lastname")
@@ -11,8 +12,15 @@ class RegistrationPage(BasePage):
     INPUT_CONFIRM_PASSWORD = (By.CSS_SELECTOR, "#input-confirm")
     BUTTON_ACCEPTANCE = (By.XPATH, "//body/div[@id='account-register']/div[1]/div[1]/form[1]/div[1]/div[1]/input[1]")
     BUTTON_NEXT = (By.XPATH, "//body/div[@id='account-register']/div[1]/div[1]/form[1]/div[1]/div[1]/input[2]")
-    BUTTON_TRUE_SUBNEWS = (By.XPATH, "//body/div[@id='account-register']/div[1]/div[1]/form[1]/fieldset[3]/div[1]/div[1]/label[1]/input[1]")
-    BUTTON_FALSE_SUBNEWS = (By.XPATH, "//body/div[@id='account-register']/div[1]/div[1]/form[1]/fieldset[3]/div[1]/div[1]/label[2]/input[1]")
+
+    BUTTON_TRUE_SUBNEWS = (
+        By.XPATH,
+        "//body/div[@id='account-register']/div[1]/div[1]/form[1]/fieldset[3]/div[1]/div[1]/label[1]/input[1]"
+    )
+    BUTTON_FALSE_SUBNEWS = (
+        By.XPATH,
+        "//body/div[@id='account-register']/div[1]/div[1]/form[1]/fieldset[3]/div[1]/div[1]/label[2]/input[1]"
+    )
 
     inputs = [
         INPUT_FIRSTNAME, INPUT_LASTNAME, INPUT_EMAIL, INPUT_TELEPHONE, INPUT_PASSWORD, INPUT_CONFIRM_PASSWORD

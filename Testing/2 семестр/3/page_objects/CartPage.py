@@ -2,6 +2,7 @@ from page_objects.BasePage import BasePage
 from selenium.webdriver.common.by import By
 from config import *
 
+
 class CartPage(BasePage):
     BUTTON_UPDATE = (By.XPATH, "//tbody/tr[1]/td[4]/div[1]/span[1]/button[1]")
     BUTTON_DELETE = (By.XPATH, "//tbody/tr[1]/td[4]/div[1]/span[1]/button[2]")
@@ -18,4 +19,3 @@ class CartPage(BasePage):
     BUTTON_OPEN_VOUCHER = (By.PARTIAL_LINK_TEXT, "Использовать Подароч")
     BUTTON_CONFIRM_VOUCHER = (By.CSS_SELECTOR, "#button-voucher")
     INPUT_VOUCHER = (By.CSS_SELECTOR, "#input-voucher")
-    

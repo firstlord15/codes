@@ -36,10 +36,10 @@ def write(text, input_field):
     time.sleep(1)
 
 # нажатие -> столько раз, сколько указано
-def right_arrow(count: int, driver):
+def right_arrow(count, driver):
     action_chains = ActionChains(driver)
 
-    if (count < 0 | count == 1):
+    if (count <= 1):
         action_chains.send_keys(Keys.CONTROL).send_keys(Keys.ARROW_RIGHT).perform()
     else:
         for _ in range(count):
