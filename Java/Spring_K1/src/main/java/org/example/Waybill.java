@@ -1,6 +1,17 @@
 package org.example;
 
+import java.util.Date;
+
 public class Waybill implements Document{
+    private String id;
+    private double price;
+    private Date date;
+    private String nameClient;
+    private String nameProducts;
+    private Payment prevDocument;
+
+    public Waybill() {}
+
     @Override
     public String getId() {
         return null;
