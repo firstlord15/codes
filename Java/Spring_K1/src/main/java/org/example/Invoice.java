@@ -3,77 +3,67 @@ package org.example;
 import java.time.LocalDate;
 
 public class Invoice implements Document{
-    private String id;
-    private double price;
-    private LocalDate date;
-    private String nameSupplier;
-    private Payment nextDocument;
+    private int id;
+    private LocalDate waybillDate;
+    private double amount;
+    private String clientName;
+    private String nameProducts;
 
-    public Invoice(String id, double price, LocalDate date, String nameSupplier, Payment nextDocument) {
+    public Invoice(int id, LocalDate waybillDate, double amount, String clientName, String nameProducts) {
         this.id = id;
-        this.price = price;
-        this.date = date;
-        this.nameSupplier = nameSupplier;
-        this.nextDocument = nextDocument;
+        this.waybillDate = waybillDate;
+        this.amount = amount;
+        this.clientName = clientName;
+        this.nameProducts = nameProducts;
     }
 
     public Invoice() {}
 
-
     @Override
-    public String getId() {
+    public int getId() {
         return id;
     }
 
     @Override
-    public void setId(String id) {
-        this.id = id;
+    public void setId(int id) {
+
     }
 
-    @Override
-    public Document getNextDocument() {
-        return nextDocument;
-    }
-
-    @Override
-    public void setNextDocument(Document nextDocument) {
-        if (!(nextDocument instanceof Payment)) {
-            try {
-                throw new Exception("не подходяший тип документа, нужен Payment!");
-            } catch (Exception e) {
-                throw new IllegalArgumentException(e);
-            }
-        }
-
-        this.nextDocument = (Payment) nextDocument;
-    }
 
     @Override
     public void displayInfo() {
 
     }
 
-    public double getPrice() {
-        return price;
+    public LocalDate getWaybillDate() {
+        return waybillDate;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setWaybillDate(LocalDate waybillDate) {
+        this.waybillDate = waybillDate;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public String getNameSupplier() {
-        return nameSupplier;
+    public String getClientName() {
+        return clientName;
     }
 
-    public void setNameSupplier(String nameSupplier) {
-        this.nameSupplier = nameSupplier;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getNameProducts() {
+        return nameProducts;
+    }
+
+    public void setNameProducts(String nameProducts) {
+        this.nameProducts = nameProducts;
     }
 }

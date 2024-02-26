@@ -17,3 +17,5 @@ V
 &src/main/java/org/example/Payment.java,1\2\127c758419d42c7b53e1f72aba744b7cc9532fc9
 V
 &src/main/java/org/example/Waybill.java,6\4\64ab3736cd1f99e89d5dbd68afd20aba1ba70655
+]
+-src/main/java/org/example/PaymentInvoice.java,d\c\dc71ee158e242104397ba260f22cbf3f00c445bf
