@@ -28,6 +28,15 @@ class ProductPage(BasePage):
         for mark in BUTTON_REVIEW_MARK
     ]
 
+    def click_main_picture(self):
+        self.click(self.MAIN_PICTURE)
+
+        return self
+
+    def click_review_mark(self, index: int):
+        self.click(self.BUTTON_REVIEW_MARK[index])
+        return self
+
     def right_arrow(self, count: int):
         action_chains = ActionChains(self.driver)
 
@@ -38,4 +47,5 @@ class ProductPage(BasePage):
                 action_chains.send_keys(Keys.CONTROL).send_keys(Keys.ARROW_RIGHT).perform()
                 time.sleep(1)
 
-        time.sleep(1)
+        time.sleep(2)
+        return self

@@ -9,15 +9,14 @@ public class PaymentInvoice implements Document {
     private double amount;
     private String providerName;
 
+    public PaymentInvoice() {}
+
     public PaymentInvoice(int id, double price, LocalDate invoiceDate, double amount, String providerName) {
         this.id = id;
         this.price = price;
         this.invoiceDate = invoiceDate;
         this.amount = amount;
         this.providerName = providerName;
-    }
-
-    public PaymentInvoice() {
     }
 
     @Override

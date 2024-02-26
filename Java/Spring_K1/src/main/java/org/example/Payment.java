@@ -11,6 +11,13 @@ public class Payment implements Document{
 
     public Payment() {}
 
+    public Payment(int id, double price, LocalDate paymentDate, double amount, String nameSupplier) {
+        this.id = id;
+        this.price = price;
+        this.paymentDate = paymentDate;
+        this.amount = amount;
+        this.nameSupplier = nameSupplier;
+    }
 
     public Payment(int id, double price, LocalDate paymentDate, String nameSupplier) {
         this.id = id;

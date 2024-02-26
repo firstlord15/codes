@@ -23,14 +23,14 @@ def main(page):
     btn_date_sort = ft.ElevatedButton(text="Сортировка по дате", width=500)
     btn_ip_sort = ft.ElevatedButton(text="Сортировка по IP", width=500)
     list = ["red", "white", "blue"]
-    ip_dropdawn = ft.Dropdown()
-    for elenments in list:
-        ip_dropdawn.options.append(ft.dropdown.Option(elenments))
+    ip_dropdown = ft.Dropdown()
+    for elements in list:
+        ip_dropdown.options.append(ft.dropdown.Option(elements))
 
-    activte = ft.ElevatedButton(text="Применить фильтр", width=500)
+    active = ft.ElevatedButton(text="Применить фильтр", width=500)
     save_json_file = ft.ElevatedButton(text="Сохранить в json файле", width=500)
 
-    page.add(ft.Column([datatable, btn_ip_sort, btn_date_sort, activte, save_json_file]), ip_dropdawn)
+    page.add(ft.Column([datatable, btn_ip_sort, btn_date_sort, active, save_json_file]), ip_dropdown)
 
 
 ft.app(target=main)

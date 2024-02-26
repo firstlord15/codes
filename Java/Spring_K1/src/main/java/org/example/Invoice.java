@@ -9,6 +9,8 @@ public class Invoice implements Document{
     private String clientName;
     private String nameProducts;
 
+    public Invoice() {}
+
     public Invoice(int id, LocalDate waybillDate, double amount, String clientName, String nameProducts) {
         this.id = id;
         this.waybillDate = waybillDate;
@@ -17,8 +19,6 @@ public class Invoice implements Document{
         this.nameProducts = nameProducts;
     }
 
-    public Invoice() {}
-
     @Override
     public int getId() {
         return id;
@@ -26,13 +26,12 @@ public class Invoice implements Document{
 
     @Override
     public void setId(int id) {
-
+        this.id = id;
     }
-
 
     @Override
     public void displayInfo() {
-
+        
     }
 
     public LocalDate getWaybillDate() {

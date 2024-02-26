@@ -13,6 +13,14 @@ public class Order implements Document {
 
     public Order() {}
 
+    public Order(int id, int orderNumber, LocalDate orderDate, String buyerName, List<Double> unitPrice, List<String> productName) {
+        this.id = id;
+        this.orderNumber = orderNumber;
+        this.orderDate = orderDate;
+        this.buyerName = buyerName;
+        this.unitPrice = unitPrice;
+        this.productName = productName;
+    }
 
     @Override
     public int getId() {
@@ -27,6 +35,51 @@ public class Order implements Document {
     @Override
     public void displayInfo() {
 
+    }
+
+    public void addProduct(String productName, Double unitPrice) {
+        this.productName.add(productName);
+        this.unitPrice.add(unitPrice);
+    }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(int orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    public LocalDate getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(LocalDate orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public String getBuyerName() {
+        return buyerName;
+    }
+
+    public void setBuyerName(String buyerName) {
+        this.buyerName = buyerName;
+    }
+
+    public List<Double> getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(List<Double> unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+    public List<String> getProductName() {
+        return productName;
+    }
+
+    public void setProductName(List<String> productName) {
+        this.productName = productName;
     }
 }
 

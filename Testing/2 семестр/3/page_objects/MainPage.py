@@ -1,6 +1,7 @@
 from page_objects.BasePage import BasePage
 from selenium.webdriver.common.by import By
 from config import *
+import time
 
 
 class MainPage(BasePage):
@@ -38,4 +39,23 @@ class MainPage(BasePage):
         for i in range(1, 5)
     ]
 
-    LAST_INDEX = len(PRODUCTS) - 1
+    LAST_INDEX = PRODUCTS[len(PRODUCTS) - 1]
+
+    def click_product(self, index: int):
+        self.click(self.PRODUCTS[index])
+        
+        time.sleep(3)
+        return self
+    
+    def click_products_buy(self, count):
+        for i in count:
+            self.click(self.PRODUCTS_BUTTON_BUY[i])
+        
+        time.sleep(3)
+        return self
+
+    def open_registration(self):
+        self.click(self.BUTTON_REGLOG).click(self.BUTTON_REGISTER)
+        
+        time.sleep(3)
+        return self

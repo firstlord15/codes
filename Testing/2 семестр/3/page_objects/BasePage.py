@@ -9,8 +9,10 @@ import time
 
 
 class BasePage:
-    def __init__(self, driver):
+    def __init__(self, driver, wait=10):
         self.driver = driver
+        self.logger = driver.logger
+        self.wait =  WebDriverWait(self.driver, wait)
 
     def is_tuple(self, element_locator):
         if isinstance(element_locator, tuple):
@@ -19,10 +21,14 @@ class BasePage:
             return self.driver.find_element(element_locator)
 
     def escape(self):
-        return ActionChains(self.driver).send_keys(Keys.ESCAPE).perform()
+        ActionChains(self.driver).send_keys(Keys.ESCAPE).perform()
+        time.sleep(2)
+        return self
 
     def enter(self):
-        return ActionChains(self.driver).send_keys(Keys.ENTER).perform()
+        ActionChains(self.driver).send_keys(Keys.ENTER).perform()
+        time.sleep(2)
+        return self
 
     @staticmethod
     def random(arr):
@@ -34,12 +40,15 @@ class BasePage:
 
     def click(self, element_locator):
         try:
+            time.sleep(1)
             element = self.is_tuple(element_locator)
-            WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(element)).click()
+            self.wait.until(EC.element_to_be_clickable(element)).click()
             # ActionChains(self.driver).move_to_element(element).click().perform()
-            time.sleep(2)
+            time.sleep(1)
         except Exception as e:
             print(f"Ошибка при выполнении клика: {e}")
+
+        return self
 
     def write(self, element_locator, value):
         element = self.is_tuple(element_locator)
@@ -52,7 +61,10 @@ class BasePage:
             element.send_keys(letter)
         time.sleep(1)
 
+        return self
+
     def _input(self, element, value):
-        self.click(element)
-        self.write(element, value)
-        time.sleep(1)
+        self.click(element).write(element, value)
+        time.sleep(2)
+
+        return self
