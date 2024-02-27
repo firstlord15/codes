@@ -4,19 +4,17 @@ import java.time.LocalDate;
 
 public class Invoice implements Document{
     private int id;
-    private LocalDate waybillDate;
-    private double amount;
+    private LocalDate invoiceDate;
+    private double invoiceAmount;
     private String clientName;
-    private String nameProducts;
 
     public Invoice() {}
 
-    public Invoice(int id, LocalDate waybillDate, double amount, String clientName, String nameProducts) {
+    public Invoice(int id, LocalDate invoiceDate, double invoiceAmount, String clientName, String nameProducts) {
         this.id = id;
-        this.waybillDate = waybillDate;
-        this.amount = amount;
+        this.invoiceDate = invoiceDate;
+        this.invoiceAmount = invoiceAmount;
         this.clientName = clientName;
-        this.nameProducts = nameProducts;
     }
 
     @Override
@@ -35,19 +33,19 @@ public class Invoice implements Document{
     }
 
     public LocalDate getWaybillDate() {
-        return waybillDate;
+        return invoiceDate;
     }
 
-    public void setWaybillDate(LocalDate waybillDate) {
-        this.waybillDate = waybillDate;
+    public void setWaybillDate(LocalDate invoiceDate) {
+        this.invoiceDate = invoiceDate;
     }
 
     public double getAmount() {
-        return amount;
+        return invoiceAmount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setAmount(double invoiceAmount) {
+        this.invoiceAmount = invoiceAmount;
     }
 
     public String getClientName() {
@@ -56,13 +54,5 @@ public class Invoice implements Document{
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
-    }
-
-    public String getNameProducts() {
-        return nameProducts;
-    }
-
-    public void setNameProducts(String nameProducts) {
-        this.nameProducts = nameProducts;
     }
 }

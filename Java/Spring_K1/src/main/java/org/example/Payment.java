@@ -4,25 +4,16 @@ import java.time.LocalDate;
 
 public class Payment implements Document{
     private int id;
-    private double price;
     private LocalDate paymentDate;
-    private double amount;
+    private double paymentAmount;
     private String nameSupplier;
 
     public Payment() {}
 
-    public Payment(int id, double price, LocalDate paymentDate, double amount, String nameSupplier) {
+    public Payment(int id, double price, LocalDate paymentDate, double paymentAmount, String nameSupplier) {
         this.id = id;
-        this.price = price;
         this.paymentDate = paymentDate;
-        this.amount = amount;
-        this.nameSupplier = nameSupplier;
-    }
-
-    public Payment(int id, double price, LocalDate paymentDate, String nameSupplier) {
-        this.id = id;
-        this.price = price;
-        this.paymentDate = paymentDate;
+        this.paymentAmount = paymentAmount;
         this.nameSupplier = nameSupplier;
     }
 
@@ -41,14 +32,6 @@ public class Payment implements Document{
 
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getNameSupplier() {
         return nameSupplier;
     }
@@ -65,11 +48,11 @@ public class Payment implements Document{
         this.paymentDate = paymentDate;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getPaymentAmount() {
+        return paymentAmount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setPaymentAmount(double paymentAmount) {
+        this.paymentAmount = paymentAmount;
     }
 }

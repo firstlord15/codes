@@ -4,19 +4,19 @@ import java.time.LocalDate;
 
 public class PaymentInvoice implements Document {
     private int id;
-    private double price;
+    private int paymentInvoiceNumber;
     private LocalDate invoiceDate;
-    private double amount;
-    private String providerName;
+    private double invoiceAmount;
+    private String customerName;
 
     public PaymentInvoice() {}
 
-    public PaymentInvoice(int id, double price, LocalDate invoiceDate, double amount, String providerName) {
+    public PaymentInvoice(int id, int paymentInvoiceNumber, LocalDate invoiceDate, double invoiceAmount, String customerName) {
         this.id = id;
-        this.price = price;
+        this.paymentInvoiceNumber = paymentInvoiceNumber;
         this.invoiceDate = invoiceDate;
-        this.amount = amount;
-        this.providerName = providerName;
+        this.invoiceAmount = invoiceAmount;
+        this.customerName = customerName;
     }
 
     @Override
@@ -34,28 +34,20 @@ public class PaymentInvoice implements Document {
 
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public String getProviderName() {
-        return providerName;
+        return customerName;
     }
 
-    public void setProviderName(String providerName) {
-        this.providerName = providerName;
+    public void setProviderName(String customerName) {
+        this.customerName = customerName;
     }
 
     public double getAmount() {
-        return amount;
+        return invoiceAmount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
+    public void setAmount(double invoiceAmount) {
+        this.invoiceAmount = invoiceAmount;
     }
 
     public LocalDate getInvoiceDate() {
@@ -66,4 +58,11 @@ public class PaymentInvoice implements Document {
         this.invoiceDate = invoiceDate;
     }
 
+    public int getPaymentInvoiceNumber() {
+        return paymentInvoiceNumber;
+    }
+
+    public void setPaymentInvoiceNumber(int paymentInvoiceNumber) {
+        this.paymentInvoiceNumber = paymentInvoiceNumber;
+    }
 }
