@@ -4,16 +4,16 @@ import java.time.LocalDate;
 
 public class Invoice implements Document{
     private int id;
+    private int invoiceNumber;
     private LocalDate invoiceDate;
-    private double invoiceAmount;
     private String clientName;
 
     public Invoice() {}
 
-    public Invoice(int id, LocalDate invoiceDate, double invoiceAmount, String clientName, String nameProducts) {
+    public Invoice(int id, int invoiceNumber, LocalDate invoiceDate, String clientName) {
         this.id = id;
+        this.invoiceNumber = invoiceNumber;
         this.invoiceDate = invoiceDate;
-        this.invoiceAmount = invoiceAmount;
         this.clientName = clientName;
     }
 
@@ -40,19 +40,19 @@ public class Invoice implements Document{
         this.invoiceDate = invoiceDate;
     }
 
-    public double getAmount() {
-        return invoiceAmount;
-    }
-
-    public void setAmount(double invoiceAmount) {
-        this.invoiceAmount = invoiceAmount;
-    }
-
     public String getClientName() {
         return clientName;
     }
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
+    }
+
+    public int getInvoiceNumber() {
+        return invoiceNumber;
+    }
+
+    public void setInvoiceNumber(int invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
     }
 }

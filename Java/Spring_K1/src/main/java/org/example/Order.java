@@ -8,16 +8,18 @@ public class Order implements Document {
     private int orderNumber;
     private LocalDate orderDate;
     private String buyerName;
+    private int amount;
     private List<Double> unitPrice;
     private List<String> productName;
 
     public Order() {}
 
-    public Order(int id, int orderNumber, LocalDate orderDate, String buyerName, List<Double> unitPrice, List<String> productName) {
+    public Order(int id, int orderNumber, LocalDate orderDate, String buyerName, int amount, List<Double> unitPrice, List<String> productName) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.orderDate = orderDate;
         this.buyerName = buyerName;
+        this.amount = amount;
         this.unitPrice = unitPrice;
         this.productName = productName;
     }
@@ -80,6 +82,14 @@ public class Order implements Document {
 
     public void setProductName(List<String> productName) {
         this.productName = productName;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }
 

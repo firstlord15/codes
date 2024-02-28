@@ -5,33 +5,87 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class WorkDocument {
-    Scanner scanner = new Scanner(System.in);
 
-    public void doDocument(){
+// Сделать общий number
+public class WorkDocument {
+    private final Scanner scanner;
+
+    public WorkDocument() {
+        this.scanner = new Scanner(System.in);
+    }
+
+    public List<String> createDocument(String name) {
+        List<String> result = new ArrayList<>();
+        result.add(enterValue("Введите id: "));
+        result.add(enterValue("Введите Number: "));
+        result.add(enterValue("Введите " + name + ": "));
+
+        return result;
+    }
+
+    private String enterValue(String prompt) {
+        System.out.println(prompt);
+        return scanner.nextLine().trim().toLowerCase();
+    }
+
+    public PaymentInvoice createPaymentInvoice() {
+        List<String> documentData = createDocument("customerName");
+        return new PaymentInvoice(
+                Integer.parseInt(documentData.get(0)),
+                Integer.parseInt(documentData.get(1)),
+                LocalDate.now(),
+                documentData.get(3)
+        );
+    }
+
+    public Payment createPayment(){
+        List<String> documentData = createDocument("nameSupplier");
+        return new Payment(
+                Integer.parseInt(documentData.get(0)),
+                Integer.parseInt(documentData.get(1)),
+                LocalDate.now(),
+                documentData.get(3)
+        );
+    }
+
+    public Invoice createInvoice(){
+        List<String> documentData = createDocument("clientName");
+        return new Invoice(
+                Integer.parseInt(documentData.get(0)),
+                Integer.parseInt(documentData.get(1)),
+                LocalDate.now(),
+                documentData.get(3)
+        );
+    }
+
+    public Order createOrder(){
         List<Double> unitPrice = new ArrayList<>();
         List<String> productName = new ArrayList<>();
-        System.out.println("Введите id: ");
-        int id = scanner.nextInt();
 
-        System.out.println("Введите orderNumber: ");
-        int orderNumber = scanner.nextInt();
-        LocalDate orderDate = LocalDate.now();
+        List<String> documentData = createDocument("buyerName");
 
-        System.out.println("Введите buyerName: ");
-        String buyerName = scanner.next();
+        System.out.println("\nВведите amount: \n");
+        int amount = scanner.nextInt();
 
         while(true){
-            System.out.println("Введите название продукта и через пробел, его цену: ");
+            System.out.println("\nВведите название продукта и через пробел его цену: ");
             String nameAndPrice = scanner.next();
 
             productName.add(nameAndPrice.split(" ")[0].trim());
             unitPrice.add(Double.valueOf(nameAndPrice.split(" ")[1].trim()));
 
-            if (nameAndPrice.trim().equals("exit")) break;
+            if (nameAndPrice.trim().equalsIgnoreCase("exit")) break;
         }
 
-        Order order = new Order(id, orderNumber, orderDate, buyerName, unitPrice, productName);
-        PaymentInvoice paymentInvoice = new PaymentInvoice(id, );
+        return new Order(
+                Integer.parseInt(documentData.get(0)),
+                Integer.parseInt(documentData.get(1)),
+                LocalDate.now(), documentData.get(3),
+                amount, unitPrice, productName
+        );
+    }
+
+    public void doDocument(){
+
     }
 }

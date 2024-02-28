@@ -6,16 +6,14 @@ public class PaymentInvoice implements Document {
     private int id;
     private int paymentInvoiceNumber;
     private LocalDate invoiceDate;
-    private double invoiceAmount;
     private String customerName;
 
     public PaymentInvoice() {}
 
-    public PaymentInvoice(int id, int paymentInvoiceNumber, LocalDate invoiceDate, double invoiceAmount, String customerName) {
+    public PaymentInvoice(int id, int paymentInvoiceNumber, LocalDate invoiceDate, String customerName) {
         this.id = id;
         this.paymentInvoiceNumber = paymentInvoiceNumber;
         this.invoiceDate = invoiceDate;
-        this.invoiceAmount = invoiceAmount;
         this.customerName = customerName;
     }
 
@@ -40,14 +38,6 @@ public class PaymentInvoice implements Document {
 
     public void setProviderName(String customerName) {
         this.customerName = customerName;
-    }
-
-    public double getAmount() {
-        return invoiceAmount;
-    }
-
-    public void setAmount(double invoiceAmount) {
-        this.invoiceAmount = invoiceAmount;
     }
 
     public LocalDate getInvoiceDate() {
