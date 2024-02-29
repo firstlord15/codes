@@ -2,7 +2,6 @@ package org.example;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,7 +14,7 @@ public class WorkDocument {
         this.scanner = new Scanner(System.in);
     }
 
-    public List<String> createDocument(String name) {
+    public List<String> createDoc(String name) {
         List<String> result = new ArrayList<>();
         result.add(enterValue("Введите id: "));
         result.add(enterValue("Введите " + name + ": "));
@@ -29,7 +28,7 @@ public class WorkDocument {
     }
 
     public PaymentInvoice createPaymentInvoice(int number) {
-        List<String> documentData = createDocument("customerName");
+        List<String> documentData = createDoc("customerName");
         return new PaymentInvoice(
                 Integer.parseInt(documentData.get(0)),
                 number,
@@ -39,7 +38,7 @@ public class WorkDocument {
     }
 
     public Payment createPayment(int number){
-        List<String> documentData = createDocument("nameSupplier");
+        List<String> documentData = createDoc("nameSupplier");
         return new Payment(
                 Integer.parseInt(documentData.get(0)),
                 number,
@@ -49,7 +48,7 @@ public class WorkDocument {
     }
 
     public Invoice createInvoice(int number){
-        List<String> documentData = createDocument("clientName");
+        List<String> documentData = createDoc("clientName");
         return new Invoice(
                 Integer.parseInt(documentData.get(0)),
                 number,
@@ -63,7 +62,7 @@ public class WorkDocument {
         List<String> productName = new ArrayList<>();
         List<Integer> productAmount = new ArrayList<>();
 
-        List<String> documentData = createDocument("buyerName");
+        List<String> documentData = createDoc("buyerName");
 
         while(true){
             System.out.println("\nВведите в формате [<Название продукта> <Кол-во> <Цена>]: ");
@@ -84,15 +83,15 @@ public class WorkDocument {
     }
 
 
-    public void doDocument(){
+    public SaveDocuments doDocs(){
         System.out.println("\nВведите number: \n");
         int number = scanner.nextInt();
 
-        Order order = createOrder(number);
-        PaymentInvoice paymentInvoice = createPaymentInvoice(number);
-        Payment payment = createPayment(number);
-        Invoice invoice = createInvoice(number);
-
-
+        return new SaveDocuments(
+                createOrder(number),
+                createPaymentInvoice(number),
+                createPayment(number),
+                createInvoice(number)
+        );
     }
 }
