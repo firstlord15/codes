@@ -8,5 +8,5 @@ public interface Document {
     public void setId(int id);
 
     // Метод для вывода информации о документе
-    public void displayInfo();
+    public String displayInfo();
 }

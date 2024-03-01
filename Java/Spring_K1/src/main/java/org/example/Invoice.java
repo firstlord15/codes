@@ -28,13 +28,11 @@ public class Invoice implements Document{
     }
 
     @Override
-    public void displayInfo() {
-        System.out.println(
-                "id: "+ id +"\n" +
-                        "number: "+ invoiceNumber +"\n" +
-                        "date: "+ invoiceDate +"\n" +
-                        "customerName: "+ clientName +"\n"
-        );
+    public String displayInfo() {
+        return  "id: "+ id +"\n" +
+                "number: "+ invoiceNumber +"\n" +
+                "date: "+ invoiceDate +"\n" +
+                "customerName: "+ clientName +"\n";
     }
 
     public LocalDate getWaybillDate() {

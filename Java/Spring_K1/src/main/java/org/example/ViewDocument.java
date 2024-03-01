@@ -17,7 +17,7 @@ public class ViewDocument {
     // Метод для вывода всех существующих документов
     public void displayAllDocuments() {
         for (Document doc : documents) {
-            doc.displayInfo();
+            System.out.println(doc.displayInfo());
         }
     }
 

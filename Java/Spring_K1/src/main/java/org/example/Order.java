@@ -36,15 +36,13 @@ public class Order implements Document {
     }
 
     @Override
-    public void displayInfo() {
-        System.out.println(
-                "\n" +
+    public String displayInfo() {
+        return  "\n" +
                 "id: "+ id +"\n" +
-                        "number: "+ orderNumber +"\n" +
-                        "date: "+ orderDate +"\n" +
-                        "customerName: "+ buyerName +"\n" +
-                        "Products: "+ productName.get(0) +" "+ unitPrice.get(0) +" "+productAmount.get(0) + " (" + (productName.size()) +")" + "\n"
-        );
+                "number: "+ orderNumber +"\n" +
+                "date: "+ orderDate +"\n" +
+                "customerName: "+ buyerName +"\n" +
+                "Products: "+ productName.get(0) +" "+ unitPrice.get(0) +" "+productAmount.get(0) + " (" + (productName.size() - 1) +")" + "\n";
     }
 
     public void addProduct(String productName, Double unitPrice, Integer amount) {
