@@ -1,3 +1,4 @@
+
 package org.example;
 
 import java.time.LocalDate;
@@ -36,12 +37,20 @@ public class Order implements Document {
 
     @Override
     public void displayInfo() {
-
+        System.out.println(
+                "\n" +
+                "id: "+ id +"\n" +
+                        "number: "+ orderNumber +"\n" +
+                        "date: "+ orderDate +"\n" +
+                        "customerName: "+ buyerName +"\n" +
+                        "Products: "+ productName.get(0) +" "+ unitPrice.get(0) +" "+productAmount.get(0) + " (" + (productName.size()) +")" + "\n"
+        );
     }
 
-    public void addProduct(String productName, Double unitPrice) {
+    public void addProduct(String productName, Double unitPrice, Integer amount) {
         this.productName.add(productName);
         this.unitPrice.add(unitPrice);
+        this.productAmount.add(amount);
     }
 
     public int getOrderNumber() {

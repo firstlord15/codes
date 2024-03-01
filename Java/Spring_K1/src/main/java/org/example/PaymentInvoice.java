@@ -29,7 +29,12 @@ public class PaymentInvoice implements Document {
 
     @Override
     public void displayInfo() {
-
+        System.out.println(
+                "id: "+ id +"\n" +
+                "number: "+ paymentInvoiceNumber +"\n" +
+                "date: "+ invoiceDate +"\n" +
+                "customerName: "+ customerName +"\n"
+        );
     }
 
     public String getProviderName() {
