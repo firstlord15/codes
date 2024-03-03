@@ -2,11 +2,11 @@ package org.example;
 
 public interface Document {
     // Метод для получения уникального идентификатора документа
-    public int getId();
+    int getId();
 
     // Метод для установки уникального идентификатора документа
-    public void setId(int id);
+    void setId(int id);
 
     // Метод для вывода информации о документе
-    public String displayInfo();
+    String displayInfo();
 }
