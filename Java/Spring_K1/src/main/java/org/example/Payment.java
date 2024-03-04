@@ -5,8 +5,8 @@ import java.time.LocalDate;
 public class Payment implements Document{
     private int id;
     private int paymentNumber;
-    private LocalDate paymentDate;
-    private String nameSupplier;
+    private LocalDate paymentDate; // дата и время
+    private String nameSupplier; // Плательщик // тип оплаты и данные краты если онлайн *********7842
 
     public Payment() {}
 

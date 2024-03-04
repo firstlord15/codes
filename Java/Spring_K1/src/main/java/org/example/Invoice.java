@@ -5,8 +5,9 @@ import java.time.LocalDate;
 public class Invoice implements Document{
     private int id;
     private int invoiceNumber;
-    private LocalDate invoiceDate;
-    private String clientName;
+    private LocalDate invoiceDate; // дата и время
+    private String clientName; // заказчик
+    private String address;
 
     public Invoice() {}
 

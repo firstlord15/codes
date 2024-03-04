@@ -112,6 +112,7 @@ public class CreateDocuments {
     }
 
 
+    // списки в списках
     public ArrayList<Document> doDocs(){
         ArrayList<Document> result = new ArrayList<>();
         System.out.println("\nВведите number:");

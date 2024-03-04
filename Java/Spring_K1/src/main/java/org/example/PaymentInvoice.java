@@ -5,15 +5,16 @@ import java.time.LocalDate;
 public class PaymentInvoice implements Document {
     private int id;
     private int paymentInvoiceNumber;
-    private LocalDate invoiceDate;
+    private LocalDate paymentInvoiceDate;
     private String customerName;
+    private String comments;
 
     public PaymentInvoice() {}
 
-    public PaymentInvoice(int id, int paymentInvoiceNumber, LocalDate invoiceDate, String customerName) {
+    public PaymentInvoice(int id, int paymentInvoiceNumber, LocalDate paymentInvoiceDate, String customerName) {
         this.id = id;
         this.paymentInvoiceNumber = paymentInvoiceNumber;
-        this.invoiceDate = invoiceDate;
+        this.paymentInvoiceDate = paymentInvoiceDate;
         this.customerName = customerName;
     }
 
@@ -31,7 +32,7 @@ public class PaymentInvoice implements Document {
     public String displayInfo() {
         return  "id: "+ id +"\n" +
                 "number: "+ paymentInvoiceNumber +"\n" +
-                "date: "+ invoiceDate +"\n" +
+                "date: "+ paymentInvoiceDate +"\n" +
                 "customerName: "+ customerName +"\n";
     }
 
@@ -44,11 +45,11 @@ public class PaymentInvoice implements Document {
     }
 
     public LocalDate getInvoiceDate() {
-        return invoiceDate;
+        return paymentInvoiceDate;
     }
 
     public void setInvoiceDate(LocalDate invoiceDate) {
-        this.invoiceDate = invoiceDate;
+        this.paymentInvoiceDate = invoiceDate;
     }
 
     public int getPaymentInvoiceNumber() {

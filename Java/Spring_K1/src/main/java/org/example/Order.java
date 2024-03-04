@@ -49,6 +49,8 @@ public class Order implements Document {
         this.productName.add(productName);
         this.unitPrice.add(unitPrice);
         this.productAmount.add(amount);
+
+
     }
 
     public int getOrderNumber() {
