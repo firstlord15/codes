@@ -1,8 +1,8 @@
-package org.example;
+package org.example.models;
 
 import java.time.LocalDateTime;
 
-public class Payment implements Document{
+public class Payment implements Document {
     private int id;
     private int paymentNumber;
     private LocalDateTime paymentDate; // дата и время
@@ -49,11 +49,13 @@ public class Payment implements Document{
         this.paymentDate = paymentDate;
     }
 
-    public int getPaymentNumber() {
+    @Override
+    public int getNumber() {
         return paymentNumber;
     }
 
-    public void setPaymentNumber(int paymentNumber) {
+    @Override
+    public void setNumber(int paymentNumber) {
         this.paymentNumber = paymentNumber;
     }
 }

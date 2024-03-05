@@ -1,8 +1,8 @@
-package org.example;
+package org.example.models;
 
 import java.time.LocalDateTime;
 
-public class Invoice implements Document{
+public class Invoice implements Document {
     private int id;
     private int invoiceNumber;
     private LocalDateTime invoiceDate; // дата и время
@@ -36,6 +36,16 @@ public class Invoice implements Document{
                 "address: "+ address +"\n";
     }
 
+    @Override
+    public int getNumber() {
+        return invoiceNumber;
+    }
+
+    @Override
+    public void setNumber(int invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
+    }
+
     public LocalDateTime getInvoiceDate() {
         return invoiceDate;
     }
@@ -50,14 +60,6 @@ public class Invoice implements Document{
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
-    }
-
-    public int getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public void setInvoiceNumber(int invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
     }
 
     public String getAddress() {

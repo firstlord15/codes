@@ -1,5 +1,5 @@
 
-package org.example;
+package org.example.models;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -51,11 +51,13 @@ public class Order implements Document {
 
     }
 
-    public int getOrderNumber() {
+    @Override
+    public int getNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(int orderNumber) {
+    @Override
+    public void setNumber(int orderNumber) {
         this.orderNumber = orderNumber;
     }
 

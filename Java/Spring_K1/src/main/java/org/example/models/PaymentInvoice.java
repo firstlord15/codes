@@ -1,4 +1,4 @@
-package org.example;
+package org.example.models;
 
 import java.time.LocalDateTime;
 
@@ -52,11 +52,13 @@ public class PaymentInvoice implements Document {
         this.paymentInvoiceDate = invoiceDate;
     }
 
-    public int getPaymentInvoiceNumber() {
+    @Override
+    public int getNumber() {
         return paymentInvoiceNumber;
     }
 
-    public void setPaymentInvoiceNumber(int paymentInvoiceNumber) {
+    @Override
+    public void setNumber(int paymentInvoiceNumber) {
         this.paymentInvoiceNumber = paymentInvoiceNumber;
     }
 
