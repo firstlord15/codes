@@ -1,21 +1,20 @@
 package org.example;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class PaymentInvoice implements Document {
     private int id;
     private int paymentInvoiceNumber;
-    private LocalDate paymentInvoiceDate;
+    private LocalDateTime paymentInvoiceDate;
     private String customerName;
     private String comments;
 
-    public PaymentInvoice() {}
-
-    public PaymentInvoice(int id, int paymentInvoiceNumber, LocalDate paymentInvoiceDate, String customerName) {
+    public PaymentInvoice(int id, int paymentInvoiceNumber, LocalDateTime paymentInvoiceDate, String customerName, String comments) {
         this.id = id;
         this.paymentInvoiceNumber = paymentInvoiceNumber;
         this.paymentInvoiceDate = paymentInvoiceDate;
         this.customerName = customerName;
+        this.comments = comments;
     }
 
     @Override
@@ -33,22 +32,23 @@ public class PaymentInvoice implements Document {
         return  "id: "+ id +"\n" +
                 "number: "+ paymentInvoiceNumber +"\n" +
                 "date: "+ paymentInvoiceDate +"\n" +
-                "customerName: "+ customerName +"\n";
+                "customerName: "+ customerName +"\n" +
+                "comments: " + comments + "\n";
     }
 
-    public String getProviderName() {
+    public String getCustomerName() {
         return customerName;
     }
 
-    public void setProviderName(String customerName) {
+    public void setCustomerName(String customerName) {
         this.customerName = customerName;
     }
 
-    public LocalDate getInvoiceDate() {
+    public LocalDateTime getInvoiceDate() {
         return paymentInvoiceDate;
     }
 
-    public void setInvoiceDate(LocalDate invoiceDate) {
+    public void setInvoiceDate(LocalDateTime invoiceDate) {
         this.paymentInvoiceDate = invoiceDate;
     }
 
@@ -58,5 +58,13 @@ public class PaymentInvoice implements Document {
 
     public void setPaymentInvoiceNumber(int paymentInvoiceNumber) {
         this.paymentInvoiceNumber = paymentInvoiceNumber;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }

@@ -1,21 +1,19 @@
 
 package org.example;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Order implements Document {
     private int id;
     private int orderNumber;
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
     private String buyerName;
     private List<Integer> productAmount;
     private List<Double> unitPrice;
     private List<String> productName;
 
-    public Order() {}
-
-    public Order(int id, int orderNumber, LocalDate orderDate, String buyerName, List<Integer> productAmount, List<Double> unitPrice, List<String> productName) {
+    public Order(int id, int orderNumber, LocalDateTime orderDate, String buyerName, List<Integer> productAmount, List<Double> unitPrice, List<String> productName) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.orderDate = orderDate;
@@ -42,7 +40,7 @@ public class Order implements Document {
                 "number: "+ orderNumber +"\n" +
                 "date: "+ orderDate +"\n" +
                 "customerName: "+ buyerName +"\n" +
-                "Products: "+ productName.get(0) +" "+ unitPrice.get(0) +" "+productAmount.get(0) + " (" + (productName.size() - 1) +")" + "\n";
+                "Products: "+ productName.get(0) +" "+ unitPrice.get(0) +" "+productAmount.get(0) + " (+" +  (productName.size() - 1) +")" + "\n";
     }
 
     public void addProduct(String productName, Double unitPrice, Integer amount) {
@@ -61,11 +59,11 @@ public class Order implements Document {
         this.orderNumber = orderNumber;
     }
 
-    public LocalDate getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 

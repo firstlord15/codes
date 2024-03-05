@@ -1,12 +1,10 @@
 package org.example;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
-// Сделать общий number
 public class CreateDocuments {
     private final Scanner scanner;
 
@@ -14,57 +12,57 @@ public class CreateDocuments {
         this.scanner = new Scanner(System.in);
     }
 
-    public List<String> createDoc(String name, int number) {
+    public List<String> createDoc(String name) {
         List<String> result = new ArrayList<>();
         result.add(enterValue("Введите id: "));
-        result.add(String.valueOf(number));
         result.add(enterValue("Введите " + name + ": "));
 
         return result;
     }
 
-    public List<String> createDoc(String name, int id, int number) {
+    public List<String> createDoc(String name, int id) {
         List<String> result = new ArrayList<>();
         result.add(String.valueOf(id));
-        result.add(String.valueOf(number));
         result.add(enterValue("Введите " + name + ": "));
 
         return result;
     }
 
     private String enterValue(String prompt) {
-        System.out.println(prompt);
-
-        return scanner.next().trim().toLowerCase();
+        System.out.print(prompt + " ");
+        return scanner.nextLine().trim().toLowerCase();
     }
 
     public PaymentInvoice createPaymentInvoice(int number, int id) {
-        List<String> documentData = createDoc("customerName", id, number);
+        List<String> documentData = createDoc("customerName", id);
+
+        String comments = enterValue("Введите comments: ");
+
         return new PaymentInvoice(
-                Integer.parseInt(documentData.get(0)),
-                Integer.parseInt(documentData.get(1)),
-                LocalDate.now(),
-                documentData.get(2)
+                Integer.parseInt(documentData.get(0)), number,
+                LocalDateTime.now(),
+                documentData.get(1),
+                comments
         );
     }
 
     public Payment createPayment(int number, int id){
-        List<String> documentData = createDoc("nameSupplier", id, number);
+        List<String> documentData = createDoc("nameSupplier", id);
         return new Payment(
-                Integer.parseInt(documentData.get(0)),
-                Integer.parseInt(documentData.get(1)),
-                LocalDate.now(),
-                documentData.get(2)
+                Integer.parseInt(documentData.get(0)), number,
+                LocalDateTime.now(), documentData.get(1)
         );
     }
 
     public Invoice createInvoice(int number, int id){
-        List<String> documentData = createDoc("clientName", id, number);
+        List<String> documentData = createDoc("clientName", id);
+
+        String address = enterValue("Введите address: ");
+
         return new Invoice(
-                Integer.parseInt(documentData.get(0)),
-                Integer.parseInt(documentData.get(1)),
-                LocalDate.now(),
-                documentData.get(2)
+                Integer.parseInt(documentData.get(0)), number,
+                LocalDateTime.now(),
+                documentData.get(1), address
         );
     }
 
@@ -73,12 +71,11 @@ public class CreateDocuments {
         List<String> productName = new ArrayList<>();
         List<Integer> productAmount = new ArrayList<>();
 
-        List<String> documentData = createDoc("buyerName", number);
+        List<String> documentData = createDoc("buyerName");
 
         while (true) {
             System.out.println("\nВведите в формате [<Название продукта> <Кол-во> <Цена>], или 'exit' для завершения: ");
-            String nameAndPrice = scanner.nextLine().trim();
-
+            String nameAndPrice = scanner.nextLine();
             if (nameAndPrice.equalsIgnoreCase("exit")) break;
 
             String[] parts = nameAndPrice.split(" ");
@@ -104,26 +101,25 @@ public class CreateDocuments {
             unitPrice.add(price);
         }
 
+        System.out.println();
         return new Order(
-                Integer.parseInt(documentData.get(0)), Integer.parseInt(documentData.get(1)),
-                LocalDate.now(), documentData.get(2), productAmount,
+                Integer.parseInt(documentData.get(0)), number,
+                LocalDateTime.now(), documentData.get(1), productAmount,
                 unitPrice, productName
         );
     }
 
-
-    // списки в списках
     public ArrayList<Document> doDocs(){
         ArrayList<Document> result = new ArrayList<>();
-        System.out.println("\nВведите number:");
-        int number = scanner.nextInt();
 
+        int number = Integer.parseInt(enterValue("\nВведите number:"));
         Order order = createOrder(number);
 
         result.add(order);
         result.add(createPaymentInvoice(number, order.getId()+1));
         result.add(createPayment(number, order.getId()+2));
         result.add(createInvoice(number, order.getId()+3));
+        scanner.close();
 
         return result;
     }

@@ -4,13 +4,14 @@ import java.util.ArrayList;
 public class ViewDocument {
     private ArrayList<Document> documents;
 
-    public ViewDocument(){
-        CreateDocuments createDocuments = new CreateDocuments();
-        this.documents = createDocuments.doDocs();
-    }
-
+    public ViewDocument(){}
     public ViewDocument(ArrayList<Document> documents) {
         this.documents = documents;
+    }
+
+    public void CreateDocs(){
+        CreateDocuments createDocuments = new CreateDocuments();
+        this.documents = createDocuments.doDocs();
     }
 
     // Метод для вывода всех существующих документов

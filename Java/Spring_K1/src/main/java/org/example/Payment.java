@@ -1,20 +1,18 @@
 package org.example;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Payment implements Document{
     private int id;
     private int paymentNumber;
-    private LocalDate paymentDate; // дата и время
-    private String nameSupplier; // Плательщик // тип оплаты и данные краты если онлайн *********7842
+    private LocalDateTime paymentDate; // дата и время
+    private String paymentName; // Плательщик // тип оплаты и данные краты если онлайн *********7842
 
-    public Payment() {}
-
-    public Payment(int id, int paymentNumber, LocalDate paymentDate, String nameSupplier) {
+    public Payment(int id, int paymentNumber, LocalDateTime paymentDate, String paymentName) {
         this.id = id;
         this.paymentNumber = paymentNumber;
         this.paymentDate = paymentDate;
-        this.nameSupplier = nameSupplier;
+        this.paymentName = paymentName;
     }
 
     @Override
@@ -32,22 +30,22 @@ public class Payment implements Document{
         return  "id: "+ id +"\n" +
                 "number: "+ paymentNumber +"\n" +
                 "date: "+ paymentDate +"\n" +
-                "customerName: "+ nameSupplier +"\n";
+                "paymentName: "+ paymentName +"\n";
     }
 
-    public String getNameSupplier() {
-        return nameSupplier;
+    public String getPaymentName() {
+        return paymentName;
     }
 
-    public void setNameSupplier(String nameSupplier) {
-        this.nameSupplier = nameSupplier;
+    public void setPaymentName(String nameSupplier) {
+        this.paymentName = nameSupplier;
     }
 
-    public LocalDate getPaymentDate() {
+    public LocalDateTime getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(LocalDate paymentDate) {
+    public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
     }
 

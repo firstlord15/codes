@@ -1,21 +1,20 @@
 package org.example;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Invoice implements Document{
     private int id;
     private int invoiceNumber;
-    private LocalDate invoiceDate; // дата и время
+    private LocalDateTime invoiceDate; // дата и время
     private String clientName; // заказчик
     private String address;
 
-    public Invoice() {}
-
-    public Invoice(int id, int invoiceNumber, LocalDate invoiceDate, String clientName) {
+    public Invoice(int id, int invoiceNumber, LocalDateTime invoiceDate, String clientName, String address) {
         this.id = id;
         this.invoiceNumber = invoiceNumber;
         this.invoiceDate = invoiceDate;
         this.clientName = clientName;
+        this.address = address;
     }
 
     @Override
@@ -33,14 +32,15 @@ public class Invoice implements Document{
         return  "id: "+ id +"\n" +
                 "number: "+ invoiceNumber +"\n" +
                 "date: "+ invoiceDate +"\n" +
-                "customerName: "+ clientName +"\n";
+                "clientName: "+ clientName +"\n" +
+                "address: "+ address +"\n";
     }
 
-    public LocalDate getWaybillDate() {
+    public LocalDateTime getInvoiceDate() {
         return invoiceDate;
     }
 
-    public void setWaybillDate(LocalDate invoiceDate) {
+    public void setInvoiceDate(LocalDateTime invoiceDate) {
         this.invoiceDate = invoiceDate;
     }
 
@@ -58,5 +58,13 @@ public class Invoice implements Document{
 
     public void setInvoiceNumber(int invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }
