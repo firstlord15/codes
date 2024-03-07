@@ -3,12 +3,12 @@ import org.example.models.Document;
 
 import java.util.ArrayList;
 
-public class documentWork {
+public class DocumentWork {
     private ArrayList<Document> documents;
 
-    public documentWork(){}
+    public DocumentWork(){}
 
-    public documentWork(ArrayList<Document> documents) {
+    public DocumentWork(ArrayList<Document> documents) {
         this.documents = documents;
     }
 

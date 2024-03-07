@@ -19,7 +19,7 @@ def driver(request):
     drivers = request.config.getoption("--drivers")
     log_level = request.config.getoption("--log_level")
     headless = request.config.getoption("--headless")
-    executor_url = "https://demo-opencart.ru"
+    executor_url = "https://demo-opencart.ru/"
     
     logger = logging.getLogger(request.node.name)
     file_handler = logging.FileHandler(f"logs/{request.node.name}.log")

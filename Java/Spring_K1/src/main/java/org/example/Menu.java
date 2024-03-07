@@ -58,7 +58,19 @@ public class Menu {
     }
 
     public void editDocs() {
-        System.out.println("Редактирование цикла документов в данный момент недоступно.");
+        int indexDocs = chooseDocument("Редактирование");
+        if (indexDocs >= 0) {
+            DocumentType[] documentTypes = DocumentType.values();
+
+            for (int i = 0; i < documentTypes.length; i++) {
+                DocumentType documentType = documentTypes[i];
+                System.out.println("["+ i +"] " + documentType);
+            }
+
+            int indexDocType = scanner.nextInt();
+
+//            listDocuments.get(indexDocs);
+        }
     }
 
     public void deleteDocs() {
@@ -74,12 +86,16 @@ public class Menu {
         System.out.println("[2] Просмотр цикла документов");
         System.out.println("[3] Редактирование цикла документов");
         System.out.println("[4] Удаление цикла документов");
-        System.out.println("[5] Для выхода");
+        System.out.println("[5] Для выхода\n");
 
-        int number = scanner.nextInt();
-        scanner.nextLine();
+        String answer = scanner.nextLine();
 
-        return number;
+        if (!answer.isEmpty() && answer.matches("\\d+")) {
+            return Integer.parseInt(answer);
+        } else {
+            System.out.println("Некорректный ввод. Пожалуйста, введите число от 1 до 5.");
+            return mainMenu();
+        }
     }
 
     public void menu() {
