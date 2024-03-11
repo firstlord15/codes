@@ -1,13 +1,13 @@
-INFO ===> Test test_forth_task started at 2024-03-11 02:59:12.490762
+INFO ===> Test test_forth_task started at 2024-03-11 15:52:56.307550
 INFO Browser chrome started
 INFO MainPage: Clicking element 'BUTTON_REGLOG'
 INFO MainPage: Clicking element 'BUTTON_REGISTER'
 INFO RegistrationPage: Clicking element 'INPUT_FIRSTNAME'
 INFO RegistrationPage: Clearing input
-INFO RegistrationPage: Writing 'Ратмир' in input 'INPUT_FIRSTNAME'
+INFO RegistrationPage: Writing 'Ratmir' in input 'INPUT_FIRSTNAME'
 INFO RegistrationPage: Clicking element 'INPUT_LASTNAME'
 INFO RegistrationPage: Clearing input
-INFO RegistrationPage: Writing 'Ашимов' in input 'INPUT_LASTNAME'
+INFO RegistrationPage: Writing 'Ashimov' in input 'INPUT_LASTNAME'
 INFO RegistrationPage: Clicking element 'INPUT_EMAIL'
 INFO RegistrationPage: Clearing input
 INFO RegistrationPage: Writing 'ratmir.yuldashev28@mail.ru' in input 'INPUT_EMAIL'
@@ -23,4 +23,4 @@ INFO RegistrationPage: Writing 'UwUPassword' in input 'INPUT_CONFIRM_PASSWORD'
 INFO RegistrationPage: Clicking element 'BUTTON_TRUE_SUBNEWS'
 INFO RegistrationPage: Clicking element 'BUTTON_ACCEPTANCE'
 INFO RegistrationPage: Clicking element 'BUTTON_NEXT'
-INFO ===> Test test_forth_task finished at 2024-03-11 03:00:09.962565
+INFO ===> Test test_forth_task finished at 2024-03-11 15:53:52.139284

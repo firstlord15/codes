@@ -9,11 +9,11 @@ review_mark_cs = ("div.container:nth-child(4) div.row div.col-sm-12 div.row div.
                   "div.tab-pane.active:nth-child(3) form.form-horizontal div.form-group.required:nth-child(5) "
                   "div.col-sm-12 > input:nth-child({})")
 
-firstname_text = "Ратмир"
-lastname_text = "Ашимов"
+firstname_text = "Ratmir"
+lastname_text = "Ashimov"
 email_text = "ratmir.yuldashev28@mail.ru"
 telephone_text = "89096895085"
 password_text = "UwUPassword"
-review_text = "ТОПЧИК просто, самый лучший продукт в этом магазине, конечно ограничение в 25 символов, меня подставило"
+review_text = "kodfjlkfajfasss nice review"
 
 input_texts = [firstname_text, lastname_text, email_text, telephone_text, password_text, password_text]

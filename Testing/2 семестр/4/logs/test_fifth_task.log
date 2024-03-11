@@ -1,7 +1,7 @@
-INFO ===> Test test_fifth_task started at 2024-03-11 03:00:14.019190
+INFO ===> Test test_fifth_task started at 2024-03-11 15:53:56.231203
 INFO Browser chrome started
 INFO MainPage: Clicking element 'INPUT_SEARCH'
 INFO MainPage: Clearing input
 INFO MainPage: Writing 'random text!' in input 'INPUT_SEARCH'
 INFO Press 'Enter'
-INFO ===> Test test_fifth_task finished at 2024-03-11 03:00:29.708006
+INFO ===> Test test_fifth_task finished at 2024-03-11 15:54:11.300150

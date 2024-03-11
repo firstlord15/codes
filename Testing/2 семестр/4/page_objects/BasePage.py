@@ -44,21 +44,12 @@ class BasePage:
     # метод для поиска названия поля в классе, по значению
     def element_name(self, element):
         for name, value in vars(self.__class__).items():
-            if value == element:
+            if isinstance(value, (list, tuple)) and element in value:
+                return f"{name}[{value.index(element)}]"
+            elif value == element:
                 return name
-        
         return element
 
-    # def element_name(self, element):
-    #     fields = vars(self.__class__).items()
-    #     for i, (name, value) in enumerate(fields):
-    #         if isinstance(element, (list, tuple)):
-    #             if i < len(element) and value == element[i]:
-    #                 return f"{name}-{element[i]}"
-    #         elif value == element:
-    #             return name
-                
-    #     return ""
 
     def click(self, element_locator):
         try:

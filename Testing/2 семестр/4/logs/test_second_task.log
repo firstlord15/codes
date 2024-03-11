@@ -1,6 +1,6 @@
-INFO ===> Test test_second_task started at 2024-03-11 02:58:29.360649
+INFO ===> Test test_second_task started at 2024-03-11 15:52:14.178324
 INFO Browser chrome started
-INFO MainPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row:nth-child(4) div.product-layout.col-lg-3.col-md-3.col-sm-6.col-xs-12:nth-child(1) div.product-thumb.transition div.button-group > button:nth-child(1)')'
-INFO MainPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row:nth-child(4) div.product-layout.col-lg-3.col-md-3.col-sm-6.col-xs-12:nth-child(2) div.product-thumb.transition div.button-group > button:nth-child(1)')'
+INFO MainPage: Clicking element 'PRODUCTS_BUTTON_BUY[0]'
+INFO MainPage: Clicking element 'PRODUCTS_BUTTON_BUY[1]'
 INFO MainPage: Clicking element 'BUTTON_CART'
-INFO ===> Test test_second_task finished at 2024-03-11 02:58:49.352347
+INFO ===> Test test_second_task finished at 2024-03-11 15:52:33.718909
