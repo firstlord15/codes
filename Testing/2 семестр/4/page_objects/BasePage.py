@@ -13,7 +13,8 @@ class BasePage:
         self.driver = driver
         self.logger = driver.logger
         self.wait =  WebDriverWait(self.driver, wait)
-
+        self.class_name = self.__class__.__name__
+    
     def is_tuple(self, element_locator):
         if isinstance(element_locator, tuple):
             return self.driver.find_element(*element_locator)
@@ -22,11 +23,13 @@ class BasePage:
 
     def escape(self):
         ActionChains(self.driver).send_keys(Keys.ESCAPE).perform()
+        self.logger.info("Press 'Escape'")
         time.sleep(2)
         return self
 
     def enter(self):
         ActionChains(self.driver).send_keys(Keys.ENTER).perform()
+        self.logger.info("Press 'Enter'")
         time.sleep(2)
         return self
 
@@ -37,6 +40,25 @@ class BasePage:
     @staticmethod
     def last(arr):
         return len(arr) - 1
+    
+    # метод для поиска названия поля в классе, по значению
+    def element_name(self, element):
+        for name, value in vars(self.__class__).items():
+            if value == element:
+                return name
+        
+        return element
+
+    # def element_name(self, element):
+    #     fields = vars(self.__class__).items()
+    #     for i, (name, value) in enumerate(fields):
+    #         if isinstance(element, (list, tuple)):
+    #             if i < len(element) and value == element[i]:
+    #                 return f"{name}-{element[i]}"
+    #         elif value == element:
+    #             return name
+                
+    #     return ""
 
     def click(self, element_locator):
         try:
@@ -44,6 +66,7 @@ class BasePage:
             element = self.is_tuple(element_locator)
             self.wait.until(EC.element_to_be_clickable(element)).click()
             # ActionChains(self.driver).move_to_element(element).click().perform()
+            self.logger.info(f"{self.class_name}: Clicking element '{self.element_name(element_locator)}'")
             time.sleep(1)
         except Exception as e:
             print(f"Ошибка при выполнении клика: {e}")
@@ -53,18 +76,20 @@ class BasePage:
     def write(self, element_locator, value):
         element = self.is_tuple(element_locator)
         element.clear()
-
+        self.logger.info(f"{self.class_name}: Clearing input")
         result_text = value[randint(0, len(value) - 1)] if isinstance(value, list) else value
 
         for letter in result_text:
             time.sleep(randint(1, 3) / 50)
             element.send_keys(letter)
+        self.logger.info(f"{self.class_name}: Writing '{result_text}' in input '{self.element_name(element_locator)}'")
         time.sleep(1)
 
         return self
 
     def _input(self, element, value):
-        self.click(element).write(element, value)
+        self.click(element)
+        self.write(element, value)
         time.sleep(2)
 
         return self

@@ -2,25 +2,21 @@
 package org.example.models;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Order implements Document {
     private int id;
     private int orderNumber;
     private LocalDateTime orderDate;
     private String buyerName;
-    private List<Integer> productAmount;
-    private List<Double> unitPrice;
-    private List<String> productName;
+    private ArrayList<String> products;
 
-    public Order(int id, int orderNumber, LocalDateTime orderDate, String buyerName, List<Integer> productAmount, List<Double> unitPrice, List<String> productName) {
+    public Order(int id, int orderNumber, LocalDateTime orderDate, String buyerName, ArrayList<String> products) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.orderDate = orderDate;
         this.buyerName = buyerName;
-        this.productAmount = productAmount;
-        this.unitPrice = unitPrice;
-        this.productName = productName;
+        this.products = products;
     }
 
     @Override
@@ -35,20 +31,14 @@ public class Order implements Document {
 
     @Override
     public String displayInfo() {
+        String[] productInfo = products.get(0).split(" ");
+
         return  "\n" +
                 "id: "+ id +"\n" +
                 "number: "+ orderNumber +"\n" +
                 "date: "+ orderDate +"\n" +
                 "customerName: "+ buyerName +"\n" +
-                "Products: "+ productName.get(0) +" "+ unitPrice.get(0) +" "+productAmount.get(0) + " (+" +  (productName.size() - 1) +")" + "\n";
-    }
-
-    public void addProduct(String productName, Double unitPrice, Integer amount) {
-        this.productName.add(productName);
-        this.unitPrice.add(unitPrice);
-        this.productAmount.add(amount);
-
-
+                "Products: "+ productInfo[0] + productInfo[1] + productInfo[2] + " (+" +  (products.size() - 1) +")" + "\n";
     }
 
     @Override
@@ -77,28 +67,12 @@ public class Order implements Document {
         this.buyerName = buyerName;
     }
 
-    public List<Double> getUnitPrice() {
-        return unitPrice;
+    public ArrayList<String> getProducts() {
+        return products;
     }
 
-    public void setUnitPrice(List<Double> unitPrice) {
-        this.unitPrice = unitPrice;
-    }
-
-    public List<String> getProductName() {
-        return productName;
-    }
-
-    public void setProductName(List<String> productName) {
-        this.productName = productName;
-    }
-
-    public List<Integer> getAmount() {
-        return productAmount;
-    }
-
-    public void setAmount(List<Integer> productAmount) {
-        this.productAmount = productAmount;
+    public void setProducts(ArrayList<String> products) {
+        this.products = products;
     }
 }
 

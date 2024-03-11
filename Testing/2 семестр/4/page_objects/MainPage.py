@@ -43,7 +43,6 @@ class MainPage(BasePage):
 
     def click_product(self, index: int):
         self.click(self.PRODUCTS[index])
-        
         time.sleep(3)
         return self
     
@@ -55,7 +54,12 @@ class MainPage(BasePage):
         return self
 
     def open_registration(self):
-        self.click(self.BUTTON_REGLOG).click(self.BUTTON_REGISTER)
-        
+        self.click(self.BUTTON_REGLOG)
+        self.click(self.BUTTON_REGISTER)
+
         time.sleep(3)
         return self
+    
+    def click_search(self, text: str):
+        self._input(self.INPUT_SEARCH, text)
+        self.enter()

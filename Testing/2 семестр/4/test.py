@@ -7,4 +7,4 @@ from page_objects.RegistrationPage import RegistrationPage
 
 def test_fifth_task(driver):
     time.sleep(3)
-    MainPage(driver)._input(MainPage.INPUT_SEARCH, "random text!").enter()
+    MainPage(driver).click_search("random text!")

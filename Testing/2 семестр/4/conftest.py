@@ -15,7 +15,7 @@ def pytest_addoption(parser):
 
 @pytest.fixture
 def driver(request):
-    browser = request.config.getoption("--browser")
+    browser_name = request.config.getoption("--browser")
     drivers = request.config.getoption("--drivers")
     log_level = request.config.getoption("--log_level")
     headless = request.config.getoption("--headless")
@@ -31,40 +31,32 @@ def driver(request):
         "===> Test %s started at %s" % (request.node.name, datetime.datetime.now())
     )
 
-    if browser == "chrome": 
-        options = Options()
-        if headless:
-            options.add_argument("headless")
-        driver = webdriver.Remote(
-            command_executor=executor_url,
-            options=options
-        )
-    elif browser == "yandex":
+    if browser_name == "chrome":
+        option = Options()
+        driver = webdriver.Chrome(options=option)
+    elif browser_name == "yandex":
         options = webdriver.ChromeOptions()
         binary_yandex_driver_file = os.path.join(drivers, 'yandexdriver\\yandexdriver.exe')
         service = webdriver.chrome.service.Service(executable_path=binary_yandex_driver_file)
         driver = webdriver.Chrome(service=service, options=options)
-    elif browser == "firefox":
-        options = FirefoxOptions()
-        if headless:
-            options.headless = True
-        driver = webdriver.Firefox(options=options)
+    elif browser_name == "firefox":
+        option = FirefoxOptions()
+        driver = webdriver.Firefox(options=option)
     else:
-        raise NotImplemented()
-    
+        raise Exception("Driver not supported")
+
+    driver.get(executor_url)
     driver.log_level = log_level
     driver.logger = logger
     driver.test_name = request.node.name
-    
-    logger.info("Browser %s started" % browser)
+
+    logger.info("Browser %s started" % browser_name)
 
     def fin():
-        driver.get(executor_url)
         driver.quit()
         logger.info(
             "===> Test %s finished at %s" % (request.node.name, datetime.datetime.now())
         )
 
-    request.addfinalizer(fin())
-
+    request.addfinalizer(fin)
     return driver

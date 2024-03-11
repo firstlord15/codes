@@ -69,10 +69,7 @@ public class CreateDocuments {
     }
 
     public Order createOrder(int number){
-        List<Double> unitPrice = new ArrayList<>();
-        List<String> productName = new ArrayList<>();
-        List<Integer> productAmount = new ArrayList<>();
-
+        ArrayList<String> products = new ArrayList<>();
         List<String> documentData = createDoc("buyerName");
 
         while (true) {
@@ -98,16 +95,13 @@ public class CreateDocuments {
                 continue;
             }
 
-            productName.add(productNameStr);
-            productAmount.add(amount);
-            unitPrice.add(price);
+            products.add(productNameStr + " " + amount + " " + price);
         }
 
         System.out.println();
         return new Order(
                 Integer.parseInt(documentData.get(0)), number,
-                LocalDateTime.now(), documentData.get(1), productAmount,
-                unitPrice, productName
+                LocalDateTime.now(), documentData.get(1), products
         );
     }
 
