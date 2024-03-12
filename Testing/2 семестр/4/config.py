@@ -16,4 +16,5 @@ telephone_text = "89096895085"
 password_text = "UwUPassword"
 review_text = "kodfjlkfajfasss nice review"
 
-input_texts = [firstname_text, lastname_text, email_text, telephone_text, password_text, password_text]
+input_texts = [firstname_text, lastname_text, email_text,
+               telephone_text, password_text, password_text]

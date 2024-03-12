@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.models.Document;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -69,7 +70,15 @@ public class Menu {
 
             int indexDocType = scanner.nextInt();
 
-//            listDocuments.get(indexDocs);
+            Document document = listDocuments.get(indexDocs).get(indexDocType);
+            Field[] fields = document.getClass().getFields();
+
+            for (int i = 0; i < fields.length - 1; i++){
+                System.out.println("["+ i +"] " + fields[i]);
+            }
+
+            int indexField = scanner.nextInt();
+
         }
     }
 

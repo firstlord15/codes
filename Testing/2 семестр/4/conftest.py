@@ -2,6 +2,8 @@ import datetime
 import os
 import pytest
 import logging
+import allure
+import json
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -11,14 +13,14 @@ def pytest_addoption(parser):
     parser.addoption("--browser", default="chrome")
     parser.addoption("--drivers", default=os.path.expanduser("C:\\webdrivers"))
     parser.addoption("--log_level", action="store", default="INFO")
-    parser.addoption("--headless", action="store_true")
+    # parser.addoption("--headless", action="store_true")
 
 @pytest.fixture
 def driver(request):
     browser_name = request.config.getoption("--browser")
     drivers = request.config.getoption("--drivers")
     log_level = request.config.getoption("--log_level")
-    headless = request.config.getoption("--headless")
+    # headless = request.config.getoption("--headless")
     executor_url = "https://demo-opencart.ru/"
     
     logger = logging.getLogger(request.node.name)
@@ -44,6 +46,12 @@ def driver(request):
         driver = webdriver.Firefox(options=option)
     else:
         raise Exception("Driver not supported")
+
+    allure.attach(
+        name=driver.session_id,
+        body=json.dumps(drivers.capabilities),
+        attachment_type=allure.attachment_type.JSON,
+    )
 
     driver.get(executor_url)
     driver.log_level = log_level

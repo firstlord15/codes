@@ -66,14 +66,15 @@ class BasePage:
 
     def write(self, element_locator, value):
         element = self.is_tuple(element_locator)
+        element_name = self.element_name(element_locator)
         element.clear()
-        self.logger.info(f"{self.class_name}: Clearing input")
+        self.logger.info(f"{self.class_name}: Clearing input '{element_name}'")
         result_text = value[randint(0, len(value) - 1)] if isinstance(value, list) else value
 
         for letter in result_text:
             time.sleep(randint(1, 3) / 50)
             element.send_keys(letter)
-        self.logger.info(f"{self.class_name}: Writing '{result_text}' in input '{self.element_name(element_locator)}'")
+        self.logger.info(f"{self.class_name}: Writing '{result_text}' in input '{element_name}'")
         time.sleep(1)
 
         return self
