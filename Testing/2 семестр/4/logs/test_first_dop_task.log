@@ -1,4 +1,4 @@
-INFO ===> Test test_first_dop_task started at 2024-03-11 15:54:15.388184
+INFO ===> Test test_first_dop_task started at 2024-03-13 14:57:59.347249
 INFO Browser chrome started
-INFO MainPage: Clicking element 'PRODUCTS_BUTTON_FAVORITE[1]'
-INFO ===> Test test_first_dop_task finished at 2024-03-11 15:54:24.592564
+INFO MainPage: Clicking element 'PRODUCTS_BUTTON_FAVORITE[3]'
+INFO ===> Test test_first_dop_task finished at 2024-03-13 14:58:09.023197

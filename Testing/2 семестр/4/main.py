@@ -55,8 +55,8 @@ def test_first_dop_task(driver):
     MainPage(driver).click(MainPage.PRODUCTS_BUTTON_FAVORITE[index])
 
 
-@allure.feature("Search")
-@allure.title("Input text in search")
+@allure.feature("Last product")
+@allure.title("Add last product to cart")
 def test_second_dop_task(driver):
     time.sleep(3)
     MainPage(driver).click(MainPage(driver).LAST_INDEX)
@@ -65,8 +65,8 @@ def test_second_dop_task(driver):
 
 
 # дальше продолжить
-@allure.feature("Search")
-@allure.title("Input text in search")
+@allure.feature("Tablet")
+@allure.title("Add tablet to cart")
 def test_third_dop_task(driver):
     time.sleep(3)
     MainPage(driver).click(MainPage.DROPDOWN_TABLET)
@@ -74,8 +74,8 @@ def test_third_dop_task(driver):
     ProductPage(driver).click(ProductPage.BUTTON_BUY)
 
 
-@allure.feature("Search")
-@allure.title("Input text in search")
+@allure.feature("Telephone")
+@allure.title("Add telephone htc to cart")
 def test_forth_dop_task(driver):
     time.sleep(3)
     MainPage(driver).click(MainPage.DROPDOWN_TELEPHONE_HTC)
@@ -83,8 +83,8 @@ def test_forth_dop_task(driver):
     ProductPage(driver).click(ProductPage.BUTTON_BUY)
 
 
-@allure.feature("Search")
-@allure.title("Input text in search")
+@allure.feature("Review")
+@allure.title("Write review in product")
 def test_fifth_dop_task(driver):
     time.sleep(3)
     MainPage(driver).click_product(0)

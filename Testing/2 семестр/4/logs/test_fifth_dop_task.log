@@ -1,117 +1,13 @@
-INFO ===> Test test_fifth_dop_task started at 2024-03-11 15:05:02.335087
-INFO Browser chrome started
-INFO MainPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row:nth-child(4) div.product-layout.col-lg-3.col-md-3.col-sm-6.col-xs-12:nth-child(1) div.product-thumb.transition div.image > a:nth-child(1)')'
-INFO ProductPage: Clicking element 'BUTTON_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'Ratmir' in input 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'kodfjlkajfsjalkfjaksfasjklfajlfjlakfjalfajflasjlfajfas nice review' in input 'INPUT_REVIEW'
-INFO ProductPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row div.col-sm-8 div.tab-content div.tab-pane.active:nth-child(3) form.form-horizontal div.form-group.required:nth-child(5) div.col-sm-12 > input:nth-child(6)')'
-INFO ProductPage: Clicking element 'BUTTON_NEXT_REVIEW'
-INFO ===> Test test_fifth_dop_task finished at 2024-03-11 15:05:38.829232
-INFO ===> Test test_fifth_dop_task started at 2024-03-11 15:12:37.253493
-INFO Browser chrome started
-INFO MainPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row:nth-child(4) div.product-layout.col-lg-3.col-md-3.col-sm-6.col-xs-12:nth-child(1) div.product-thumb.transition div.image > a:nth-child(1)')'
-INFO ProductPage: Clicking element '('partial link text', '������� (')'
-INFO ProductPage: Clicking element '('css selector', '#input-name')'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'Ratmir' in input '('css selector', '#input-name')'
-INFO ProductPage: Clicking element '('css selector', '#input-review')'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'kodfjlkajfsjalkfjaksfasjklfajlfjlakfjalfajflasjlfajfas nice review' in input '('css selector', '#input-review')'
-INFO ProductPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row div.col-sm-8 div.tab-content div.tab-pane.active:nth-child(3) form.form-horizontal div.form-group.required:nth-child(5) div.col-sm-12 > input:nth-child(6)')'
-INFO ProductPage: Clicking element '('css selector', '#button-review')'
-INFO ===> Test test_fifth_dop_task finished at 2024-03-11 15:13:13.948170
-INFO ===> Test test_fifth_dop_task started at 2024-03-11 15:17:01.382433
-INFO Browser chrome started
-INFO MainPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row:nth-child(4) div.product-layout.col-lg-3.col-md-3.col-sm-6.col-xs-12:nth-child(1) div.product-thumb.transition div.image > a:nth-child(1)')'
-INFO ProductPage: Clicking element 'BUTTON_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'Ratmir' in input 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'kodfjlkajfsjalkfjaksfasjklfajlfjlakfjalfajflasjlfajfas nice review' in input 'INPUT_REVIEW'
-INFO ProductPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row div.col-sm-8 div.tab-content div.tab-pane.active:nth-child(3) form.form-horizontal div.form-group.required:nth-child(5) div.col-sm-12 > input:nth-child(6)')'
-INFO ProductPage: Clicking element 'BUTTON_NEXT_REVIEW'
-INFO ===> Test test_fifth_dop_task finished at 2024-03-11 15:17:38.143842
-INFO ===> Test test_fifth_dop_task started at 2024-03-11 15:21:37.051618
-INFO Browser chrome started
-INFO MainPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row:nth-child(4) div.product-layout.col-lg-3.col-md-3.col-sm-6.col-xs-12:nth-child(1) div.product-thumb.transition div.image > a:nth-child(1)')'
-INFO ProductPage: Clicking element 'BUTTON_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'Ratmir' in input 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'kodfjlkajfsjalkfjaksfasjklfajlfjlakfjalfajflasjlfajfas nice review' in input 'INPUT_REVIEW'
-INFO ProductPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row div.col-sm-8 div.tab-content div.tab-pane.active:nth-child(3) form.form-horizontal div.form-group.required:nth-child(5) div.col-sm-12 > input:nth-child(6)')'
-INFO ProductPage: Clicking element 'BUTTON_NEXT_REVIEW'
-INFO ===> Test test_fifth_dop_task finished at 2024-03-11 15:22:14.729894
-INFO ===> Test test_fifth_dop_task started at 2024-03-11 15:25:52.642137
-INFO Browser chrome started
-INFO MainPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row:nth-child(4) div.product-layout.col-lg-3.col-md-3.col-sm-6.col-xs-12:nth-child(1) div.product-thumb.transition div.image > a:nth-child(1)')'
-INFO ProductPage: Clicking element 'BUTTON_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'Ratmir' in input 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'kodfjlkajfsjalkfjaksfasjklfajlfjlakfjalfajflasjlfajfas nice review' in input 'INPUT_REVIEW'
-INFO ProductPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row div.col-sm-8 div.tab-content div.tab-pane.active:nth-child(3) form.form-horizontal div.form-group.required:nth-child(5) div.col-sm-12 > input:nth-child(6)')'
-INFO ProductPage: Clicking element 'BUTTON_NEXT_REVIEW'
-INFO ===> Test test_fifth_dop_task finished at 2024-03-11 15:26:29.052928
-INFO ===> Test test_fifth_dop_task started at 2024-03-11 15:38:22.514709
-INFO Browser chrome started
-INFO MainPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row:nth-child(4) div.product-layout.col-lg-3.col-md-3.col-sm-6.col-xs-12:nth-child(1) div.product-thumb.transition div.image > a:nth-child(1)')'
-INFO ProductPage: Clicking element 'BUTTON_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'Ratmir' in input 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'kodfjlkajfsjalkfjaksfasjklfajlfjlakfjalfajflasjlfajfas nice review' in input 'INPUT_REVIEW'
-INFO ProductPage: Clicking element '('css selector', 'div.container:nth-child(4) div.row div.col-sm-12 div.row div.col-sm-8 div.tab-content div.tab-pane.active:nth-child(3) form.form-horizontal div.form-group.required:nth-child(5) div.col-sm-12 > input:nth-child(6)')'
-INFO ProductPage: Clicking element 'BUTTON_NEXT_REVIEW'
-INFO ===> Test test_fifth_dop_task finished at 2024-03-11 15:38:59.052868
-INFO ===> Test test_fifth_dop_task started at 2024-03-11 15:48:29.774231
+INFO ===> Test test_fifth_dop_task started at 2024-03-13 14:59:12.463914
 INFO Browser chrome started
 INFO MainPage: Clicking element 'PRODUCTS[0]'
 INFO ProductPage: Clicking element 'BUTTON_REVIEW'
 INFO ProductPage: Clicking element 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clearing input
+INFO ProductPage: Clearing input 'INPUT_NAME_REVIEW'
 INFO ProductPage: Writing 'Ratmir' in input 'INPUT_NAME_REVIEW'
 INFO ProductPage: Clicking element 'INPUT_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'kodfjlkajfsjalkfjaksfasjklfajlfjlakfjalfajflasjlfajfas nice review' in input 'INPUT_REVIEW'
+INFO ProductPage: Clearing input 'INPUT_REVIEW'
+INFO ProductPage: Writing 'kodfjlkfajfasss nice review' in input 'INPUT_REVIEW'
 INFO ProductPage: Clicking element 'BUTTON_REVIEW_MARK[4]'
 INFO ProductPage: Clicking element 'BUTTON_NEXT_REVIEW'
-INFO ===> Test test_fifth_dop_task finished at 2024-03-11 15:49:06.156754
-INFO ===> Test test_fifth_dop_task started at 2024-03-11 15:50:19.414358
-INFO Browser chrome started
-INFO MainPage: Clicking element 'PRODUCTS[0]'
-INFO ProductPage: Clicking element 'BUTTON_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'Ratmir' in input 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'kodfjlkajfsjalkfjaksfasjklfajlfjlakfjalfajflasjlfajfas nice review' in input 'INPUT_REVIEW'
-INFO ProductPage: Clicking element 'BUTTON_REVIEW_MARK[4]'
-INFO ProductPage: Clicking element 'BUTTON_NEXT_REVIEW'
-INFO ===> Test test_fifth_dop_task finished at 2024-03-11 15:50:56.325719
-INFO ===> Test test_fifth_dop_task started at 2024-03-11 15:55:23.764532
-INFO Browser chrome started
-INFO MainPage: Clicking element 'PRODUCTS[0]'
-INFO ProductPage: Clicking element 'BUTTON_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'Ratmir' in input 'INPUT_NAME_REVIEW'
-INFO ProductPage: Clicking element 'INPUT_REVIEW'
-INFO ProductPage: Clearing input
-INFO ProductPage: Writing 'kodfjlkajfsjalkfjaksfasjklfajlfjlakfjalfajflasjlfajfas nice review' in input 'INPUT_REVIEW'
-INFO ProductPage: Clicking element 'BUTTON_REVIEW_MARK[4]'
-INFO ProductPage: Clicking element 'BUTTON_NEXT_REVIEW'
-INFO ===> Test test_fifth_dop_task finished at 2024-03-11 15:56:00.036547
+INFO ===> Test test_fifth_dop_task finished at 2024-03-13 14:59:47.424646

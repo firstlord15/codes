@@ -1,0 +1,6 @@
+[32mINFO    [0m test_second_task:conftest.py:34 ===> Test test_second_task started at 2024-03-13 14:55:53.856672
+[32mINFO    [0m test_second_task:conftest.py:66 Browser chrome started
+[32mINFO    [0m test_second_task:BasePage.py:63 MainPage: Clicking element 'PRODUCTS_BUTTON_BUY[0]'
+[32mINFO    [0m test_second_task:BasePage.py:63 MainPage: Clicking element 'PRODUCTS_BUTTON_BUY[1]'
+[32mINFO    [0m test_second_task:BasePage.py:63 MainPage: Clicking element 'BUTTON_CART'
+[32mINFO    [0m test_second_task:conftest.py:70 ===> Test test_second_task finished at 2024-03-13 14:56:14.463740

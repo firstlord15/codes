@@ -1,6 +1,6 @@
-INFO ===> Test test_third_dop_task started at 2024-03-11 15:54:47.893931
+INFO ===> Test test_third_dop_task started at 2024-03-13 14:58:32.168269
 INFO Browser chrome started
 INFO MainPage: Clicking element 'DROPDOWN_TABLET'
 INFO MainPage: Clicking element 'PRODUCT_TABLET'
 INFO ProductPage: Clicking element 'BUTTON_BUY'
-INFO ===> Test test_third_dop_task finished at 2024-03-11 15:55:01.708761
+INFO ===> Test test_third_dop_task finished at 2024-03-13 14:58:48.295108

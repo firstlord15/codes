@@ -1,5 +1,5 @@
-INFO ===> Test test_first_task started at 2024-03-11 15:51:50.332887
+INFO ===> Test test_first_task started at 2024-03-13 14:55:28.492557
 INFO Browser chrome started
 INFO MainPage: Clicking element 'PRODUCTS[0]'
 INFO ProductPage: Clicking element 'MAIN_PICTURE'
-INFO ===> Test test_first_task finished at 2024-03-11 15:52:10.095262
+INFO ===> Test test_first_task finished at 2024-03-13 14:55:49.784890

@@ -1,5 +1,5 @@
-INFO ===> Test test_third_task started at 2024-03-11 15:52:37.787207
+INFO ===> Test test_third_task started at 2024-03-13 14:56:18.512227
 INFO Browser chrome started
 INFO MainPage: Clicking element 'DROPDOWN_PC'
 INFO MainPage: Clicking element 'LI_PC'
-INFO ===> Test test_third_task finished at 2024-03-11 15:52:52.233603
+INFO ===> Test test_third_task finished at 2024-03-13 14:56:33.389795
