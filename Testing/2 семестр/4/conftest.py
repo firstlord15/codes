@@ -3,7 +3,6 @@ import os
 import pytest
 import logging
 import allure
-import json
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -32,20 +31,12 @@ def driver(request):
     logger.setLevel(level=log_level)
 
     logger.info(
-        "===> Test %s started at %s" % (
-            request.node.name, datetime.datetime.now())
+        "===> Test %s started at %s" % (request.node.name, datetime.datetime.now())
     )
 
     if browser_name == "chrome":
         option = Options()
         driver = webdriver.Chrome(options=option)
-    elif browser_name == "yandex":
-        options = webdriver.ChromeOptions()
-        binary_yandex_driver_file = os.path.join(
-            drivers, 'yandexdriver\\yandexdriver.exe')
-        service = webdriver.chrome.service.Service(
-            executable_path=binary_yandex_driver_file)
-        driver = webdriver.Chrome(service=service, options=options)
     elif browser_name == "firefox":
         option = FirefoxOptions()
         driver = webdriver.Firefox(options=option)
@@ -68,8 +59,7 @@ def driver(request):
     def fin():
         driver.quit()
         logger.info(
-            "===> Test %s finished at %s" % (
-                request.node.name, datetime.datetime.now())
+            "===> Test %s finished at %s" % (request.node.name, datetime.datetime.now())
         )
 
     request.addfinalizer(fin)

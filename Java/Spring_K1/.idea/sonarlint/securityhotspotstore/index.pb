@@ -25,3 +25,15 @@ d
 +src/main/java/org/example/DocumentWork.java,4\1\413002b0ab2368dad8d6ae116364d2bb4d39805c
 [
 +src/main/java/org/example/DocumentType.java,9\5\95b68e3b2e914ee7425d3703174324da4a4f4d9a
+Y
+)src/main/java/org/example/Views/Menu.java,e\f\ef6ecf1e532b491ee84db1bbf880beee1669545d
+d
+4src/main/java/org/example/Views/CreateDocuments.java,2\f\2fb05012bc739700a4c7cf1c90e6c5ed4c03d19d
+b
+2src/main/java/org/example/Models/DocumentWork.java,0\8\082b72841f6be515d99064ec8bfca543c613f207
+_
+/src/main/java/org/example/Controllers/Main.java,0\2\024420c80d57872a150d1137ff5436bd1b34d5e2
+R
+"src/main/java/DatabaseManager.java,3\a\3a95d45747abf54af39ee15fc1f54cba61d5da73
+^
+.src/main/java/org/example/DatabaseManager.java,3\b\3bc4aa60fb062f853070ffa7a9f9d9962f01de28

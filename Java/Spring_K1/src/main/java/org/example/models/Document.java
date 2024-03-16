@@ -1,4 +1,4 @@
-package org.example.models;
+package org.example.Models;
 
 public interface Document {
     // Метод для получения уникального идентификатора документа
