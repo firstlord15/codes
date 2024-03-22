@@ -38,7 +38,7 @@ public class Order implements Document {
                 "number: "+ orderNumber +"\n" +
                 "date: "+ orderDate +"\n" +
                 "customerName: "+ buyerName +"\n" +
-                "Products: "+ productInfo[0] + productInfo[1] + productInfo[2] + " (+" +  (products.size() - 1) +")" + "\n";
+                "Products: "+ productInfo[0] + " " + productInfo[1] + " " + productInfo[2] + " " + " (+" +  (products.size() - 1) +")" + "\n";
     }
 
     @Override

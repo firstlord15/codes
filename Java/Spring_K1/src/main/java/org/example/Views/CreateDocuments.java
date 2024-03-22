@@ -16,30 +16,42 @@ public class CreateDocuments {
 
     public List<String> createDoc(String name) {
         List<String> result = new ArrayList<>();
-        result.add(enterValue("Введите id: "));
-        result.add(enterValue("Введите " + name + ": "));
+        String id = enterValue("Введите id: ");
+        String nameValue = enterValue("Введите " + name + ": ");
 
+        if (id.trim().equalsIgnoreCase("exit()")){
+            System.out.println("Создание документа прервано пользователем.");
+            return null;
+        }
+
+        result.add(id);
+        result.add(nameValue);
         return result;
     }
 
     public List<String> createDoc(String name, int id) {
         List<String> result = new ArrayList<>();
         result.add(String.valueOf(id));
-        result.add(enterValue("Введите " + name + ": "));
+        
+        String answerName = enterValue("Введите " + name + ": ");
+        if (answerName.trim().equalsIgnoreCase("exit()")) return null;
 
+        result.add(answerName);
         return result;
     }
 
     private String enterValue(String prompt) {
         System.out.print(prompt + " ");
-        return scanner.nextLine().trim().toLowerCase();
+        String string = scanner.nextLine();
+
+        return string.trim().toLowerCase();
     }
 
     public PaymentInvoice createPaymentInvoice(int number, int id) {
         List<String> documentData = createDoc("customerName", id);
+        if (documentData == null) return null;
 
         String comments = enterValue("Введите comments: ");
-
         return new PaymentInvoice(
                 Integer.parseInt(documentData.get(0)), number,
                 LocalDateTime.now(),
@@ -50,6 +62,11 @@ public class CreateDocuments {
 
     public Payment createPayment(int number, int id){
         List<String> documentData = createDoc("nameSupplier", id);
+        if (documentData == null){
+            System.out.println("Создание документа прервано пользователем.");
+            return null;
+        }
+
         return new Payment(
                 Integer.parseInt(documentData.get(0)), number,
                 LocalDateTime.now(), documentData.get(1)
@@ -58,9 +75,12 @@ public class CreateDocuments {
 
     public Invoice createInvoice(int number, int id){
         List<String> documentData = createDoc("clientName", id);
+        if (documentData == null){
+            System.out.println("Создание документа прервано пользователем.");
+            return null;
+        }
 
         String address = enterValue("Введите address: ");
-
         return new Invoice(
                 Integer.parseInt(documentData.get(0)), number,
                 LocalDateTime.now(),
@@ -71,11 +91,23 @@ public class CreateDocuments {
     public Order createOrder(int number){
         ArrayList<String> products = new ArrayList<>();
         List<String> documentData = createDoc("buyerName");
+        if (documentData == null) {
+            System.out.println("Создание документа прервано пользователем.");
+            return null;
+        }
 
+        System.out.println("\nВ формате [<Название продукта> <Кол-во> <Цена>] или 'exit' для завершения");
         while (true) {
-            System.out.println("\nВведите в формате [<Название продукта> <Кол-во> <Цена>], или 'exit' для завершения: ");
+            System.out.print("Введите данные продукта: ");
             String nameAndPrice = scanner.nextLine();
-            if (nameAndPrice.equalsIgnoreCase("exit")) break;
+
+            if (nameAndPrice.equalsIgnoreCase("exit") & !products.isEmpty())
+                break;
+
+            if (nameAndPrice.equalsIgnoreCase("exit") && products.isEmpty()) {
+                System.out.println("Надо ввести хотя бы один продукт");
+                continue;
+            }
 
             String[] parts = nameAndPrice.split(" ");
             if (parts.length != 3) {
@@ -110,12 +142,29 @@ public class CreateDocuments {
 
         int number = Integer.parseInt(enterValue("\nВведите number:"));
         Order order = createOrder(number);
+        if (order == null) {
+            return null;
+        }
+
+        PaymentInvoice paymentInvoice = createPaymentInvoice(number, order.getId()+1);
+        if (paymentInvoice == null) {
+            return null;
+        }
+
+        Payment payment = createPayment(number, order.getId()+2);
+        if (payment == null) {
+            return null;
+        }
+
+        Invoice invoice = createInvoice(number, order.getId()+3);
+        if (invoice == null) {
+            return null;
+        }
 
         result.add(order);
-        result.add(createPaymentInvoice(number, order.getId()+1));
-        result.add(createPayment(number, order.getId()+2));
-        result.add(createInvoice(number, order.getId()+3));
-        scanner.close();
+        result.add(paymentInvoice);
+        result.add(payment);
+        result.add(invoice);
 
         return result;
     }

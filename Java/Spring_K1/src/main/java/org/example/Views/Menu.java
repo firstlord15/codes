@@ -17,10 +17,16 @@ public class Menu {
         this.listDocuments = new ArrayList<>();
     }
 
+    public void scannerClose(){
+        scanner.close();
+    }
+
     public void displayAllDocuments(ArrayList<Document> documents) {
+        System.out.println("\n=====================================");
         for (Document doc : documents) {
             System.out.println(doc.displayInfo());
         }
+        System.out.println("=====================================\n");
     }
 
     private <T> void printOptions(T[] options) {
@@ -41,12 +47,12 @@ public class Menu {
             System.out.println("[" + i + "]  Doc number: " + listDocument.get(0).getNumber());
         }
 
-        System.out.print("Выберите нужную вам цепочку документов: ");
+        System.out.print("\nВыберите нужную вам цепочку документов: ");
         int indexDocs = scanner.nextInt();
         scanner.nextLine();
 
         if (indexDocs < 0 || indexDocs >= listDocuments.size()) {
-            System.out.println("Некорректный номер цепочки документов.");
+            System.out.println("\nНекорректный номер цепочки документов.");
             return -1;
         }
 
@@ -73,6 +79,7 @@ public class Menu {
 
             System.out.print("Введите индекс типа документа: ");
             int indexDocType = scanner.nextInt();
+            scanner.nextLine();
 
             Document document = listDocuments.get(indexDocs).get(indexDocType);
             Field[] fields = document.getClass().getDeclaredFields();
@@ -80,9 +87,11 @@ public class Menu {
 
             System.out.print("Введите индекс поля: ");
             int indexField = scanner.nextInt();
+            scanner.nextLine();
 
             System.out.print("Введите данные, на которые вы хотите заменить: ");
             String answer = scanner.next();
+            scanner.nextLine();
 
             try {
                 fields[indexField].setAccessible(true);
@@ -102,21 +111,18 @@ public class Menu {
     }
 
     public int mainMenu() {
-        System.out.println("[Основное меню]");
+        System.out.println("\n[Основное меню]");
         System.out.println("[1] Создание цикла документов");
         System.out.println("[2] Просмотр цикла документов");
         System.out.println("[3] Редактирование цикла документов");
         System.out.println("[4] Удаление цикла документов");
         System.out.println("[5] Для выхода\n");
 
-        String answer = scanner.nextLine();
+        System.out.print("Введите свой ответ: ");
+        int answer = scanner.nextInt();
+        scanner.nextLine();
 
-        if (!answer.isEmpty() && answer.matches("\\d+")) {
-            return Integer.parseInt(answer);
-        } else {
-            System.out.println("Некорректный ввод. Пожалуйста, введите число от 1 до 5.");
-            return mainMenu();
-        }
+        return answer;
     }
 
     public void menu() {
